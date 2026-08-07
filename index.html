@@ -11,6 +11,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+<link rel="preload"
+      as="image"
+      href="https://i.ibb.co/LDnsrfGT/81a688d0-f48b-4a78-a375-9a4151352ccc.png">
+
   <style>
     :root {
       --void: #090511;
@@ -284,20 +288,41 @@
       animation: spin 16s linear infinite reverse;
     }
 
-    .cauldron-image {
-      z-index: 2;
-      object-fit: contain;
-      mix-blend-mode: screen;
-      clip-path: circle(50%);
-      cursor: pointer;
-      filter: drop-shadow(0 0 4px var(--glow)) drop-shadow(0 0 10px var(--witch)) drop-shadow(0 12px 17px #000b);
-      transition: filter .3s ease, transform .3s ease;
-    }
+.cauldron-image {
+  z-index: 2;
+  object-fit: contain;
+  mix-blend-mode: screen;
+  clip-path: circle(50%);
+  cursor: pointer;
+  opacity: 0;
+  filter:
+    blur(10px)
+    drop-shadow(0 0 4px var(--glow))
+    drop-shadow(0 0 10px var(--witch))
+    drop-shadow(0 12px 17px #000b);
+  transition:
+    opacity .7s ease,
+    filter .7s ease,
+    transform .3s ease;
+}
 
-    .cauldron-image:hover {
-      filter: drop-shadow(0 0 14px var(--glow)) drop-shadow(0 0 36px var(--witch)) drop-shadow(0 15px 22px #000b);
-      transform: translateX(-50%) scale(1.06);
-    }
+.cauldron-image.loaded {
+  opacity: 1;
+  filter:
+    blur(0)
+    drop-shadow(0 0 4px var(--glow))
+    drop-shadow(0 0 10px var(--witch))
+    drop-shadow(0 12px 17px #000b);
+}
+
+.cauldron-image:hover {
+  filter:
+    blur(0)
+    drop-shadow(0 0 14px var(--glow))
+    drop-shadow(0 0 36px var(--witch))
+    drop-shadow(0 15px 22px #000b);
+  transform: translateX(-50%) scale(1.06);
+}
 
     .witch-hat {
       position: absolute;
@@ -1218,6 +1243,17 @@
 
       const potionResult = $("#potionResult");
       const cauldron = $("#cauldron");
+      const cauldronImage = document.querySelector(".cauldron-image");
+
+function revealCauldronImage() {
+  cauldronImage.classList.add("loaded");
+}
+
+if (cauldronImage.complete) {
+  revealCauldronImage();
+} else {
+  cauldronImage.addEventListener("load", revealCauldronImage, { once: true });
+}
 
       const potions = [
         "🧪 Şans İksiri: Bugün bütün güzel tesadüfler seni bulacak!",
