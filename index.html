@@ -288,18 +288,23 @@
       animation: spin 16s linear infinite reverse;
     }
 
+/* Mevcut .cauldron-image stilinde: */
 .cauldron-image {
   z-index: 2;
   object-fit: contain;
   mix-blend-mode: screen;
   clip-path: circle(50%);
   cursor: pointer;
-  opacity: 65;
+
+  /* Görsel yüklenirken boş görünmez */
+  opacity: .65;
+
   filter:
     blur(10px)
     drop-shadow(0 0 4px var(--glow))
     drop-shadow(0 0 10px var(--witch))
     drop-shadow(0 12px 17px #000b);
+
   transition:
     opacity .7s ease,
     filter .7s ease,
@@ -313,15 +318,6 @@
     drop-shadow(0 0 4px var(--glow))
     drop-shadow(0 0 10px var(--witch))
     drop-shadow(0 12px 17px #000b);
-}
-
-.cauldron-image:hover {
-  filter:
-    blur(0)
-    drop-shadow(0 0 14px var(--glow))
-    drop-shadow(0 0 36px var(--witch))
-    drop-shadow(0 15px 22px #000b);
-  transform: translateX(-50%) scale(1.06);
 }
 
     .witch-hat {
