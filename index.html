@@ -2,11 +2,14 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090511">
+  <meta name="description" content="Wiccawic'in büyülü yayın ve sosyal medya merkezi">
   <title>Wiccawic — Cadı Kazanı</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Eagle+Lake&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -14,11 +17,14 @@
       --plum: #1c1226;
       --plum-2: #302044;
       --witch: #8a63d2;
-      --witch-glow: #c6a8ff;
+      --glow: #c6a8ff;
       --gold: #e0b45c;
       --cream: #f3ead9;
       --mute: #b7a8c9;
       --pink: #ff9ddd;
+      --bg-glow-1: #8a63d23d;
+      --bg-glow-2: #e0b45c18;
+      --grid-color: #fff1;
     }
 
     * {
@@ -37,27 +43,70 @@
       color: var(--cream);
       font-family: Quicksand, sans-serif;
       background:
-        radial-gradient(circle at 15% 15%, #8a63d23d, transparent 32%),
-        radial-gradient(circle at 50% 100%, #e0b45c18, transparent 36%),
+        radial-gradient(circle at 15% 15%, var(--bg-glow-1), transparent 32%),
+        radial-gradient(circle at 50% 100%, var(--bg-glow-2), transparent 36%),
         var(--void);
     }
 
+    body.theme-midnight {
+      --void: #050a14;
+      --plum: #0f1724;
+      --plum-2: #1a2638;
+      --witch: #5b8bd2;
+      --glow: #9ec6ff;
+      --gold: #d4a35c;
+      --cream: #f3ead9;
+      --mute: #a8b8c9;
+      --pink: #9dcfff;
+      --bg-glow-1: #5b8bd23d;
+      --bg-glow-2: #d4a35c18;
+    }
+
+    body.theme-samhain {
+      --void: #1a0d05;
+      --plum: #2a180a;
+      --plum-2: #3d2413;
+      --witch: #d28a3e;
+      --glow: #ffcc8a;
+      --gold: #e88b4a;
+      --cream: #fff4e6;
+      --mute: #d4bfa3;
+      --pink: #ff9d9d;
+      --bg-glow-1: #d28a3e3d;
+      --bg-glow-2: #e88b4a18;
+    }
+
+    body.theme-forest {
+      --void: #08140b;
+      --plum: #122019;
+      --plum-2: #1d3326;
+      --witch: #5da67a;
+      --glow: #a8ffc6;
+      --gold: #c9d45c;
+      --cream: #f1f8e9;
+      --mute: #b4c9a9;
+      --pink: #b4ff9d;
+      --bg-glow-1: #5da67a3d;
+      --bg-glow-2: #c9d45c18;
+    }
+
     body::before {
-      content: "";
       position: fixed;
       inset: 0;
       z-index: -2;
-      opacity: .18;
+      content: "";
+      opacity: .16;
       pointer-events: none;
-      background-image:
-        linear-gradient(#fff1 1px, transparent 1px),
-        linear-gradient(90deg, #fff1 1px, transparent 1px);
+      background:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
       background-size: 42px 42px;
-      mask-image: linear-gradient(to bottom, black, transparent);
+      mask-image: linear-gradient(to bottom, #000, transparent);
     }
 
     #stars,
-    #particles {
+    #particles,
+    #magicSymbols {
       position: fixed;
       inset: 0;
       z-index: 0;
@@ -65,45 +114,24 @@
       pointer-events: none;
     }
 
-    .star {
+    .star,
+    .particle {
       position: absolute;
       border-radius: 50%;
+    }
+
+    .star {
       background: var(--cream);
       box-shadow: 0 0 8px var(--cream);
       animation: twinkle 4s ease-in-out infinite;
     }
 
     .particle {
-      position: absolute;
       width: 4px;
       height: 4px;
-      border-radius: 50%;
-      background: var(--witch-glow);
+      background: var(--glow);
       box-shadow: 0 0 12px 3px var(--witch);
       animation: float-up linear infinite;
-    }
-
-    @keyframes twinkle {
-      50% {
-        opacity: .9;
-        transform: scale(1.4);
-      }
-    }
-
-    @keyframes float-up {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-
-      20%, 80% {
-        opacity: .8;
-      }
-
-      to {
-        opacity: 0;
-        transform: translateY(-110vh) rotate(180deg);
-      }
     }
 
     .moon {
@@ -112,17 +140,11 @@
       right: 8vw;
       z-index: 0;
       width: 74px;
-      height: 74px;
+      aspect-ratio: 1;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #fff8e6, var(--gold) 70%);
       box-shadow: 0 0 30px 8px #e0b45c88, 0 0 85px 22px #e0b45c33;
       animation: moon-glow 4s ease-in-out infinite;
-    }
-
-    @keyframes moon-glow {
-      50% {
-        box-shadow: 0 0 42px 12px #e0b45c99, 0 0 100px 28px #e0b45c44;
-      }
     }
 
     main {
@@ -135,117 +157,145 @@
       text-align: center;
     }
 
+    @keyframes twinkle {
+      50% { opacity: .9; transform: scale(1.4); }
+    }
+
+    @keyframes float-up {
+      from { opacity: 0; transform: translateY(30px); }
+      20%, 80% { opacity: .8; }
+      to { opacity: 0; transform: translateY(-110vh) rotate(180deg); }
+    }
+
+    @keyframes moon-glow {
+      50% { box-shadow: 0 0 42px 12px #e0b45c99, 0 0 100px 28px #e0b45c44; }
+    }
+
+    .daily-quote {
+      margin: 16px auto 0;
+      padding: 12px 18px;
+      max-width: 420px;
+      border: 1px solid #c6a8ff44;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #8a63d21a, transparent);
+      color: var(--glow);
+      font-size: 13px;
+      font-weight: 600;
+      font-style: italic;
+      line-height: 1.5;
+      text-shadow: 0 0 10px var(--witch);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: .3s ease;
+    }
+
+    .quote-stars {
+      color: var(--gold);
+      font-style: normal;
+      font-size: 12px;
+    }
+
     .cauldron-wrap {
+      --cauldron-size: 230px;
+      --cauldron-top: 24px;
       position: relative;
       width: 300px;
       height: 270px;
       margin: auto;
-      overflow: visible;
       isolation: isolate;
     }
 
     .cauldron-wrap::before {
-      content: "";
       position: absolute;
       top: 48%;
       left: 50%;
-      z-index: -2;
+      z-index: -1;
       width: 220px;
       height: 155px;
+      content: "";
       border-radius: 50%;
       background: var(--witch);
       filter: blur(70px);
       opacity: .1;
       transform: translate(-50%, -50%);
-      animation: cauldron-aura 3s ease-in-out infinite;
+      animation: aura 3s ease-in-out infinite;
     }
 
-/* .cauldron-frame içindeki değerleri güncelleyin */
-.cauldron-frame {
-  position: absolute;
-  top: var(--cauldron-top);
-  left: 50%;
-  z-index: 1;
-  width: var(--cauldron-size);
-  height: var(--cauldron-size);
-  border: 2px solid #c6a8ff99;
-  border-radius: 50%;
-  background:
-    linear-gradient(135deg, #c6a8ff22, transparent 35%, #8a63d233),
-    #160d25aa;
-box-shadow:
-    0 0 0 7px #8a63d210,
-    0 0 0 10px #c6a8ff0c,
-    0 0 12px 2px #8a63d244,
-    inset 0 0 15px #c6a8ff22;
-  transform: translateX(-50%);
-  animation: frame-float 3.5s ease-in-out infinite;
-}
+    .cauldron-frame,
+    .magic-ring,
+    .cauldron-image {
+      position: absolute;
+      top: var(--cauldron-top);
+      left: 50%;
+      width: var(--cauldron-size);
+      height: var(--cauldron-size);
+      border-radius: 50%;
+      transform: translateX(-50%);
+      animation: float 3.5s ease-in-out infinite;
+    }
 
-/* magic-ring de görselle aynı hizaya gelsin */
-.magic-ring {
-  position: absolute;
-  top: 24px;
-  left: 50%;
-  z-index: 3;
-  width: 230px;
-  height: 230px;
-  border: 1px solid #c6a8ff80;
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translateX(-50%);
-  animation: ring-float 3.5s ease-in-out infinite;
-}
-
+    .cauldron-frame {
+      z-index: 1;
+      border: 2px solid #c6a8ff99;
+      background: linear-gradient(135deg, #c6a8ff22, transparent 35%, #8a63d233), #160d25aa;
+      box-shadow:
+        0 0 0 7px #8a63d210,
+        0 0 0 10px #c6a8ff0c,
+        0 0 12px 2px #8a63d244,
+        inset 0 0 15px #c6a8ff22;
+    }
 
     .cauldron-frame::before {
-      content: "";
       position: absolute;
       inset: 8px;
-      z-index: -1;
+      content: "";
       border: 1px dashed #e0b45c99;
-      border-radius: 50%;
+      border-radius: inherit;
       box-shadow: inset 0 0 18px #e0b45c33;
-      animation: ring-spin 18s linear infinite;
+      animation: spin 18s linear infinite;
     }
 
     .cauldron-frame::after {
-      content: "✦";
       position: absolute;
       top: -17px;
       left: 50%;
+      content: "✦";
       color: var(--gold);
       font-size: 22px;
       text-shadow: 0 0 12px var(--gold);
       transform: translateX(-50%);
     }
 
-    .cauldron-image {
+    .magic-ring {
+      z-index: 3;
+      border: 1px solid #c6a8ff80;
+      pointer-events: none;
+    }
+
+    .magic-ring::before {
       position: absolute;
-      top: 24px;
-      left: 50%;
+      inset: -1px;
+      content: "";
+      border: 1px dashed #c6a8ff99;
+      border-radius: inherit;
+      box-shadow: 0 0 14px #8a63d288, inset 0 0 14px #8a63d244;
+      animation: spin 16s linear infinite reverse;
+    }
+
+    .cauldron-image {
       z-index: 2;
-      width: 230px;
-      height: 230px;
       object-fit: contain;
-      border-radius: 50%;
-      clip-path: circle(50%);
       mix-blend-mode: screen;
-    filter:
-    drop-shadow(0 0 4px #c6a8ff)
-    drop-shadow(0 0 10px #8a63d2)
-    drop-shadow(0 12px 17px #000b);
+      clip-path: circle(50%);
       cursor: pointer;
-      transform: translateX(-50%);
-      animation: cauldron-float 3.5s ease-in-out infinite;
+      filter: drop-shadow(0 0 4px var(--glow)) drop-shadow(0 0 10px var(--witch)) drop-shadow(0 12px 17px #000b);
       transition: filter .3s ease, transform .3s ease;
     }
 
     .cauldron-image:hover {
-      filter:
-        drop-shadow(0 0 14px var(--witch-glow))
-        drop-shadow(0 0 36px var(--witch))
-        drop-shadow(0 15px 22px #000b);
+      filter: drop-shadow(0 0 14px var(--glow)) drop-shadow(0 0 36px var(--witch)) drop-shadow(0 15px 22px #000b);
       transform: translateX(-50%) scale(1.06);
     }
 
@@ -258,178 +308,87 @@ box-shadow:
       height: 75px;
       pointer-events: none;
       transform: translateX(-50%) rotate(-7deg);
-      filter: drop-shadow(0 0 7px #8a63d2) drop-shadow(0 8px 8px #000b);
+      filter: drop-shadow(0 0 7px var(--witch)) drop-shadow(0 8px 8px #000b);
       animation: hat-float 3.5s ease-in-out infinite;
     }
 
     .witch-hat::before {
-      content: "";
       position: absolute;
       left: 29px;
       bottom: 15px;
       width: 53px;
       height: 58px;
+      content: "";
       background: linear-gradient(110deg, #120b1e, #44226d 55%, #170d27);
-      clip-path: polygon(50% 0, 100% 100%, 0 100%);
-      border-radius: 45% 45% 5% 5%;
       border-top: 2px solid #c6a8ff99;
+      border-radius: 45% 45% 5% 5%;
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
     }
 
     .witch-hat::after {
-      content: "";
       position: absolute;
       left: 3px;
       bottom: 8px;
       width: 104px;
       height: 22px;
+      content: "";
+      border: 2px solid #c6a8ff99;
       border-radius: 50%;
       background: linear-gradient(#35184f, #120b1e);
-      border: 2px solid #c6a8ff99;
-      box-shadow:
-        0 0 8px #8a63d2aa,
-        inset 0 3px 5px #c6a8ff33;
+      box-shadow: 0 0 8px #8a63d2aa, inset 0 3px 5px #c6a8ff33;
     }
 
-    .magic-ring {
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes float {
+      50% { transform: translateX(-50%) translateY(-8px) rotate(1deg); }
+    }
+    @keyframes hat-float {
+      50% { transform: translateX(-50%) translateY(-8px) rotate(-4deg); }
+    }
+    @keyframes aura {
+      50% { opacity: .75; transform: translate(-50%, -50%) scale(1.2); }
+    }
+
+    .spark,
+    .smoke {
       position: absolute;
-      top: 25px;
-      left: 50%;
-      z-index: 3;
-      width: 230px;
-      height: 230px;
-      border: 1px solid #c6a8ff80;
-      border-radius: 50%;
       pointer-events: none;
-      transform: translateX(-50%);
-      animation: ring-float 3.5s ease-in-out infinite;
-    }
-
-    .magic-ring::before {
-      content: "";
-      position: absolute;
-      inset: -1px;
-      border: 1px dashed #c6a8ff99;
-      border-radius: 50%;
-      box-shadow:
-        0 0 14px #8a63d288,
-        inset 0 0 14px #8a63d244;
-      animation: ring-spin 16s linear infinite reverse;
-    }
-
-    .cauldron-wrap:hover .magic-ring {
-      border-color: var(--witch-glow);
-      box-shadow: 0 0 18px #8a63d288;
     }
 
     .spark {
-      position: absolute;
       z-index: 4;
-      color: var(--witch-glow);
+      color: var(--glow);
       font-size: 18px;
       text-shadow: 0 0 12px var(--witch);
-      animation: spark-orbit 2.5s ease-in-out infinite;
-      pointer-events: none;
+      animation: spark 2.5s ease-in-out infinite;
     }
 
-    .spark-one {
-      top: 38px;
-      left: 26px;
-    }
+    .spark-one { top: 38px; left: 26px; }
+    .spark-two { top: 90px; right: 20px; color: var(--gold); animation-delay: .8s; }
+    .spark-three { bottom: 32px; left: 48px; animation-delay: 1.4s; }
 
-    .spark-two {
-      top: 90px;
-      right: 20px;
-      color: var(--gold);
-      animation-delay: .8s;
-    }
-
-    .spark-three {
-      bottom: 32px;
-      left: 48px;
-      animation-delay: 1.4s;
+    @keyframes spark {
+      50% { opacity: .35; transform: translateY(-12px) scale(1.5) rotate(90deg); }
     }
 
     .smoke {
-      position: absolute;
       top: 26px;
       left: 50%;
       z-index: 3;
       width: 18px;
       height: 18px;
       border-radius: 50%;
-      background: radial-gradient(circle, var(--witch-glow), transparent 70%);
-      animation: smoke-rise 3s ease-in infinite;
-      pointer-events: none;
+      background: radial-gradient(circle, var(--glow), transparent 70%);
+      animation: smoke 3s ease-in infinite;
     }
 
-    .smoke:nth-of-type(2) {
-      left: 42%;
-      animation-delay: .8s;
-    }
+    .smoke:nth-of-type(2) { left: 42%; animation-delay: .8s; }
+    .smoke:nth-of-type(3) { left: 58%; animation-delay: 1.6s; }
 
-    .smoke:nth-of-type(3) {
-      left: 58%;
-      animation-delay: 1.6s;
-    }
-
-    @keyframes ring-spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes ring-float {
-      50% {
-        transform: translateX(-50%) translateY(-8px) rotate(1deg);
-      }
-    }
-
-    @keyframes frame-float {
-      50% {
-        transform: translateX(-50%) translateY(-8px) rotate(1deg);
-      }
-    }
-
-    @keyframes cauldron-aura {
-      50% {
-        opacity: .75;
-        transform: translate(-50%, -50%) scale(1.2);
-      }
-    }
-
-    @keyframes cauldron-float {
-      50% {
-        transform: translateX(-50%) translateY(-8px) rotate(1deg);
-      }
-    }
-
-    @keyframes hat-float {
-      50% {
-        transform: translateX(-50%) translateY(-8px) rotate(-4deg);
-      }
-    }
-
-    @keyframes spark-orbit {
-      50% {
-        opacity: .35;
-        transform: translateY(-12px) scale(1.5) rotate(90deg);
-      }
-    }
-
-    @keyframes smoke-rise {
-      from {
-        opacity: 0;
-        transform: translate(-50%, 0) scale(.6);
-      }
-
-      20% {
-        opacity: .8;
-      }
-
-      to {
-        opacity: 0;
-        transform: translate(-50%, -110px) scale(1.8);
-      }
+    @keyframes smoke {
+      from { opacity: 0; transform: translate(-50%, 0) scale(.6); }
+      20% { opacity: .8; }
+      to { opacity: 0; transform: translate(-50%, -110px) scale(1.8); }
     }
 
     .brand {
@@ -441,9 +400,7 @@ box-shadow:
     }
 
     @keyframes brand-float {
-      50% {
-        transform: translateY(-4px);
-      }
+      50% { transform: translateY(-4px); }
     }
 
     .tagline {
@@ -460,7 +417,7 @@ box-shadow:
       padding: 7px 15px;
       border: 1px solid #c6a8ff66;
       border-radius: 20px;
-      color: var(--witch-glow);
+      color: var(--glow);
       background: #8a63d21a;
       font-size: 12px;
       font-weight: 700;
@@ -477,31 +434,28 @@ box-shadow:
     }
 
     @keyframes pulse {
-      50% {
-        opacity: .35;
-        transform: scale(.75);
-      }
+      50% { opacity: .35; transform: scale(.75); }
     }
 
     .section-title {
       margin: 38px 0 15px;
-      color: var(--witch-glow);
+      color: var(--glow);
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 2.5px;
       text-transform: uppercase;
-      text-shadow: 0 0 12px var(--witch-glow);
+      text-shadow: 0 0 12px var(--glow);
     }
 
     .feature-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, 1fr);
       gap: 10px;
       margin-bottom: 14px;
     }
 
     button {
-      font-family: inherit;
+      font: inherit;
       cursor: pointer;
     }
 
@@ -516,8 +470,9 @@ box-shadow:
       transition: .25s ease;
     }
 
-    .feature-button:hover {
-      border-color: var(--witch-glow);
+    .feature-button:hover,
+    .feature-button:focus-visible {
+      border-color: var(--glow);
       box-shadow: 0 0 22px #8a63d255;
       transform: translateY(-3px);
     }
@@ -528,7 +483,7 @@ box-shadow:
       padding: 12px;
       border: 1px solid #c6a8ff55;
       border-radius: 14px;
-      color: var(--witch-glow);
+      color: var(--glow);
       background: #8a63d212;
       font-size: 13px;
       font-weight: 600;
@@ -559,7 +514,7 @@ box-shadow:
     .stream-status {
       padding: 5px 9px;
       border-radius: 20px;
-      color: var(--witch-glow);
+      color: var(--glow);
       background: #8a63d222;
       font-size: 10px;
       font-weight: 700;
@@ -576,7 +531,6 @@ box-shadow:
     }
 
     .stream-frame {
-      position: relative;
       overflow: hidden;
       aspect-ratio: 16 / 9;
       border-radius: 11px;
@@ -598,7 +552,8 @@ box-shadow:
       text-align: center;
     }
 
-    .offline-box.visible {
+    .offline-box.visible,
+    .last-stream.visible {
       display: block;
     }
 
@@ -613,7 +568,8 @@ box-shadow:
     }
 
     .offline-box p,
-    .embed-note {
+    .embed-note,
+    .last-stream {
       color: var(--mute);
       font-size: 12px;
       line-height: 1.6;
@@ -625,18 +581,11 @@ box-shadow:
       padding: 12px;
       border: 1px solid #8a63d255;
       border-radius: 11px;
-      color: var(--mute);
       background: #8a63d212;
-      font-size: 12px;
-      line-height: 1.7;
-    }
-
-    .last-stream.visible {
-      display: block;
     }
 
     .last-stream strong {
-      color: var(--witch-glow);
+      color: var(--glow);
     }
 
     .last-stream-title {
@@ -656,7 +605,7 @@ box-shadow:
     }
 
     .potion-link {
-      --glow: var(--witch);
+      --link-glow: var(--witch);
       position: relative;
       display: flex;
       align-items: center;
@@ -675,53 +624,54 @@ box-shadow:
     }
 
     .potion-link::before {
-      content: "";
       position: absolute;
       inset: 0 auto 0 0;
       width: 5px;
-      background: var(--glow);
-      box-shadow: 0 0 14px var(--glow);
+      content: "";
+      background: var(--link-glow);
+      box-shadow: 0 0 14px var(--link-glow);
     }
 
-    .potion-link:hover {
-      border-color: var(--glow);
-      box-shadow: 0 10px 30px -6px var(--glow);
+    .potion-link:hover,
+    .potion-link:focus-visible {
+      border-color: var(--link-glow);
+      box-shadow: 0 10px 30px -6px var(--link-glow);
       transform: translateY(-4px);
     }
 
-    .lk-kick { --glow: #8a63d2; }
-    .lk-discord { --glow: #9c8bf0; }
-    .lk-instagram { --glow: #e28fd0; }
-    .lk-tiktok { --glow: #e6e6e6; }
-    .lk-x { --glow: #c9c9d9; }
-    .lk-support { --glow: #e0b45c; }
+    .lk-kick { --link-glow: #8a63d2; }
+    .lk-discord { --link-glow: #9c8bf0; }
+    .lk-instagram { --link-glow: #e28fd0; }
+    .lk-tiktok { --link-glow: #e6e6e6; }
+    .lk-x { --link-glow: #c9c9d9; }
+    .lk-support { --link-glow: var(--gold); }
 
     .bottle {
-      flex: 0 0 30px;
       position: relative;
+      flex: 0 0 30px;
       width: 30px;
       height: 36px;
     }
 
     .bottle::before {
-      content: "";
       position: absolute;
       top: 10px;
       left: 2px;
       width: 26px;
       height: 26px;
+      content: "";
       border-radius: 8px 8px 12px 12px;
-      background: var(--glow);
-      box-shadow: 0 0 14px var(--glow);
+      background: var(--link-glow);
+      box-shadow: 0 0 14px var(--link-glow);
     }
 
     .bottle::after {
-      content: "";
       position: absolute;
       top: 0;
       left: 11px;
       width: 8px;
       height: 7px;
+      content: "";
       border-radius: 2px;
       background: #8a6a3a;
     }
@@ -744,6 +694,49 @@ box-shadow:
       font-size: 18px;
     }
 
+    .theme-switcher {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 28px auto 0;
+      padding: 10px 14px;
+      width: fit-content;
+      border: 1px solid #c6a8ff33;
+      border-radius: 24px;
+      background: #09051180;
+      backdrop-filter: blur(4px);
+    }
+
+    .theme-label {
+      color: var(--mute);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .theme-btn {
+      width: 22px;
+      height: 22px;
+      border: 2px solid transparent;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .theme-btn:hover,
+    .theme-btn.active {
+      transform: scale(1.15);
+      border-color: var(--cream);
+      box-shadow: 0 0 12px var(--cream);
+    }
+
+    .theme-default { background: linear-gradient(135deg, #8a63d2, #e0b45c); }
+    .theme-midnight { background: linear-gradient(135deg, #5b8bd2, #050a14); }
+    .theme-samhain { background: linear-gradient(135deg, #d28a3e, #e88b4a); }
+    .theme-forest { background: linear-gradient(135deg, #5da67a, #c9d45c); }
+
     .cat-scene {
       position: relative;
       width: 190px;
@@ -764,14 +757,11 @@ box-shadow:
       background: radial-gradient(circle, #c6a8ff2e, transparent 68%);
       box-shadow: 0 0 28px #8a63d266;
       transform: translateX(-50%);
-      animation: aura-breathe 3s ease-in-out infinite;
+      animation: breathe 3s ease-in-out infinite;
     }
 
-    @keyframes aura-breathe {
-      50% {
-        transform: translateX(-50%) scale(1.12);
-        opacity: .7;
-      }
+    @keyframes breathe {
+      50% { opacity: .7; transform: translateX(-50%) scale(1.12); }
     }
 
     .cat {
@@ -786,9 +776,7 @@ box-shadow:
     }
 
     @keyframes cat-float {
-      50% {
-        transform: translate(-50%, -8px) rotate(4deg);
-      }
+      50% { transform: translate(-50%, -8px) rotate(4deg); }
     }
 
     .paw-trail {
@@ -824,15 +812,8 @@ box-shadow:
     }
 
     @keyframes message-pop {
-      15%, 80% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-
-      100% {
-        opacity: 0;
-        transform: translateY(-8px) scale(.9);
-      }
+      15%, 80% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: translateY(-8px) scale(.9); }
     }
 
     .hearts {
@@ -843,41 +824,29 @@ box-shadow:
       color: var(--pink);
       font-size: 18px;
       opacity: 0;
-      pointer-events: none;
       transform: translateX(-50%);
     }
 
     .cat-scene.active .hearts {
-      animation: hearts-rise 1.5s ease-out forwards;
+      animation: hearts 1.5s ease-out forwards;
     }
 
-    @keyframes hearts-rise {
-      from {
-        opacity: 0;
-        transform: translate(-50%, 15px) scale(.5);
-      }
-
-      25% {
-        opacity: 1;
-      }
-
-      to {
-        opacity: 0;
-        transform: translate(-50%, -65px) scale(1.4);
-      }
+    @keyframes hearts {
+      from { opacity: 0; transform: translate(-50%, 15px) scale(.5); }
+      25% { opacity: 1; }
+      to { opacity: 0; transform: translate(-50%, -65px) scale(1.4); }
     }
 
     .site-footer {
-      position: relative;
       margin-top: 32px;
       padding: 22px 12px 12px;
       text-align: center;
     }
 
     .site-footer::before {
-      content: "✦  ✧  ✦";
       display: block;
       margin-bottom: 13px;
+      content: "✦  ✧  ✦";
       color: var(--gold);
       font-size: 12px;
       letter-spacing: 8px;
@@ -889,7 +858,7 @@ box-shadow:
       font-family: "Eagle Lake", cursive;
       font-size: clamp(13px, 3.5vw, 17px);
       text-decoration: none;
-      text-shadow: 0 0 5px var(--cream), 0 0 14px var(--witch-glow);
+      text-shadow: 0 0 5px var(--cream), 0 0 14px var(--glow);
     }
 
     .modal {
@@ -916,12 +885,11 @@ box-shadow:
       border: 1px solid #c6a8ff88;
       background: linear-gradient(135deg, #493167f2, #1c1226f5);
       box-shadow: 0 0 45px #8a63d288;
-      text-align: left;
     }
 
     .spellbook h2 {
       margin-bottom: 15px;
-      color: var(--witch-glow);
+      color: var(--glow);
       font-family: "Eagle Lake", cursive;
       text-align: center;
     }
@@ -947,31 +915,37 @@ box-shadow:
       font-size: 24px;
     }
 
+    .magic-symbol {
+      position: absolute;
+      bottom: -60px;
+      color: var(--glow);
+      font-family: serif;
+      font-size: clamp(22px, 4vw, 38px);
+      opacity: 0;
+      text-shadow: 0 0 8px #8a63d288, 0 0 20px #8a63d244;
+      animation: symbol-rise linear infinite;
+    }
+
+    .magic-symbol.gold {
+      color: var(--gold);
+      text-shadow: 0 0 8px #e0b45c88, 0 0 20px #e0b45c44;
+    }
+
+    @keyframes symbol-rise {
+      0% { opacity: 0; transform: translateY(30px) rotate(-12deg) scale(.8); }
+      15% { opacity: .18; }
+      70% { opacity: .12; }
+      100% { opacity: 0; transform: translateY(-115vh) rotate(18deg) scale(1.15); }
+    }
+
     @media (max-width: 600px) {
-      main {
-        padding-top: 35px;
-      }
-
-      .moon {
-        top: 4vh;
-        right: 5vw;
-        width: 55px;
-        height: 55px;
-      }
-
-      .feature-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .cat-message {
-        right: -18px;
-      }
-
- .cauldron-wrap {
-  --cauldron-size: 230px;
-  --cauldron-top: 24px;
-  }
-}
+      main { padding-top: 35px; }
+      .moon { top: 4vh; right: 5vw; width: 55px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .cat-message { right: -18px; }
+      .daily-quote { flex-direction: column; gap: 6px; font-size: 12px; }
+      .theme-switcher { gap: 8px; padding: 8px 12px; }
+    }
 
     @media (prefers-reduced-motion: reduce) {
       *,
@@ -979,120 +953,67 @@ box-shadow:
       *::after {
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
       }
     }
-
-
-#magicSymbols {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.magic-symbol {
-  position: absolute;
-  bottom: -60px;
-  color: #c6a8ff;
-  opacity: 0;
-  font-family: "Times New Roman", serif;
-  font-size: clamp(22px, 4vw, 38px);
-  text-shadow:
-    0 0 8px #8a63d288,
-    0 0 20px #8a63d244;
-  animation: symbol-rise linear infinite;
-}
-
-.magic-symbol.gold {
-  color: #e0b45c;
-  text-shadow:
-    0 0 8px #e0b45c88,
-    0 0 20px #e0b45c44;
-}
-
-@keyframes symbol-rise {
-  0% {
-    opacity: 0;
-    transform: translateY(30px) rotate(-12deg) scale(.8);
-  }
-
-  15% {
-    opacity: .18;
-  }
-
-  70% {
-    opacity: .12;
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateY(-115vh) rotate(18deg) scale(1.15);
-  }
-}
-
-
-
-
   </style>
 </head>
 
 <body>
-  <div id="stars"></div>
+  <div id="stars" aria-hidden="true"></div>
   <div id="magicSymbols" aria-hidden="true"></div>
-  <div id="particles"></div>
-  <div class="moon"></div>
+  <div id="particles" aria-hidden="true"></div>
+  <div class="moon" aria-hidden="true"></div>
 
   <main>
-    <div class="cauldron-wrap" id="cauldron">
+    <div class="cauldron-wrap" id="cauldron" role="button" tabindex="0" aria-label="Rastgele iksir seç">
       <div class="cauldron-frame"></div>
       <div class="witch-hat" aria-hidden="true"></div>
-      <div class="magic-ring"></div>
-
+      <div class="magic-ring" aria-hidden="true"></div>
       <span class="spark spark-one">✦</span>
       <span class="spark spark-two">✧</span>
       <span class="spark spark-three">✦</span>
-
       <span class="smoke"></span>
       <span class="smoke"></span>
       <span class="smoke"></span>
-
-      <img
-        class="cauldron-image"
+      <img class="cauldron-image"
         src="https://i.ibb.co/LDnsrfGT/81a688d0-f48b-4a78-a375-9a4151352ccc.png"
         alt="Büyülü cadı kazanı"
         title="Kazanın içine tıkla">
     </div>
 
-    <h1 class="brand">Wiccawic</h1>
-    <p class="tagline">cadı kazanında iksir kaynatıyorum ✨🔮</p>
 
-    <a class="kick-badge" href="https://kick.com/Wiccawic" target="_blank" rel="noopener">
-      <span class="dot"></span>
-      <span>KICK KANALINI ZİYARET ET</span>
-    </a>
+    <div class="daily-quote" id="dailyQuote" aria-live="polite">
+      <span class="quote-stars">✦</span>
+      <p class="quote-text" id="quoteText">Büyü yükleniyor...</p>
+      <span class="quote-stars">✦</span>
+    </div>
 
     <p class="section-title">Büyülü Araçlar</p>
 
     <div class="feature-grid">
-      <button class="feature-button" id="potionButton">🧪 İksir Seç</button>
-      <button class="feature-button" id="spellbookButton">📖 Büyü Kitabı</button>
+      <button class="feature-button" id="potionButton" type="button">🧪 İksir Seç</button>
+      <button class="feature-button" id="spellbookButton" type="button">📖 Büyü Kitabı</button>
     </div>
 
-    <div class="potion-result" id="potionResult">
-      Kazana tıklayabilir veya kendin için rastgele bir iksir seçebilirsin ✨
+    <div class="potion-result" id="potionResult" aria-live="polite">
+      Kendin için rastgele bir iksir seçebilirsin ✨
     </div>
 
     <p class="section-title">Canlı Yayın Kazanı</p>
 
-    <section class="stream-card">
+    <section class="stream-card" aria-labelledby="streamHeading">
       <div class="stream-header">
         <strong id="streamHeading">🔮 Yayın durumu kontrol ediliyor...</strong>
         <span class="stream-status loading" id="streamStatus">KONTROL</span>
       </div>
 
       <div class="stream-frame" id="streamFrame" hidden>
-        <iframe id="streamEmbed" title="Wiccawic Kick canlı yayını" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <iframe id="streamEmbed"
+          title="Wiccawic Kick canlı yayını"
+          loading="lazy"
+          allow="autoplay; fullscreen"
+          allowfullscreen></iframe>
       </div>
 
       <div class="offline-box" id="offlineBox">
@@ -1105,67 +1026,54 @@ box-shadow:
       <p class="embed-note" id="streamNote">Kick yayın durumu yükleniyor...</p>
     </section>
 
+       <a class="kick-badge" href="https://kick.com/Wiccawic" target="_blank" rel="noopener">
+        <span class="dot"></span>
+        <span>KICK KANALINI ZİYARET ET</span>
+    </a>
+
     <p class="section-title">İksir Rafı</p>
 
     <nav class="links" aria-label="Sosyal medya bağlantıları">
       <a class="potion-link lk-kick" href="https://kick.com/Wiccawic" target="_blank" rel="noopener">
         <span class="bottle"></span>
-        <span class="label-group">
-          <span>Kick Kanalım</span>
-          <span class="sub">canlı yayını izle</span>
-        </span>
+        <span class="label-group"><span>Kick Kanalım</span><span class="sub">canlı yayını izle</span></span>
         <span class="arrow">›</span>
       </a>
 
       <a class="potion-link lk-discord" href="https://discord.com/invite/ScbQXUsnNk" target="_blank" rel="noopener">
         <span class="bottle"></span>
-        <span class="label-group">
-          <span>Discord</span>
-          <span class="sub">kazana katıl</span>
-        </span>
+        <span class="label-group"><span>Discord</span><span class="sub">kazana katıl</span></span>
         <span class="arrow">›</span>
       </a>
 
       <a class="potion-link lk-instagram" href="https://www.instagram.com/wicca.wic" target="_blank" rel="noopener">
         <span class="bottle"></span>
-        <span class="label-group">
-          <span>Instagram</span>
-          <span class="sub">günlük büyüler</span>
-        </span>
+        <span class="label-group"><span>Instagram</span><span class="sub">günlük büyüler</span></span>
         <span class="arrow">›</span>
       </a>
 
       <a class="potion-link lk-tiktok" href="https://www.tiktok.com/@wiccawicc" target="_blank" rel="noopener">
         <span class="bottle"></span>
-        <span class="label-group">
-          <span>TikTok</span>
-          <span class="sub">kısa iksirler</span>
-        </span>
+        <span class="label-group"><span>TikTok</span><span class="sub">kısa iksirler</span></span>
         <span class="arrow">›</span>
       </a>
 
       <a class="potion-link lk-x" href="https://x.com/diloswic" target="_blank" rel="noopener">
         <span class="bottle"></span>
-        <span class="label-group">
-          <span>X</span>
-          <span class="sub">duyurular</span>
-        </span>
+        <span class="label-group"><span>X</span><span class="sub">duyurular</span></span>
         <span class="arrow">›</span>
       </a>
 
       <a class="potion-link lk-support" href="https://donate.bynogame.com/wiccawicc" target="_blank" rel="noopener">
         <span class="bottle"></span>
-        <span class="label-group">
-          <span>Bağış Yap</span>
-          <span class="sub">kazanı besle</span>
-        </span>
+        <span class="label-group"><span>Bağış Yap</span><span class="sub">kazanı besle</span></span>
         <span class="arrow">›</span>
       </a>
     </nav>
 
-    <div class="cat-scene" id="cat" title="Büyülü kediye tıkla">
+    <div class="cat-scene" id="cat" role="button" tabindex="0" title="Büyülü kediye tıkla">
       <div class="cat-aura"></div>
-      <div class="cat-message" id="catMessage"></div>
+      <div class="cat-message" id="catMessage" aria-live="polite"></div>
       <div class="hearts">💜 ✨ 💜</div>
       <div class="cat">🐈‍⬛</div>
       <div class="paw-trail">🐾　🐾　🐾</div>
@@ -1180,312 +1088,365 @@ box-shadow:
 
   <div class="modal" id="spellbookModal" hidden>
     <article class="spellbook" role="dialog" aria-modal="true" aria-labelledby="spellbookTitle">
-      <button class="close-modal" id="closeModal" aria-label="Büyü kitabını kapat">×</button>
+      <button class="close-modal" id="closeModal" type="button" aria-label="Büyü kitabını kapat">×</button>
       <h2 id="spellbookTitle">Büyü Kitabı</h2>
-
-      <p><strong>✨ Wiccawic kimdir?</strong><br>
-        Cadı kazanında oyun, sohbet ve eğlence iksirleri kaynatan gizemli yayıncı.</p>
-
-      <p><strong>🔮 Kazanın sırrı</strong><br>
-        Her yayın yeni bir büyü, her izleyici de kazanın gücünü artıran bir büyücüdür.</p>
-
-      <p><strong>🌙 Yayın büyüsü</strong><br>
-        Kick kanalını takip et, Discord topluluğuna katıl ve yeni yayınlardan haberdar ol.</p>
-
-      <p><strong>🐈‍⬛ Aşina kedi</strong><br>
-        Büyülü kediye her tıkladığında farklı bir tepki verir.</p>
+      <p><strong>✨ Wiccawic kimdir?</strong><br>Cadı kazanında oyun, sohbet ve eğlence iksirleri kaynatan gizemli yayıncı.</p>
+      <p><strong>🔮 Kazanın sırrı</strong><br>Her yayın yeni bir büyü, her izleyici de kazanın gücünü artıran bir büyücüdür.</p>
+      <p><strong>🌙 Yayın büyüsü</strong><br>Kick kanalını takip et, Discord topluluğuna katıl ve yeni yayınlardan haberdar ol.</p>
+      <p><strong>🐈‍⬛ Aşina kedi</strong><br>Büyülü kediye her tıkladığında farklı bir tepki verir.</p>
     </article>
   </div>
 
   <script>
-    const KICK_USERNAME = "Wiccawic";
-    const KICK_CHANNEL_API =
-      `https://kick.com/api/v2/channels/${KICK_USERNAME.toLowerCase()}`;
-    const KICK_VIDEOS_API =
-      `https://kick.com/api/v2/channels/${KICK_USERNAME.toLowerCase()}/videos`;
+    (() => {
+      "use strict";
 
-    const stars = document.getElementById("stars");
-    const particles = document.getElementById("particles");
+      const $ = selector => document.querySelector(selector);
+      const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    for (let i = 0; i < (innerWidth < 600 ? 45 : 90); i++) {
-      const star = document.createElement("span");
-      const size = Math.random() * 2 + 1;
+      const KICK_USERNAME = "Wiccawic";
+      const channelApi = `https://kick.com/api/v2/channels/${KICK_USERNAME.toLowerCase()}`;
+      const videosApi = `${channelApi}/videos`;
 
-      star.className = "star";
-      star.style.width = `${size}px`;
-      star.style.height = `${size}px`;
-      star.style.top = `${Math.random() * 100}%`;
-      star.style.left = `${Math.random() * 100}%`;
-      star.style.opacity = Math.random();
-      star.style.animationDelay = `${Math.random() * 4}s`;
-      stars.appendChild(star);
-    }
+      const quotes = [
+        "Yıldızlar sana yol göstersin, büyücü.",
+        "Kazan seni asla yalnız bırakmaz.",
+        "Her iksirin bir bedeli, her bedelin bir büyüsü vardır.",
+        "Güç içindedir, sadece doğru zamanda karıştırmayı bil.",
+        "Bugün seni bekleyen tek şey mucizedir.",
+        "Ay’ın ışığında gizlenenler, senin için ortaya çıkacak.",
+        "Kediler bilir, sen de kulak ver.",
+        "Büyü, inandığın kadar gerçektir.",
+        "Küçük bir kıvılcım, büyük bir alev doğurur.",
+        "Kazandaki her köpük, yeni bir hikayedir."
+      ];
 
-    for (let i = 0; i < (innerWidth < 600 ? 12 : 24); i++) {
-      const particle = document.createElement("span");
+      const quoteText = $("#quoteText");
+      const today = new Date().getDate();
+      quoteText.textContent = quotes[today % quotes.length];
 
-      particle.className = "particle";
-      particle.style.left = `${Math.random() * 100}%`;
-      particle.style.top = `${Math.random() * 100 + 20}%`;
-      particle.style.animationDuration = `${8 + Math.random() * 12}s`;
-      particle.style.animationDelay = `${Math.random() * -15}s`;
+      function initTheme() {
+        const savedTheme = localStorage.getItem("wiccawic-theme") || "default";
+        const themeBtns = document.querySelectorAll(".theme-btn");
 
-      particles.appendChild(particle);
-    }
+        function applyTheme(theme) {
+          document.body.className = theme === "default" ? "" : `theme-${theme}`;
+          localStorage.setItem("wiccawic-theme", theme);
+          themeBtns.forEach(btn => {
+            btn.classList.toggle("active", btn.dataset.theme === theme);
+          });
+        }
 
-    const potions = [
-      "🧪 Şans İksiri: Bugün bütün güzel tesadüfler seni bulacak!",
-      "💜 Mor Büyü: Yaratıcılığın ve enerjin iki katına çıktı!",
-      "🔥 Ejderha Nefesi: Bugünkü yayın enerjin alev alev yanıyor!",
-      "🌙 Ay Işığı İksiri: Gizli dileğin gece gerçekleşebilir.",
-      "✨ Kaos İksiri: Beklenmedik ama çok eğlenceli bir macera seni bekliyor!"
-    ];
+        themeBtns.forEach(btn => {
+          btn.addEventListener("click", () => applyTheme(btn.dataset.theme));
+        });
 
-    const potionResult = document.getElementById("potionResult");
-    const cauldron = document.getElementById("cauldron");
-
-    function choosePotion() {
-      const potion = potions[Math.floor(Math.random() * potions.length)];
-
-      potionResult.textContent = potion;
-      cauldron.classList.remove("active");
-      void cauldron.offsetWidth;
-      cauldron.classList.add("active");
-
-      potionResult.animate(
-        [
-          { opacity: .3, transform: "scale(.96)" },
-          { opacity: 1, transform: "scale(1)" }
-        ],
-        { duration: 400, easing: "ease-out" }
-      );
-
-      setTimeout(() => cauldron.classList.remove("active"), 900);
-    }
-
-    document.getElementById("potionButton").addEventListener("click", choosePotion);
-    cauldron.addEventListener("click", choosePotion);
-
-    const streamHeading = document.getElementById("streamHeading");
-    const streamStatus = document.getElementById("streamStatus");
-    const streamFrame = document.getElementById("streamFrame");
-    const streamEmbed = document.getElementById("streamEmbed");
-    const offlineBox = document.getElementById("offlineBox");
-    const lastStream = document.getElementById("lastStream");
-    const streamNote = document.getElementById("streamNote");
-
-    function formatDate(value) {
-      if (!value) return "Tarih bilgisi bulunamadı";
-
-      const date = new Date(value);
-
-      if (Number.isNaN(date.getTime())) {
-        return "Tarih bilgisi bulunamadı";
+        applyTheme(savedTheme);
       }
 
-      return new Intl.DateTimeFormat("tr-TR", {
-        dateStyle: "medium",
-        timeStyle: "short"
-      }).format(date);
-    }
+      initTheme();
 
-    function escapeHtml(value) {
-      return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
+      function createBackground() {
+        const stars = $("#stars");
+        const particles = $("#particles");
+        const symbols = $("#magicSymbols");
+        const mobile = innerWidth < 600;
 
-    function getLastStream(response) {
-      const videos = Array.isArray(response) ? response : response?.data;
+        const fragment = document.createDocumentFragment();
 
-      if (!Array.isArray(videos) || videos.length === 0) return null;
+        for (let i = 0; i < (mobile ? 35 : 70); i++) {
+          const star = document.createElement("span");
+          const size = Math.random() * 2 + 1;
 
-      const video = videos[0];
+          star.className = "star";
+          star.style.cssText = `
+            width:${size}px;
+            height:${size}px;
+            top:${Math.random() * 100}%;
+            left:${Math.random() * 100}%;
+            opacity:${Math.random()};
+            animation-delay:${Math.random() * 4}s;
+          `;
+          fragment.appendChild(star);
+        }
 
-      return {
-        title: video.session_title || video.title || video.name || "Son yayın",
-        category:
-          video.category?.name ||
-          video.category?.slug ||
-          video.category_name ||
-          video.game?.name ||
-          video.category ||
-          "Kategori belirtilmemiş",
-        date: video.created_at || video.published_at || video.start_time || video.started_at
-      };
-    }
+        stars.appendChild(fragment);
 
-    function showLiveStream(livestream) {
-      streamHeading.textContent = "🔴 Wiccawic şu anda yayında!";
-      streamStatus.textContent = "CANLI";
-      streamStatus.className = "stream-status";
+        const particleFragment = document.createDocumentFragment();
 
-      streamFrame.hidden = false;
-      offlineBox.classList.remove("visible");
-      lastStream.classList.remove("visible");
+        for (let i = 0; i < (mobile ? 8 : 16); i++) {
+          const particle = document.createElement("span");
 
-      streamEmbed.src =
-        `https://player.kick.com/${KICK_USERNAME.toLowerCase()}?autoplay=true&muted=true`;
+          particle.className = "particle";
+          particle.style.cssText = `
+            left:${Math.random() * 100}%;
+            top:${Math.random() * 100 + 20}%;
+            animation-duration:${8 + Math.random() * 12}s;
+            animation-delay:${Math.random() * -15}s;
+          `;
+          particleFragment.appendChild(particle);
+        }
 
-      streamNote.textContent =
-        `${livestream.session_title || "Canlı yayın"} • ${livestream.viewer_count || 0} izleyici`;
-    }
+        particles.appendChild(particleFragment);
 
-    function showOfflineStream(videos) {
-      const previousStream = getLastStream(videos);
+        const symbolList = [
+          ["☽", "gold"], ["𑄝੭", ""], ["𖤐", ""], ["🕮", ""],
+          ["𓃵", "gold"], ["⏾", ""], ["♡", ""], ["☽ ☾", "gold"]
+        ];
 
-      streamHeading.textContent = "🌙 Wiccawic şu anda yayında değil";
-      streamStatus.textContent = "ÇEVRİMDIŞI";
-      streamStatus.className = "stream-status offline";
+        const symbolFragment = document.createDocumentFragment();
 
-      streamEmbed.src = "";
-      streamFrame.hidden = true;
-      offlineBox.classList.add("visible");
+        for (let i = 0; i < (reduceMotion ? 6 : 14); i++) {
+          const [character, type] = symbolList[Math.floor(Math.random() * symbolList.length)];
+          const symbol = document.createElement("span");
 
-      streamNote.textContent =
-        "Yeni yayın başladığında canlı yayın burada görünecek.";
+          symbol.className = `magic-symbol ${type}`;
+          symbol.textContent = character;
+          symbol.style.cssText = `
+            left:${Math.random() * 100}%;
+            animation-duration:${14 + Math.random() * 14}s;
+            animation-delay:${Math.random() * -24}s;
+            font-size:${22 + Math.random() * 18}px;
+          `;
+          symbolFragment.appendChild(symbol);
+        }
 
-      if (previousStream) {
+        symbols.appendChild(symbolFragment);
+      }
+
+      createBackground();
+
+      const potionResult = $("#potionResult");
+      const cauldron = $("#cauldron");
+
+      const potions = [
+        "🧪 Şans İksiri: Bugün bütün güzel tesadüfler seni bulacak!",
+        "💜 Mor Büyü: Yaratıcılığın ve enerjin iki katına çıktı!",
+        "🔥 Ejderha Nefesi: Bugünkü yayın enerjin alev alev yanıyor!",
+        "🌙 Ay Işığı İksiri: Gizli dileğin gece gerçekleşebilir.",
+        "✨ Kaos İksiri: Beklenmedik ama çok eğlenceli bir macera seni bekliyor!"
+      ];
+
+      function choosePotion() {
+        potionResult.textContent = potions[Math.floor(Math.random() * potions.length)];
+
+        if (!reduceMotion) {
+          cauldron.classList.remove("active");
+          void cauldron.offsetWidth;
+          cauldron.classList.add("active");
+
+          potionResult.animate(
+            [
+              { opacity: .3, transform: "scale(.96)" },
+              { opacity: 1, transform: "scale(1)" }
+            ],
+            { duration: 400, easing: "ease-out" }
+          );
+
+          setTimeout(() => cauldron.classList.remove("active"), 900);
+        }
+      }
+
+      $("#potionButton").addEventListener("click", choosePotion);
+      cauldron.addEventListener("click", choosePotion);
+      cauldron.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          choosePotion();
+        }
+      });
+
+      const streamHeading = $("#streamHeading");
+      const streamStatus = $("#streamStatus");
+      const streamFrame = $("#streamFrame");
+      const streamEmbed = $("#streamEmbed");
+      const offlineBox = $("#offlineBox");
+      const lastStream = $("#lastStream");
+      const streamNote = $("#streamNote");
+
+      function formatDate(value) {
+        const date = new Date(value);
+        return value && !Number.isNaN(date.getTime())
+          ? new Intl.DateTimeFormat("tr-TR", { dateStyle: "medium", timeStyle: "short" }).format(date)
+          : "Tarih bilgisi bulunamadı";
+      }
+
+      function escapeHtml(value) {
+        const div = document.createElement("div");
+        div.textContent = String(value ?? "");
+        return div.innerHTML;
+      }
+
+      function getLastStream(response) {
+        const videos = Array.isArray(response) ? response : response?.data;
+        const video = videos?.[0];
+
+        if (!video) return null;
+
+        return {
+          title: video.session_title || video.title || video.name || "Son yayın",
+          category:
+            video.category?.name ||
+            video.category?.slug ||
+            video.category_name ||
+            video.game?.name ||
+            video.category ||
+            "Kategori belirtilmemiş",
+          date: video.created_at || video.published_at || video.start_time || video.started_at
+        };
+      }
+
+      function showLiveStream(livestream) {
+        streamHeading.textContent = "🔴 Wiccawic şu anda yayında!";
+        streamStatus.textContent = "CANLI";
+        streamStatus.className = "stream-status";
+        streamFrame.hidden = false;
+        offlineBox.classList.remove("visible");
+        lastStream.classList.remove("visible");
+
+        const source = `https://player.kick.com/${KICK_USERNAME.toLowerCase()}?autoplay=true&muted=true`;
+
+        if (streamEmbed.src !== source) {
+          streamEmbed.src = source;
+        }
+
+        streamNote.textContent =
+          `${livestream.session_title || "Canlı yayın"} • ${livestream.viewer_count || 0} izleyici`;
+      }
+
+      function showOfflineStream(videos) {
+        const previousStream = getLastStream(videos);
+
+        streamHeading.textContent = "🌙 Wiccawic şu anda yayında değil";
+        streamStatus.textContent = "ÇEVRİMDIŞI";
+        streamStatus.className = "stream-status offline";
+        streamEmbed.removeAttribute("src");
+        streamFrame.hidden = true;
+        offlineBox.classList.add("visible");
+        streamNote.textContent = "Yeni yayın başladığında canlı yayın burada görünecek.";
+
+        if (!previousStream) {
+          lastStream.classList.remove("visible");
+          return;
+        }
+
         lastStream.innerHTML = `
           <strong>📜 Son yayın</strong><br>
           <span class="last-stream-title">${escapeHtml(previousStream.title)}</span><br>
           🎮 ${escapeHtml(previousStream.category)}<br>
           🕒 ${formatDate(previousStream.date)}
         `;
-
         lastStream.classList.add("visible");
       }
-    }
 
-    function showStreamError() {
-      streamHeading.textContent = "🔮 Yayın durumu alınamadı";
-      streamStatus.textContent = "KICK";
-      streamStatus.className = "stream-status offline";
-      streamFrame.hidden = true;
-      offlineBox.classList.add("visible");
+      function showStreamError() {
+        streamHeading.textContent = "🔮 Yayın durumu alınamadı";
+        streamStatus.textContent = "KICK";
+        streamStatus.className = "stream-status offline";
+        streamEmbed.removeAttribute("src");
+        streamFrame.hidden = true;
+        offlineBox.classList.add("visible");
+        streamNote.innerHTML = `
+          Durumu kontrol etmek için
+          <a href="https://kick.com/${KICK_USERNAME}" target="_blank" rel="noopener">Kick kanalını aç</a>.
+        `;
+      }
 
-      streamNote.innerHTML = `
-        Durumu kontrol etmek için
-        <a href="https://kick.com/${KICK_USERNAME}"
-           target="_blank"
-           rel="noopener">Kick kanalını aç</a>.`;
-    }
+      async function fetchJson(url, timeout = 8000) {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), timeout);
 
-    async function updateStreamStatus() {
-      try {
-        const [channelResponse, videosResponse] = await Promise.all([
-          fetch(KICK_CHANNEL_API),
-          fetch(KICK_VIDEOS_API)
-        ]);
+        try {
+          const response = await fetch(url, {
+            signal: controller.signal,
+            cache: "no-store"
+          });
 
-        if (!channelResponse.ok) {
-          throw new Error("Kick kanal bilgisi alınamadı.");
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return await response.json();
+        } finally {
+          clearTimeout(timer);
         }
+      }
 
-        const channelData = await channelResponse.json();
-        const videosData = videosResponse.ok
-          ? await videosResponse.json()
-          : [];
+      async function updateStreamStatus() {
+        try {
+          const [channelData, videosData] = await Promise.all([
+            fetchJson(channelApi),
+            fetchJson(videosApi).catch(() => [])
+          ]);
 
-        if (channelData.livestream) {
-          showLiveStream(channelData.livestream);
-        } else {
-          showOfflineStream(videosData);
+          channelData.livestream
+            ? showLiveStream(channelData.livestream)
+            : showOfflineStream(videosData);
+        } catch (error) {
+          console.warn("Kick yayın durumu alınamadı:", error);
+          showStreamError();
         }
-      } catch (error) {
-        console.warn("Kick yayın durumu alınamadı:", error);
-        showStreamError();
       }
-    }
 
-    updateStreamStatus();
-    setInterval(updateStreamStatus, 60000);
+      updateStreamStatus();
+      setInterval(updateStreamStatus, 60000);
 
-    const spellbookModal = document.getElementById("spellbookModal");
-    const spellbookButton = document.getElementById("spellbookButton");
-    const closeModal = document.getElementById("closeModal");
+      const modal = $("#spellbookModal");
+      const spellbookButton = $("#spellbookButton");
+      const closeModal = $("#closeModal");
 
-    function openSpellbook() {
-      spellbookModal.hidden = false;
-      closeModal.focus();
-    }
-
-    function closeSpellbook() {
-      spellbookModal.hidden = true;
-      spellbookButton.focus();
-    }
-
-    spellbookButton.addEventListener("click", openSpellbook);
-    closeModal.addEventListener("click", closeSpellbook);
-
-    spellbookModal.addEventListener("click", event => {
-      if (event.target === spellbookModal) {
-        closeSpellbook();
+      function openSpellbook() {
+        modal.hidden = false;
+        closeModal.focus();
       }
-    });
 
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape" && !spellbookModal.hidden) {
-        closeSpellbook();
+      function closeSpellbook() {
+        modal.hidden = true;
+        spellbookButton.focus();
       }
-    });
 
-    const cat = document.getElementById("cat");
-    const catMessage = document.getElementById("catMessage");
+      spellbookButton.addEventListener("click", openSpellbook);
+      closeModal.addEventListener("click", closeSpellbook);
 
-    const catReactions = [
-      "Miyav! Büyü başladı ✨",
-      "Bugün şansın çok açık! 💜",
-      "Kedi kehaneti: Güzel haberler geliyor 🔮",
-      "Mırıldanıyorum, çünkü enerjin harika! 🐾",
-      "Sana gizli bir yıldız gönderdim 🌟",
-      "Kazan seni sevdi, büyücü! 🧪",
-      "Pati büyüsü başarıyla uygulandı ✨"
-    ];
+      modal.addEventListener("click", event => {
+        if (event.target === modal) closeSpellbook();
+      });
 
-    cat.addEventListener("click", () => {
-      catMessage.classList.remove("show");
-      void cat.offsetWidth;
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && !modal.hidden) closeSpellbook();
+      });
 
-      const reaction =
-        catReactions[Math.floor(Math.random() * catReactions.length)];
+      const cat = $("#cat");
+      const catMessage = $("#catMessage");
 
-      catMessage.textContent = reaction;
-      catMessage.classList.add("show");
-      potionResult.textContent = `🐈‍⬛ ${reaction}`;
-    });
+      const reactions = [
+        "Miyav! Büyü başladı ✨",
+        "Bugün şansın çok açık! 💜",
+        "Kedi kehaneti: Güzel haberler geliyor 🔮",
+        "Mırıldanıyorum, çünkü enerjin harika! 🐾",
+        "Sana gizli bir yıldız gönderdim 🌟",
+        "Kazan seni sevdi, büyücü! 🧪",
+        "Pati büyüsü başarıyla uygulandı ✨"
+      ];
 
-const magicSymbols = document.getElementById("magicSymbols");
+      function catReaction() {
+        catMessage.classList.remove("show");
+        void cat.offsetWidth;
 
-const symbols = [
-  { character: "☽", type: "gold" },
-  { character: "𑄝੭", type: "" },
-  { character: "𖤐", type: "" },
-  { character: "🕮", type: "" },
-  { character: "𓃵", type: "gold" },
-  { character: "⏾", type: "" },
-  { character: "♡", type: "" },
-  { character: "☽ ☾", type: "gold" }
-];
+        const reaction = reactions[Math.floor(Math.random() * reactions.length)];
+        catMessage.textContent = reaction;
+        catMessage.classList.add("show");
+        cat.classList.remove("active");
+        void cat.offsetWidth;
+        cat.classList.add("active");
+        potionResult.textContent = `🐈‍⬛ ${reaction}`;
+      }
 
-for (let i = 0; i < 18; i++) {
-  const symbolData = symbols[Math.floor(Math.random() * symbols.length)];
-  const symbol = document.createElement("span");
-
-  symbol.className = `magic-symbol ${symbolData.type}`;
-  symbol.textContent = symbolData.character;
-  symbol.style.left = `${Math.random() * 100}%`;
-  symbol.style.animationDuration = `${14 + Math.random() * 14}s`;
-  symbol.style.animationDelay = `${Math.random() * -24}s`;
-  symbol.style.fontSize = `${22 + Math.random() * 18}px`;
-
-  magicSymbols.appendChild(symbol);
-}
-
-
+      cat.addEventListener("click", catReaction);
+      cat.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          catReaction();
+        }
+      });
+    })();
   </script>
 </body>
 </html>
