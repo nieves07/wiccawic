@@ -6,7 +6,7 @@
       name: "Rhea Thorne",
       age: "26 yaşında",
       location: "Amerika",
-      occupation: "Polis adayı",
+      occupation: "Şerif adayı",
       imageUrl: "",
       avatar: "🐺",
       quote: "Yetkimi korkutmak için değil, güven vermek için kullanacağım.",
@@ -15,7 +15,7 @@ Rhea Thorne, Amerika'nın Oregon eyaletine bağlı Eugene şehrinde dünyaya gel
 Babası oto tamircisi, annesi ise halk kütüphanesinde görevliydi. Ailesi ona
 dürüst olmayı, çalışmayı ve kendi ayakları üzerinde durmayı öğretti.
 
-Çocukluğundan itibaren arabalara, motorlara ve tamir işlerine ilgi duydu. 
+Çocukluğundan itibaren arabalara, motorlara ve tamir işlerine ilgi duydu.
 Bisiklete binmek, fotoğraf çekmek, uzun araba ve motor sürüşlerine çıkmak,
 akrobasi çalışmak ve kum torbasında antrenman yapmak hobileri arasındaydı.
 
@@ -37,7 +37,7 @@ En büyük amacı adil, güvenilir ve görevini hakkıyla yapan bir polis olmakt
       age: "26 yaşında",
       location: "Türkiye",
       occupation: "Gözlemci ve psikoloji meraklısı",
-      imageUrl: "",
+      imageUrl: "https://s3.kngl.gg/knglrp-media/characters/5d8bb04c-3150-4bff-addc-73b4ed1a3595.png",
       avatar: "🖤",
       quote: "İnsanları tanımak için söylediklerinden çok sustuklarına bakarım.",
       story: `
