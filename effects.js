@@ -113,8 +113,132 @@
       transform: translateY(-3px);
     }
 
-    .stream-frame iframe {
+    .stream-frame {
+      position: relative;
+      isolation: isolate;
+      border: 1px solid transparent;
+      transition: border-color .5s ease, box-shadow .5s ease, filter .5s ease;
+    }
+
+    .stream-frame::before,
+    .stream-frame::after {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      content: "";
+      border-radius: inherit;
       pointer-events: none;
+      opacity: 0;
+      transition: opacity .5s ease;
+    }
+
+    .stream-frame::before {
+      border: 1px solid var(--glow);
+      box-shadow:
+        0 0 8px var(--glow),
+        0 0 18px var(--witch),
+        inset 0 0 12px #c6a8ff55;
+    }
+
+    .stream-frame::after {
+      inset: -35%;
+      z-index: 0;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        transparent 265deg,
+        var(--pink) 292deg,
+        var(--glow) 315deg,
+        transparent 340deg
+      );
+      filter: blur(16px);
+      animation: stream-neon-spin 5s linear infinite;
+    }
+
+    .stream-frame.neon-live {
+      border-color: var(--glow);
+      box-shadow:
+        0 0 8px #c6a8ffcc,
+        0 0 22px #8a63d288,
+        0 0 46px #8a63d244,
+        inset 0 0 18px #c6a8ff33;
+      animation: stream-neon-pulse 2.4s ease-in-out infinite;
+    }
+
+    .stream-frame.neon-live::before,
+    .stream-frame.neon-live::after {
+      opacity: 1;
+    }
+
+    .stream-frame iframe {
+      position: relative;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    @keyframes stream-neon-pulse {
+      0%, 100% { filter: saturate(1); }
+      50% { filter: saturate(1.25) brightness(1.06); }
+    }
+
+    @keyframes stream-neon-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .shooting-star {
+      position: absolute;
+      z-index: 1;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      opacity: 0;
+      background: #fff;
+      box-shadow:
+        0 0 5px 1px #fff,
+        0 0 12px 2px var(--glow),
+        0 0 22px 3px var(--witch);
+      transform: rotate(135deg);
+      animation: shooting-star linear infinite;
+    }
+
+    .shooting-star::after {
+      position: absolute;
+      top: 1px;
+      right: 2px;
+      width: var(--tail-length, 115px);
+      height: 1px;
+      content: "";
+      background: linear-gradient(90deg, transparent, var(--glow) 55%, #fff);
+      box-shadow: 0 0 7px var(--glow);
+      transform-origin: right center;
+    }
+
+    .shooting-star.gold {
+      background: var(--gold);
+      box-shadow:
+        0 0 5px 1px #fff8d6,
+        0 0 12px 2px var(--gold),
+        0 0 22px 3px #e0b45caa;
+    }
+
+    .shooting-star.gold::after {
+      background: linear-gradient(90deg, transparent, var(--gold) 55%, #fff8d6);
+    }
+
+    @keyframes shooting-star {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, 0, 0) rotate(135deg) scale(.55);
+      }
+
+      8%, 22% {
+        opacity: 1;
+      }
+
+      38%, 100% {
+        opacity: 0;
+        transform: translate3d(-390px, 390px, 0) rotate(135deg) scale(1);
+      }
     }
 
     .cauldron-wrap {
@@ -201,9 +325,7 @@
     }
 
     @keyframes cauldron-orbit {
-      to {
-        transform: translate(-50%, -50%) rotateX(68deg) rotate(360deg);
-      }
+      to { transform: translate(-50%, -50%) rotateX(68deg) rotate(360deg); }
     }
 
     @keyframes cauldron-image-glow {
@@ -232,9 +354,7 @@
         transform: rotate(0deg) translateX(122px) scale(.4);
       }
 
-      15%, 80% {
-        opacity: 1;
-      }
+      15%, 80% { opacity: 1; }
 
       to {
         opacity: 0;
@@ -259,9 +379,7 @@
     }
 
     @keyframes signature-float {
-      50% {
-        transform: translateY(-4px);
-      }
+      50% { transform: translateY(-4px); }
     }
 
     .cat-scene {
@@ -314,55 +432,63 @@
       top: 0;
       left: 0;
       z-index: 99999;
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--pink);
+      border-radius: 50%;
       pointer-events: none;
       opacity: 0;
       visibility: hidden;
-      will-change: transform;
-      border: 1px solid var(--pink);
-      background: linear-gradient(
-        135deg,
-        var(--pink),
-        var(--witch) 55%,
-        var(--gold)
-      );
+      will-change: transform, width, height, border-color, box-shadow;
+      background: radial-gradient(circle, #fff8 0 8%, var(--pink) 20%, transparent 68%);
       box-shadow:
         0 0 8px var(--pink),
-        0 0 18px var(--witch),
+        0 0 18px var(--glow),
         0 0 32px #8a63d288;
-      transform: translate(-50%, -50%) rotate(45deg);
+      transform: translate(-50%, -50%);
       transition:
-        width .25s ease,
-        height .25s ease,
-        box-shadow .25s ease,
-        opacity .2s ease,
-        visibility .2s ease;
+        width .35s cubic-bezier(.2, .8, .2, 1),
+        height .35s cubic-bezier(.2, .8, .2, 1),
+        border-color .35s ease,
+        background .35s ease,
+        box-shadow .35s ease,
+        opacity .25s ease,
+        visibility .25s ease;
+    }
+
+    .magic-cursor::before,
+    .magic-cursor::after {
+      position: absolute;
+      content: "";
+      border-radius: 50%;
+      pointer-events: none;
     }
 
     .magic-cursor::before {
-      position: absolute;
-      inset: -7px;
-      content: "";
+      inset: -8px;
       border: 1px solid var(--glow);
-      border-radius: 50%;
-      opacity: .5;
-      pointer-events: none;
-      animation: cursor-aura 2s ease-in-out infinite;
+      opacity: .45;
+      animation: cursor-aura 2.8s ease-in-out infinite;
+    }
+
+    .magic-cursor::after {
+      inset: 4px;
+      border: 1px solid #fff9;
+      opacity: .75;
     }
 
     .cursor-particle {
       position: fixed;
       z-index: 99997;
-      width: 5px;
-      height: 5px;
+      width: 4px;
+      height: 4px;
       border-radius: 50%;
       pointer-events: none;
       background: var(--particle-color, var(--glow));
       box-shadow:
         0 0 6px var(--particle-color, var(--glow)),
         0 0 14px var(--particle-color, var(--glow));
-      animation: cursor-particle-fade .65s ease-out forwards;
+      animation: cursor-particle-fade .9s cubic-bezier(.2, .7, .2, 1) forwards;
     }
 
     .cursor-particle.star {
@@ -377,20 +503,24 @@
 
     @keyframes cursor-aura {
       0%, 100% {
-        opacity: .3;
-        transform: scale(.85);
+        opacity: .25;
+        transform: scale(.86);
       }
 
       50% {
-        opacity: .75;
-        transform: scale(1.2);
+        opacity: .72;
+        transform: scale(1.18);
       }
     }
 
     @keyframes cursor-particle-fade {
       from {
-        opacity: .95;
-        transform: translate(-50%, -50%) scale(1);
+        opacity: .9;
+        transform: translate(-50%, -50%) scale(.7) rotate(0deg);
+      }
+
+      45% {
+        opacity: .8;
       }
 
       to {
@@ -400,8 +530,8 @@
             calc(-50% + var(--move-x)),
             calc(-50% + var(--move-y))
           )
-          scale(.1)
-          rotate(120deg);
+          scale(.08)
+          rotate(150deg);
       }
     }
 
@@ -420,21 +550,29 @@
     }
 
     body.cursor-hover .magic-cursor {
-      width: 24px;
-      height: 24px;
+      width: 34px;
+      height: 34px;
+      border-color: var(--cursor-hover-color, var(--glow));
+      background: radial-gradient(
+        circle,
+        var(--cursor-hover-color, var(--glow)) 0 8%,
+        transparent 58%
+      );
       box-shadow:
-        0 0 10px var(--pink),
+        0 0 10px var(--cursor-hover-color, var(--glow)),
         0 0 24px var(--glow),
-        0 0 44px var(--witch);
+        0 0 46px var(--witch);
     }
 
     body.cursor-click .magic-cursor {
-      width: 11px;
-      height: 11px;
+      width: 12px;
+      height: 12px;
+      border-color: var(--gold);
+      background: radial-gradient(circle, #fff, var(--gold) 35%, transparent 72%);
       box-shadow:
-        0 0 10px var(--gold),
-        0 0 22px var(--glow),
-        0 0 36px var(--pink);
+        0 0 12px var(--gold),
+        0 0 28px var(--glow),
+        0 0 50px var(--pink);
     }
 
     .cursor-ripple {
@@ -446,18 +584,47 @@
       border-radius: 50%;
       pointer-events: none;
       transform: translate(-50%, -50%);
-      animation: cursor-ripple .65s ease-out forwards;
+      animation: cursor-ripple .72s cubic-bezier(.15, .7, .25, 1) forwards;
+    }
+
+    .cursor-ripple::before,
+    .cursor-ripple::after {
+      position: absolute;
+      inset: -6px;
+      content: "";
+      border: 1px solid var(--pink);
+      border-radius: inherit;
+      box-shadow: 0 0 12px var(--glow);
+      animation: cursor-ripple-ring .72s ease-out forwards;
+    }
+
+    .cursor-ripple::after {
+      inset: -11px;
+      border-color: var(--glow);
+      animation-delay: .06s;
     }
 
     @keyframes cursor-ripple {
       from {
-        opacity: .9;
-        transform: translate(-50%, -50%) scale(.5);
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(.35);
       }
 
       to {
         opacity: 0;
-        transform: translate(-50%, -50%) scale(4);
+        transform: translate(-50%, -50%) scale(3.4);
+      }
+    }
+
+    @keyframes cursor-ripple-ring {
+      from {
+        opacity: .9;
+        transform: scale(.3) rotate(0deg);
+      }
+
+      to {
+        opacity: 0;
+        transform: scale(1.35) rotate(160deg);
       }
     }
 
@@ -466,12 +633,15 @@
       .cauldron-orbit-spark,
       .cat-scene::before,
       .footer-signature,
-      .magic-cursor::before {
+      .magic-cursor::before,
+      .stream-frame.neon-live,
+      .stream-frame::after {
         animation: none;
       }
 
       .kick-badge::before,
-      .magic-cursor {
+      .magic-cursor,
+      .shooting-star {
         display: none;
       }
     }
@@ -486,6 +656,14 @@
       .kick-badge:focus-visible {
         transform: translateY(-2px) scale(1.015);
       }
+
+      .stream-frame::after {
+        filter: blur(12px);
+      }
+
+      .shooting-star::after {
+        width: calc(var(--tail-length, 115px) * .72);
+      }
     }
   `;
 
@@ -498,17 +676,72 @@
 
     for (let index = 0; index < 8; index++) {
       const spark = document.createElement("span");
-
       spark.className = "cauldron-orbit-spark";
       spark.style.animationDelay = `${-index * .7}s`;
-      spark.style.setProperty(
-        "--spark-color",
-        sparkColors[index % sparkColors.length]
-      );
-
+      spark.style.setProperty("--spark-color", sparkColors[index % sparkColors.length]);
       cauldron.appendChild(spark);
     }
   }
+
+  function initShootingStars() {
+    const starsContainer = document.querySelector("#stars");
+
+    if (!starsContainer || reduceMotion) return;
+
+    const fragment = document.createDocumentFragment();
+
+    for (let index = 0; index < 7; index++) {
+      const shootingStar = document.createElement("span");
+      const isGold = index % 4 === 0;
+
+      shootingStar.className = `shooting-star${isGold ? " gold" : ""}`;
+      shootingStar.style.top = `${Math.random() * 48 + 2}%`;
+      shootingStar.style.left = `${Math.random() * 58 + 42}%`;
+      shootingStar.style.animationDuration = `${6 + Math.random() * 7}s`;
+      shootingStar.style.animationDelay = `${-Math.random() * 14}s`;
+      shootingStar.style.setProperty("--tail-length", `${85 + Math.random() * 75}px`);
+
+      fragment.appendChild(shootingStar);
+    }
+
+    starsContainer.appendChild(fragment);
+  }
+
+  initShootingStars();
+
+  function initStreamNeon() {
+    const streamFrame = document.querySelector("#streamFrame");
+
+    if (!streamFrame) return;
+
+    const syncNeonState = () => {
+      streamFrame.classList.toggle(
+        "neon-live",
+        !streamFrame.hidden &&
+        Boolean(streamFrame.querySelector("iframe")?.src)
+      );
+    };
+
+    syncNeonState();
+
+    const observer = new MutationObserver(syncNeonState);
+
+    observer.observe(streamFrame, {
+      attributes: true,
+      attributeFilter: ["hidden"]
+    });
+
+    const streamEmbed = streamFrame.querySelector("iframe");
+
+    if (streamEmbed) {
+      observer.observe(streamEmbed, {
+        attributes: true,
+        attributeFilter: ["src"]
+      });
+    }
+  }
+
+  initStreamNeon();
 
   function initMagicCursor() {
     if (!finePointer || reduceMotion) return;
@@ -521,14 +754,24 @@
     let mouseY = innerHeight / 2;
     let cursorX = mouseX;
     let cursorY = mouseY;
+    let velocityX = 0;
+    let velocityY = 0;
     let lastParticleTime = 0;
+    let lastTrailX = mouseX;
+    let lastTrailY = mouseY;
 
     function animateCursor() {
-      cursorX += (mouseX - cursorX) * .18;
-      cursorY += (mouseY - cursorY) * .18;
+      const previousX = cursorX;
+      const previousY = cursorY;
+
+      cursorX += (mouseX - cursorX) * .13;
+      cursorY += (mouseY - cursorY) * .13;
+
+      velocityX = cursorX - previousX;
+      velocityY = cursorY - previousY;
 
       cursor.style.transform =
-        `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%) rotate(45deg)`;
+        `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
 
       requestAnimationFrame(animateCursor);
     }
@@ -536,33 +779,43 @@
     function createParticle(x, y, burst = false) {
       const particle = document.createElement("span");
       const angle = Math.random() * Math.PI * 2;
-      const distance = burst
-        ? 24 + Math.random() * 38
-        : 8 + Math.random() * 18;
-      const isStar = Math.random() > .72;
+      const speed = burst
+        ? 28 + Math.random() * 48
+        : 10 + Math.random() * 24;
+
+      const driftX = Math.cos(angle) * speed + velocityX * (burst ? 1.2 : 2.4);
+      const driftY = Math.sin(angle) * speed + velocityY * (burst ? 1.2 : 2.4);
+      const isStar = burst || Math.random() > .7;
 
       particle.className = `cursor-particle${isStar ? " star" : ""}`;
-      particle.textContent = isStar ? "✦" : "";
+      particle.textContent = isStar ? (Math.random() > .5 ? "✦" : "·") : "";
       particle.style.left = `${x}px`;
       particle.style.top = `${y}px`;
-      particle.style.setProperty("--move-x", `${Math.cos(angle) * distance}px`);
-      particle.style.setProperty("--move-y", `${Math.sin(angle) * distance}px`);
+      particle.style.setProperty("--move-x", `${driftX}px`);
+      particle.style.setProperty("--move-y", `${driftY}px`);
       particle.style.setProperty(
         "--particle-color",
         Math.random() > .5 ? "var(--glow)" : "var(--pink)"
       );
 
       document.body.appendChild(particle);
-      setTimeout(() => particle.remove(), 700);
+      setTimeout(() => particle.remove(), burst ? 800 : 900);
     }
 
-    function createTrail() {
+    function createNaturalTrail() {
       const now = performance.now();
+      const distance = Math.hypot(mouseX - lastTrailX, mouseY - lastTrailY);
 
-      if (now - lastParticleTime < 42) return;
+      if (distance < 5 || now - lastParticleTime < 22) return;
 
       lastParticleTime = now;
-      createParticle(mouseX, mouseY);
+      lastTrailX = mouseX;
+      lastTrailY = mouseY;
+
+      createParticle(
+        mouseX - velocityX * 1.8,
+        mouseY - velocityY * 1.8
+      );
     }
 
     function createRipple() {
@@ -574,11 +827,34 @@
 
       document.body.appendChild(ripple);
 
-      for (let index = 0; index < 7; index++) {
+      // Daha küçük patlama, fakat daha fazla ve daha sıkı parçacık.
+      for (let index = 0; index < 20; index++) {
         createParticle(mouseX, mouseY, true);
       }
 
-      setTimeout(() => ripple.remove(), 700);
+      setTimeout(() => ripple.remove(), 800);
+    }
+
+    function updateHoverState(target) {
+      const element = target?.closest?.(
+        "a, button, [role='button'], input, textarea"
+      );
+
+      document.body.classList.toggle("cursor-hover", Boolean(element));
+
+      if (!element) {
+        document.body.style.removeProperty("--cursor-hover-color");
+        return;
+      }
+
+      const linkColor = getComputedStyle(element)
+        .getPropertyValue("--link-glow")
+        .trim();
+
+      document.body.style.setProperty(
+        "--cursor-hover-color",
+        linkColor || "var(--glow)"
+      );
     }
 
     document.addEventListener("pointermove", event => {
@@ -586,21 +862,18 @@
       mouseY = event.clientY;
 
       document.body.classList.add("cursor-visible");
-      createTrail();
+      createNaturalTrail();
     });
 
     document.addEventListener("pointerover", event => {
-      if (event.target.closest("a, button, [role='button'], input, textarea")) {
-        document.body.classList.add("cursor-hover");
-      }
+      updateHoverState(event.target);
     });
 
     document.addEventListener("pointerout", event => {
-      if (
-        event.target.closest("a, button, [role='button'], input, textarea") &&
-        !event.relatedTarget?.closest?.("a, button, [role='button'], input, textarea")
-      ) {
+      if (!event.relatedTarget) {
         document.body.classList.remove("cursor-hover");
+      } else {
+        updateHoverState(event.relatedTarget);
       }
     });
 
@@ -614,7 +887,12 @@
     });
 
     document.addEventListener("pointerleave", () => {
-      document.body.classList.remove("cursor-visible", "cursor-hover");
+      document.body.classList.remove(
+        "cursor-visible",
+        "cursor-hover",
+        "cursor-click"
+      );
+      document.body.style.removeProperty("--cursor-hover-color");
     });
 
     animateCursor();
