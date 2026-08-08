@@ -1146,7 +1146,8 @@
       quoteText.textContent = quotes[today % quotes.length];
 
       function initTheme() {
-        const savedTheme = localStorage.getItem("wiccawic-theme") || "default";
+        localStorage.removeItem("wiccawic-theme");
+        const savedTheme = "default";
         const themeBtns = document.querySelectorAll(".theme-btn");
 
         function applyTheme(theme) {
