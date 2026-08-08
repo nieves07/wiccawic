@@ -15,7 +15,7 @@ Rhea Thorne, Amerika'nın Oregon eyaletine bağlı Eugene şehrinde dünyaya gel
 Babası oto tamircisi, annesi ise halk kütüphanesinde görevliydi. Ailesi ona
 dürüst olmayı, çalışmayı ve kendi ayakları üzerinde durmayı öğretti.
 
-Çocukluğundan itibaren arabalara, motorlara ve tamir işlerine ilgi duydu.
+Çocukluğundan itibaren arabalara, motorlara ve tamir işlerine ilgi duydu. 
 Bisiklete binmek, fotoğraf çekmek, uzun araba ve motor sürüşlerine çıkmak,
 akrobasi çalışmak ve kum torbasında antrenman yapmak hobileri arasındaydı.
 
