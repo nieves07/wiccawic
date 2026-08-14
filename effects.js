@@ -15,7 +15,7 @@
     }
 
     .potion-link,
-    .feature-button,
+    .feature-button, 
     .stream-card,
     .kick-badge {
       overflow: hidden;
