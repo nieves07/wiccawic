@@ -7,7 +7,7 @@
       age: "26 yaşında",
       location: "Amerika",
       occupation: "Şerif adayı",
-      imageUrl: "https://i.ibb.co/d4pvQD02/gfhdfg.png",
+      imageUrl: "https://i.ibb.co/MyP9ZcSH/gdfhsfdgh.png",
       avatar: "🐺",
       quote: "Yetkimi korkutmak için değil, güven vermek için kullanacağım.",
       story: `
