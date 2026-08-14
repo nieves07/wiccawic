@@ -857,29 +857,87 @@
       to { opacity: 0; transform: translate(-50%, -65px) scale(1.4); }
     }
 
-    .site-footer {
-      margin-top: 32px;
-      padding: 22px 12px 12px;
-      text-align: center;
-    }
+   .site-footer {
+  position: relative;
+  margin-top: 42px;
+  padding: 28px 16px 18px;
+  border-top: 1px solid #c6a8ff33;
+  text-align: center;
+}
 
-    .site-footer::before {
-      display: block;
-      margin-bottom: 13px;
-      content: "✦  ✧  ✦";
-      color: var(--gold);
-      font-size: 12px;
-      letter-spacing: 8px;
-      text-shadow: 0 0 12px var(--gold);
-    }
+.site-footer::before,
+.site-footer::after {
+  position: absolute;
+  top: -1px;
+  width: 32%;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  box-shadow: 0 0 10px var(--gold);
+}
 
-    .footer-signature {
-      color: var(--cream);
-      font-family: "Eagle Lake", cursive;
-      font-size: clamp(13px, 3.5vw, 17px);
-      text-decoration: none;
-      text-shadow: 0 0 5px var(--cream), 0 0 14px var(--glow);
-    }
+.site-footer::before {
+  left: 0;
+}
+
+.site-footer::after {
+  right: 0;
+}
+
+.footer-rune {
+  margin-bottom: 13px;
+  color: var(--gold);
+  font-size: 18px;
+  letter-spacing: 8px;
+  text-shadow: 0 0 12px var(--gold);
+  animation: footer-rune-glow 3s ease-in-out infinite;
+}
+
+.footer-text {
+  margin-bottom: 10px;
+  color: var(--mute);
+  font-size: 12px;
+  font-style: italic;
+}
+
+.footer-signature {
+  color: var(--cream);
+  font-family: "Eagle Lake", cursive;
+  font-size: clamp(13px, 3.5vw, 17px);
+  text-decoration: none;
+  text-shadow:
+    0 0 5px var(--cream),
+    0 0 14px var(--glow);
+  transition: color .3s ease, text-shadow .3s ease;
+}
+
+.footer-signature:hover,
+.footer-signature:focus-visible {
+  color: var(--glow);
+  text-shadow:
+    0 0 8px var(--glow),
+    0 0 20px var(--witch);
+}
+
+.footer-copyright {
+  margin-top: 12px;
+  color: var(--mute);
+  font-size: 10px;
+  opacity: .7;
+}
+
+@keyframes footer-rune-glow {
+  50% {
+    opacity: .65;
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-rune {
+    animation: none;
+  }
+}
 
     .modal {
       position: fixed;
@@ -1100,10 +1158,24 @@
     </div>
 
     <footer class="site-footer">
-      <a class="footer-signature" href="https://www.instagram.com/cesurdrnn" target="_blank" rel="noopener noreferrer">
-        This site was magically prepared for Wiccawic
-      </a>
-    </footer>
+  <div class="footer-rune" aria-hidden="true">☽ ✦ ☾</div>
+
+  <p class="footer-text">
+    Kazanın büyüsü burada hiç sönmez.
+  </p>
+
+  <a
+    class="footer-signature"
+    href="https://www.instagram.com/cesurdrnn"
+    target="_blank"
+    rel="noopener noreferrer">
+    ✨ This site was magically prepared for Wiccawic
+  </a>
+
+  <p class="footer-copyright">
+    © 2026 Wiccawic · Tüm büyüler saklıdır
+  </p>
+</footer>
   </main>
 
   <div class="modal" id="spellbookModal" hidden>
