@@ -448,4 +448,4 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
   });
 
   document.body.appendChild(container);
-})();
+})(); 
