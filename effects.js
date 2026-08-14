@@ -6,6 +6,14 @@
   const style = document.createElement("style");
 
   style.textContent = `
+    *,
+    *::before,
+    *::after {
+      user-select: none !important;
+      -webkit-user-select: none !important;
+      -webkit-touch-callout: none;
+    }
+
     .potion-link,
     .feature-button,
     .stream-card,
@@ -15,7 +23,7 @@
     }
 
     .potion-link,
-    .feature-button, 
+    .feature-button,
     .stream-card,
     .kick-badge {
       overflow: hidden;
@@ -104,24 +112,21 @@
       position: relative;
       isolation: isolate;
       border: 1px solid transparent;
+      cursor: none !important;
       transition: border-color .5s ease, box-shadow .5s ease, filter .5s ease;
     }
 
-    .stream-frame::before,
-    .stream-frame::after {
+    .stream-frame::before {
       position: absolute;
       inset: 0;
       z-index: 2;
       content: "";
       border-radius: inherit;
+      border: 1px solid var(--glow);
+      box-shadow: 0 0 8px var(--glow), 0 0 18px var(--witch);
       pointer-events: none;
       opacity: 0;
       transition: opacity .5s ease;
-    }
-
-    .stream-frame::before {
-      border: 1px solid var(--glow);
-      box-shadow: 0 0 8px var(--glow), 0 0 18px var(--witch);
     }
 
     .stream-frame.neon-live {
@@ -136,9 +141,10 @@
     .stream-frame iframe {
       position: relative;
       z-index: 1;
+      cursor: none !important;
+      pointer-events: none;
     }
 
-    /* Daha cadı temalı İksir Rafı simgeleri */
     .potion-link .bottle {
       display: grid;
       place-items: center;
@@ -167,29 +173,12 @@
       display: none;
     }
 
-    .potion-link:nth-child(1) .bottle::before {
-      content: "🧪";
-    }
-
-    .potion-link:nth-child(2) .bottle::before {
-      content: "🔮";
-    }
-
-    .potion-link:nth-child(3) .bottle::before {
-      content: "🕯️";
-    }
-
-    .potion-link:nth-child(4) .bottle::before {
-      content: "🐈‍⬛";
-    }
-
-    .potion-link:nth-child(5) .bottle::before {
-      content: "🌙";
-    }
-
-    .potion-link:nth-child(6) .bottle::before {
-      content: "🧿";
-    }
+    .potion-link:nth-child(1) .bottle::before { content: "🧪"; }
+    .potion-link:nth-child(2) .bottle::before { content: "🔮"; }
+    .potion-link:nth-child(3) .bottle::before { content: "🕯️"; }
+    .potion-link:nth-child(4) .bottle::before { content: "🐈‍⬛"; }
+    .potion-link:nth-child(5) .bottle::before { content: "🌙"; }
+    .potion-link:nth-child(6) .bottle::before { content: "🧿"; }
 
     .potion-link:hover .bottle,
     .potion-link:focus-visible .bottle {
@@ -197,6 +186,136 @@
       filter:
         drop-shadow(0 0 7px var(--glow))
         drop-shadow(0 0 16px var(--link-glow));
+    }
+
+    .witch-cursor,
+    .witch-cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+    }
+
+    .witch-cursor {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--glow);
+      box-shadow:
+        0 0 8px var(--glow),
+        0 0 18px var(--witch),
+        0 0 30px var(--witch);
+      transition: width .2s ease, height .2s ease, opacity .2s ease;
+    }
+
+    .witch-cursor-ring {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      box-shadow:
+        0 0 10px var(--gold),
+        inset 0 0 8px var(--witch);
+      transition:
+        width .25s ease,
+        height .25s ease,
+        border-color .25s ease,
+        opacity .25s ease;
+    }
+
+    body.has-witch-cursor,
+    body.has-witch-cursor *,
+    body.has-witch-cursor iframe,
+    body.has-witch-cursor .cauldron-wrap,
+    body.has-witch-cursor .cauldron-wrap *,
+    body.has-witch-cursor .cauldron-image,
+    body.has-witch-cursor button,
+    body.has-witch-cursor a,
+    body.has-witch-cursor [role="button"] {
+      cursor: none !important;
+    }
+
+    body.cursor-hover .witch-cursor {
+      width: 16px;
+      height: 16px;
+    }
+
+    body.cursor-hover .witch-cursor-ring {
+      width: 48px;
+      height: 48px;
+      border-color: var(--glow);
+    }
+
+    .cursor-particle {
+      position: fixed;
+      z-index: 9997;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--particle-color, var(--glow));
+      box-shadow:
+        0 0 6px var(--particle-color, var(--glow)),
+        0 0 14px var(--particle-color, var(--witch));
+      pointer-events: none;
+      animation: cursor-particle-fade .75s ease-out forwards;
+    }
+
+    @keyframes cursor-particle-fade {
+      0% {
+        opacity: .95;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      100% {
+        opacity: 0;
+        transform:
+          translate(
+            calc(-50% + var(--particle-x)),
+            calc(-50% + var(--particle-y))
+          )
+          scale(.15);
+      }
+    }
+
+    .cursor-spark {
+      position: fixed;
+      z-index: 9998;
+      width: 6px;
+      height: 6px;
+      color: var(--gold);
+      pointer-events: none;
+      text-shadow: 0 0 8px var(--glow);
+      animation: cursor-spark-rise .8s ease-out forwards;
+    }
+
+    @keyframes cursor-spark-rise {
+      from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(.5) rotate(0);
+      }
+
+      to {
+        opacity: 0;
+        transform:
+          translate(
+            calc(-50% + var(--spark-x)),
+            calc(-50% + var(--spark-y))
+          )
+          scale(1.5)
+          rotate(180deg);
+      }
+    }
+
+    @media (max-width: 600px), (pointer: coarse) {
+      .witch-cursor,
+      .witch-cursor-ring,
+      .cursor-spark,
+      .cursor-particle {
+        display: none;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -212,10 +331,139 @@
       .potion-link:focus-visible .bottle {
         transform: scale(1.08);
       }
+
+      .witch-cursor-ring,
+      .cursor-particle {
+        animation: none;
+        transition: none;
+      }
     }
   `;
 
   document.head.appendChild(style);
+
+  document.addEventListener("copy", event => {
+    event.preventDefault();
+  });
+
+  document.addEventListener("cut", event => {
+    event.preventDefault();
+  });
+
+  document.addEventListener("selectstart", event => {
+    event.preventDefault();
+  });
+
+  function initWitchCursor() {
+    if (!finePointer) return;
+
+    const cursor = document.createElement("span");
+    const ring = document.createElement("span");
+
+    cursor.className = "witch-cursor";
+    ring.className = "witch-cursor-ring";
+
+    document.body.append(cursor, ring);
+    document.body.classList.add("has-witch-cursor");
+
+    let mouseX = innerWidth / 2;
+    let mouseY = innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
+    let lastParticleTime = 0;
+
+    function moveCursor(event) {
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+
+      cursor.style.left = `${mouseX}px`;
+      cursor.style.top = `${mouseY}px`;
+      cursor.style.opacity = "1";
+      ring.style.opacity = "1";
+
+      createCursorParticle(event);
+    }
+
+    function createCursorParticle(event) {
+      if (reduceMotion) return;
+
+      const now = performance.now();
+
+      if (now - lastParticleTime < 35) return;
+      lastParticleTime = now;
+
+      const particle = document.createElement("span");
+      const colors = ["var(--glow)", "var(--gold)", "var(--pink)"];
+
+      particle.className = "cursor-particle";
+      particle.style.left = `${event.clientX}px`;
+      particle.style.top = `${event.clientY}px`;
+      particle.style.setProperty(
+        "--particle-color",
+        colors[Math.floor(Math.random() * colors.length)]
+      );
+      particle.style.setProperty(
+        "--particle-x",
+        `${Math.random() * 34 - 17}px`
+      );
+      particle.style.setProperty(
+        "--particle-y",
+        `${Math.random() * 34 - 17}px`
+      );
+
+      document.body.appendChild(particle);
+      particle.addEventListener("animationend", () => particle.remove(), {
+        once: true
+      });
+    }
+
+    function animateRing() {
+      ringX += (mouseX - ringX) * .18;
+      ringY += (mouseY - ringY) * .18;
+
+      ring.style.left = `${ringX}px`;
+      ring.style.top = `${ringY}px`;
+
+      requestAnimationFrame(animateRing);
+    }
+
+    function createCursorSparks(event) {
+      if (reduceMotion) return;
+
+      for (let index = 0; index < 4; index++) {
+        const spark = document.createElement("span");
+
+        spark.className = "cursor-spark";
+        spark.textContent = index % 2 ? "✦" : "✧";
+        spark.style.left = `${event.clientX}px`;
+        spark.style.top = `${event.clientY}px`;
+        spark.style.setProperty("--spark-x", `${Math.random() * 46 - 23}px`);
+        spark.style.setProperty("--spark-y", `${Math.random() * 46 - 23}px`);
+
+        document.body.appendChild(spark);
+        spark.addEventListener("animationend", () => spark.remove(), {
+          once: true
+        });
+      }
+    }
+
+    document.addEventListener("pointermove", moveCursor);
+    document.addEventListener("click", createCursorSparks);
+
+    document.querySelectorAll("a, button, [role='button']").forEach(element => {
+      element.addEventListener("mouseenter", () => {
+        document.body.classList.add("cursor-hover");
+      });
+
+      element.addEventListener("mouseleave", () => {
+        document.body.classList.remove("cursor-hover");
+      });
+    });
+
+    animateRing();
+  }
+
+  initWitchCursor();
 
   const cauldron = document.querySelector(".cauldron-wrap");
 
@@ -224,9 +472,14 @@
 
     for (let index = 0; index < 8; index++) {
       const spark = document.createElement("span");
+
       spark.className = "cauldron-orbit-spark";
       spark.style.animationDelay = `${-index * .7}s`;
-      spark.style.setProperty("--spark-color", sparkColors[index % sparkColors.length]);
+      spark.style.setProperty(
+        "--spark-color",
+        sparkColors[index % sparkColors.length]
+      );
+
       cauldron.appendChild(spark);
     }
   }
