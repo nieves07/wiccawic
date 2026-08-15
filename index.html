@@ -1375,24 +1375,65 @@ if (cauldronImage.complete) {
       }
 
       function getLastStream(response) {
-        const videos = Array.isArray(response) ? response : response?.data;
-        const video = videos?.[0];
+  const videos = Array.isArray(response)
+    ? response
+    : Array.isArray(response?.data)
+      ? response.data
+      : [];
 
-        if (!video) return null;
+  const video = videos[0];
 
-        return {
-          title: video.session_title || video.title || video.name || "Son yayın",
-          category:
-            video.category?.name ||
-            video.category?.slug ||
-            video.category_name ||
-            video.game?.name ||
-            video.category ||
-            "Kategori belirtilmemiş",
-          date: video.created_at || video.published_at || video.start_time || video.started_at
-        };
-      }
+  if (!video) return null;
 
+  function getCategory(video) {
+    const category = video.category;
+
+    if (typeof category === "string" && category.trim()) {
+      return category;
+    }
+
+    if (category && typeof category === "object") {
+      return (
+        category.name ||
+        category.title ||
+        category.slug ||
+        category.category_name
+      );
+    }
+
+    if (typeof video.game === "string" && video.game.trim()) {
+      return video.game;
+    }
+
+    if (video.game && typeof video.game === "object") {
+      return video.game.name || video.game.title || video.game.slug;
+    }
+
+    return (
+      video.category_name ||
+      video.game_name ||
+      video.categories?.[0]?.name ||
+      "Kategori bilgisi alınamadı"
+    );
+  }
+
+  return {
+    title:
+      video.session_title ||
+      video.title ||
+      video.name ||
+      "Son yayın",
+
+    category: getCategory(video),
+
+    date:
+      video.ended_at ||
+      video.created_at ||
+      video.published_at ||
+      video.start_time ||
+      video.started_at
+  };
+}
       function showLiveStream(livestream) {
         streamHeading.textContent = "🔴 Wiccawic şu anda yayında!";
         streamStatus.textContent = "CANLI";
@@ -1449,22 +1490,34 @@ if (cauldronImage.complete) {
         `;
       }
 
-      async function fetchJson(url, timeout = 8000) {
-        const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), timeout);
+     async function fetchJson(url, timeout = 8000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeout);
 
-        try {
-          const response = await fetch(url, {
-            signal: controller.signal,
-            cache: "no-store"
-          });
-
-          if (!response.ok) throw new Error(`HTTP ${response.status}`);
-          return await response.json();
-        } finally {
-          clearTimeout(timer);
-        }
+  try {
+    const response = await fetch(url, {
+      signal: controller.signal,
+      cache: "no-store",
+      headers: {
+        Accept: "application/json"
       }
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    if (error.name === "AbortError") {
+      throw new Error("Kick API zaman aşımına uğradı");
+    }
+
+    throw error;
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
       async function updateStreamStatus() {
         try {
