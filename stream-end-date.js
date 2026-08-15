@@ -9,10 +9,24 @@
 
   if (!lastStream) return;
 
-  function formatDate(value) {
-    const date = new Date(value);
+  function normalizeDateValue(value) {
+    if (value === null || value === undefined || value === "") {
+      return null;
+    }
 
-    return value && !Number.isNaN(date.getTime())
+    if (typeof value === "number" && Number.isFinite(value)) {
+      const milliseconds = value < 100000000000 ? value * 1000 : value;
+      return new Date(milliseconds);
+    }
+
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? null : date;
+  }
+
+  function formatDate(value) {
+    const date = normalizeDateValue(value);
+
+    return date
       ? new Intl.DateTimeFormat("tr-TR", {
           dateStyle: "medium",
           timeStyle: "short"
@@ -21,15 +35,31 @@
   }
 
   function validDate(value) {
-    if (!value) return null;
-
-    const date = new Date(value);
-    return Number.isNaN(date.getTime()) ? null : value;
+    const date = normalizeDateValue(value);
+    return date ? date.toISOString() : null;
   }
 
-  function parseDuration(value) {
+  function firstValidDate(...values) {
+    for (const value of values) {
+      const date = validDate(value);
+
+      if (date) return date;
+    }
+
+    return null;
+  }
+
+  function parseDuration(value, fieldName = "") {
+    if (value === null || value === undefined || value === "") {
+      return 0;
+    }
+
     if (typeof value === "number" && Number.isFinite(value)) {
-      return value > 100000 ? value / 1000 : value;
+      return fieldName.toLowerCase().includes("millisecond")
+        ? value / 1000
+        : value > 100000
+          ? value / 1000
+          : value;
     }
 
     if (typeof value !== "string") return 0;
@@ -50,36 +80,54 @@
 
     const parts = value.split(":").map(Number);
 
-    if (parts.some(Number.isNaN)) {
-      return Number(value) || 0;
+    if (parts.every(Number.isFinite)) {
+      if (parts.length === 3) {
+        return parts[0] * 3600 + parts[1] * 60 + parts[2];
+      }
+
+      if (parts.length === 2) {
+        return parts[0] * 60 + parts[1];
+      }
     }
 
-    if (parts.length === 3) {
-      return parts[0] * 3600 + parts[1] * 60 + parts[2];
-    }
+    const numericValue = Number(value);
 
-    if (parts.length === 2) {
-      return parts[0] * 60 + parts[1];
-    }
+    if (!Number.isFinite(numericValue)) return 0;
 
-    return Number(value) || 0;
+    return fieldName.toLowerCase().includes("millisecond")
+      ? numericValue / 1000
+      : numericValue > 100000
+        ? numericValue / 1000
+        : numericValue;
   }
 
-  function firstValidDate(...values) {
-    for (const value of values) {
-      const date = validDate(value);
+  function getDuration(video, livestream, session) {
+    const durationFields = [
+      ["duration_seconds", video.duration_seconds],
+      ["durationSeconds", video.durationSeconds],
+      ["duration_ms", video.duration_ms],
+      ["durationMilliseconds", video.durationMilliseconds],
+      ["duration", video.duration],
+      ["length", video.length],
+      ["duration", livestream.duration],
+      ["duration_seconds", livestream.duration_seconds],
+      ["duration", session.duration]
+    ];
 
-      if (date) return date;
+    for (const [fieldName, value] of durationFields) {
+      const duration = parseDuration(value, fieldName);
+
+      if (duration > 0) return duration;
     }
 
-    return null;
+    return 0;
   }
 
   function getStreamDates(video) {
     const livestream = video.livestream || video.live_stream || {};
     const session = video.session || {};
 
-    const startDate = firstValidDate(
+    const explicitStartDate = firstValidDate(
       video.started_at,
       video.start_time,
       video.startedAt,
@@ -91,8 +139,7 @@
       session.started_at,
       session.start_time,
       session.startedAt,
-      session.startTime,
-      video.created_at
+      session.startTime
     );
 
     const explicitEndDate = firstValidDate(
@@ -103,6 +150,8 @@
       video.stop_time,
       video.endedAt,
       video.endTime,
+      video.finishedAt,
+      video.completedAt,
       livestream.ended_at,
       livestream.end_time,
       livestream.finished_at,
@@ -111,26 +160,42 @@
       livestream.endTime,
       session.ended_at,
       session.end_time,
+      session.finished_at,
+      session.completed_at,
       session.endedAt,
       session.endTime
     );
 
-    const duration = parseDuration(
-      video.duration ??
-      video.duration_seconds ??
-      video.durationSeconds ??
-      video.length ??
-      livestream.duration ??
-      livestream.duration_seconds ??
-      session.duration
+    const createdDate = firstValidDate(
+      video.created_at,
+      video.createdAt,
+      video.published_at,
+      video.publishedAt
     );
 
+    const duration = getDuration(video, livestream, session);
+
+    let startDate = explicitStartDate;
     let endDate = explicitEndDate;
 
     if (!endDate && startDate && duration > 0) {
       const date = new Date(startDate);
       date.setSeconds(date.getSeconds() + duration);
       endDate = date.toISOString();
+    }
+
+    /*
+     * Kick çoğu zaman VOD'un created_at alanını yayın bittikten
+     * sonra oluşturulan video tarihi olarak döndürür.
+     */
+    if (!endDate && createdDate) {
+      endDate = createdDate;
+    }
+
+    if (!startDate && endDate && duration > 0) {
+      const date = new Date(endDate);
+      date.setSeconds(date.getSeconds() - duration);
+      startDate = date.toISOString();
     }
 
     return {
@@ -140,8 +205,6 @@
   }
 
   function replaceStartDate(startDate) {
-    const textNodes = [];
-
     const walker = document.createTreeWalker(
       lastStream,
       NodeFilter.SHOW_TEXT
@@ -150,15 +213,10 @@
     let node;
 
     while ((node = walker.nextNode())) {
-      textNodes.push(node);
-    }
-
-    const dateNode = textNodes.find(node =>
-      node.nodeValue.includes("🕒")
-    );
-
-    if (dateNode) {
-      dateNode.nodeValue = `🕒 Yayın başlangıcı: ${formatDate(startDate)}`;
+      if (node.nodeValue.includes("🕒")) {
+        node.nodeValue = `🕒 Yayın başlangıcı: ${formatDate(startDate)}`;
+        return;
+      }
     }
   }
 
