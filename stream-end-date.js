@@ -5,7 +5,7 @@
   const videosApi =
     `https://kick.com/api/v2/channels/${KICK_USERNAME.toLowerCase()}/videos`;
 
-  const lastStream = document.querySelector("#lastStream");
+  const lastStream = document.querySelector("#lastStream"); 
 
   if (!lastStream) return;
 
