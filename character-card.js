@@ -66,6 +66,16 @@ bir hayat arayarak Los Santos'a taşındı. Dışarıdan sakin ve sıradan gör�
 gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözmek
 üzerine kuruludur.
 `
+    },
+    {
+      name: "Reha Karan",
+      age: "26 yaşında",
+      location: "Los Santos",
+      occupation: "CK yemişsin kusen",
+      imageUrl: "https://s3.kngl.gg/knglrp-media/characters/594ce60e-63fb-4422-9629-2de3331c158d.png",
+      avatar: "💀",
+      quote: "Payloco yüzünden CK yedi...",
+      gag: true
     }
   ];
 
@@ -88,7 +98,7 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
     .character-card {
       position: relative;
       width: 100%;
-      max-height: calc(50vh - 26px);
+      max-height: calc(33.333vh - 24px);
       overflow-y: auto;
       overflow-x: hidden;
       padding: 16px;
@@ -105,22 +115,19 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       backdrop-filter: blur(12px);
       scrollbar-width: none;
       animation: character-card-float 4s ease-in-out infinite;
-      transition:
-        width .35s ease,
-        height .35s ease,
-        max-height .35s ease,
-        padding .35s ease,
-        border-radius .35s ease;
+      transition: .35s ease;
     }
 
     .character-card::-webkit-scrollbar {
       display: none;
-      width: 0;
-      height: 0;
     }
 
     .character-card:nth-child(2) {
       animation-delay: -1.5s;
+    }
+
+    .character-card:nth-child(3) {
+      animation-delay: -2.8s;
     }
 
     .character-card::before {
@@ -250,7 +257,7 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
     }
 
     .character-card__quote {
-      margin-bottom: 14px;
+      margin-bottom: 0;
       padding: 10px 12px;
       border-left: 2px solid var(--gold);
       color: var(--glow);
@@ -260,7 +267,24 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       line-height: 1.5;
     }
 
+    .character-card__fail {
+      margin-top: 12px;
+      padding: 10px;
+      border: 1px solid #ff5c8a99;
+      border-radius: 12px;
+      color: #ffd5e1;
+      background: linear-gradient(135deg, #ff3d7a30, #210d2044);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      line-height: 1.5;
+      text-align: center;
+      text-transform: uppercase;
+      box-shadow: 0 0 14px #ff3d7a33;
+    }
+
     .character-card__story {
+      margin-top: 14px;
       border-top: 1px solid #c6a8ff22;
       padding-top: 12px;
     }
@@ -317,8 +341,37 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
     .character-card.is-collapsed .character-card__badge,
     .character-card.is-collapsed .character-card__details,
     .character-card.is-collapsed .character-card__quote,
+    .character-card.is-collapsed .character-card__fail,
     .character-card.is-collapsed .character-card__story {
       display: none;
+    }
+
+    .character-card.reha-card {
+      border-color: #ff5c8a99;
+      background:
+        linear-gradient(145deg, #642645ee, #210d20f5 65%),
+        var(--plum);
+      box-shadow:
+        0 0 18px #ff3d7a66,
+        0 0 45px #ff3d7a22,
+        inset 0 0 25px #ff9dbb18;
+    }
+
+    .character-card.reha-card .character-card__name,
+    .character-card.reha-card .character-card__badge {
+      color: #ff9dbb;
+    }
+
+    .character-card.reha-card .character-card__quote {
+      border-color: #ff5c8a;
+      color: #ffb6c9;
+      background: #ff3d7a18;
+    }
+
+    .character-card.reha-card.ck-effect {
+      animation:
+        reha-shake .12s linear 8,
+        reha-flash .7s ease;
     }
 
     @keyframes character-card-float {
@@ -329,6 +382,17 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
     @keyframes character-card-shine {
       from { background-position: 220% 0; }
       to { background-position: -220% 0; }
+    }
+
+    @keyframes reha-shake {
+      0%, 100% { transform: translate(0); }
+      25% { transform: translate(-8px, 3px) rotate(-2deg); }
+      75% { transform: translate(8px, -3px) rotate(2deg); }
+    }
+
+    @keyframes reha-flash {
+      0%, 100% { filter: none; }
+      35% { filter: brightness(2.4) saturate(1.8); }
     }
 
     @media (max-width: 1150px) {
@@ -369,19 +433,36 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
 
   function escapeHtml(value) {
     const div = document.createElement("div");
-    div.textContent = value;
+    div.textContent = value ?? "";
     return div.innerHTML;
   }
 
   function createCharacterCard(character) {
     const card = document.createElement("aside");
-
-    card.className = "character-card is-collapsed";
+    card.className = `character-card is-collapsed${character.gag ? " reha-card" : ""}`;
     card.setAttribute("aria-label", `${character.name} karakter kartı`);
 
     const avatar = character.imageUrl
       ? `<img src="${escapeHtml(character.imageUrl)}" alt="${escapeHtml(character.name)} karakter görseli">`
-      : character.avatar;
+      : escapeHtml(character.avatar);
+
+    const story = character.story
+      ? `
+        <details class="character-card__story">
+          <summary>Hikâyeyi oku</summary>
+          <p>${escapeHtml(character.story)}</p>
+        </details>
+      `
+      : "";
+
+    const failNotice = character.gag
+      ? `
+        <div class="character-card__fail">
+          💀 CK YEDİ 💀<br>
+          PALYOCO ÖLDÜRDÜ
+        </div>
+      `
+      : "";
 
     card.innerHTML = `
       <div class="character-card__header">
@@ -408,7 +489,7 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
         </div>
 
         <div class="character-card__detail">
-          <small>Uyruk</small>
+          <small>Konum</small>
           <strong>${escapeHtml(character.location)}</strong>
         </div>
       </div>
@@ -417,10 +498,8 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
         “${escapeHtml(character.quote)}”
       </div>
 
-      <details class="character-card__story">
-        <summary>Hikâyeyi oku</summary>
-        <p>${escapeHtml(character.story)}</p>
-      </details>
+      ${failNotice}
+      ${story}
     `;
 
     const avatarButton = card.querySelector(".character-card__avatar");
@@ -435,12 +514,24 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
           : `${character.name} kartını küçült`
       );
 
-      avatarButton.title = collapsed
-        ? "Kartı büyüt"
-        : "Kartı küçült";
+      avatarButton.title = collapsed ? "Kartı büyüt" : "Kartı küçült";
+
+      if (character.gag) {
+        playRehaEffect(card);
+      }
     });
 
     return card;
+  }
+
+  function playRehaEffect(card) {
+    card.classList.remove("ck-effect");
+    void card.offsetWidth;
+    card.classList.add("ck-effect");
+
+    setTimeout(() => {
+      card.classList.remove("ck-effect");
+    }, 300);
   }
 
   characters.forEach(character => {
@@ -448,4 +539,4 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
   });
 
   document.body.appendChild(container);
-})(); 
+})();
