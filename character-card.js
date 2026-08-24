@@ -5,11 +5,15 @@
     {
       name: "Rhea Thorne",
       age: "26 yaşında",
-      location: "Amerika",
-      occupation: "Şerif adayı",
-      imageUrl: "https://i.hizliresim.com/24uubc81.png",
+      location: "Sandy Shores",
+      occupation: "LSSD (İhraç edildi)",
+      imageUrl: "https://i.hizliresim.com/lplsyayu.png",
       avatar: "🐺",
-      quote: "Yetkimi korkutmak için değil, güven vermek için kullanacağım.",
+      quote: "Gerçeği gördüğümü sandım. Ama gördüğüm şey, kristalin bana gösterdiği kabustu.",
+      memorialImage:
+        "https://cdn.bblrp.com/forum/2026/9ce776f1036811541b3f7685f7935eb9.png",
+      memorialText: "Rest in Peace\nRhea Thorne & Naomi Hill",
+
       story: `
 Rhea Thorne, Amerika'nın Oregon eyaletine bağlı Eugene şehrinde dünyaya geldi.
 Babası oto tamircisi, annesi ise halk kütüphanesinde görevliydi. Ailesi ona
@@ -25,11 +29,32 @@ valizlerini ve bir miktar birikimini alarak Sandy Shores'a taşındı.
 
 Kasabada şahit olduğu kazalar, kavgalar ve polis müdahaleleri onu etkiledi.
 İnsanların zor anlarında yalnızca izleyen biri olmak istemediğini fark etti.
-Bu nedenle Polis Departmanı'na yöneldi.
+Bu nedenle Polis Departmanı'na katıldı ve görevini insanlara yardım etmek,
+onları korumak ve zor anlarında yanlarında olmak üzerine kurdu.
 
-Rhea polisliği güç sahibi olmak olarak görmez. Ona göre polislik, insanların en
-zor anlarında yanında olmak ve yaşadığı kasabaya karşı sorumluluk almaktır.
-En büyük amacı adil, güvenilir ve görevini hakkıyla yapan bir polis olmaktır.
+Rhea'nın hayatındaki kırılma noktası, arkadaşı Nami ile çıktığı bir gezinti
+sırasında yaşandı. Nami, her zamanki şakacı tavrıyla “intihar edeceğim” gibi
+sözler söylemeye başladı. Ancak Rhea o sırada mavi kristalin etkisi altındaydı.
+
+Uyuşturucunun etkisiyle gerçeklik algısı bozulan Rhea, Nami'nin gerçekten
+öldüğünü gördüğüne inandı. Panik içinde diğer birimlere telsiz geçerek
+Nami'nin hayatını kaybettiğini bildirdi. Olay yerine gelen yetkililer ise
+Nami'nin ölmediğini ve Rhea'nın gördüğü görüntünün gerçeği yansıtmadığını
+tespit etti.
+
+Yapılan uyuşturucu testinde Rhea'nın mavi kristal kullandığı ortaya çıktı.
+Görevi sırasında uyuşturucu etkisi altında bulunması, gerçek olmayan bir
+ölüm ihbarı vermesi ve diğer birimleri harekete geçirmesi nedeniyle
+Rhea görevinden ihraç edildi.
+
+Bu olay Rhea için yalnızca kariyerinin sonu değildi. Kendi zihnine, anılarına
+ve kararlarına duyduğu güven de o gün paramparça oldu. Nami'nin hayatta
+olduğunu öğrendiğinde bile Rhea'nın gördüğü görüntü zihninden silinmedi.
+
+Artık Sandy Shores sokaklarında dolaşmıyor. Şehri terk ederken ardında
+yalnızca üniformasını değil, eski hayatını ve kendisine duyduğu güveni de
+bırakıyor. Geriye ise mavi kristalin gösterdiği görüntü ile gerçek arasındaki
+farkı anlamaya çalışan, yaşadığı o günü her gece yeniden hatırlayan bir Rhea kalıyor.
 `
     },
     {
@@ -37,7 +62,8 @@ En büyük amacı adil, güvenilir ve görevini hakkıyla yapan bir polis olmakt
       age: "26 yaşında",
       location: "Türkiye",
       occupation: "Gözlemci ve psikoloji meraklısı",
-      imageUrl: "https://s3.kngl.gg/knglrp-media/characters/5d8bb04c-3150-4bff-addc-73b4ed1a3595.png",
+      imageUrl:
+        "https://s3.kngl.gg/knglrp-media/characters/5d8bb04c-3150-4bff-addc-73b4ed1a3595.png",
       avatar: "🖤",
       quote: "İnsanları tanımak için söylediklerinden çok sustuklarına bakarım.",
       story: `
@@ -72,7 +98,8 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       age: "26 yaşında",
       location: "Los Santos",
       occupation: "CK yemişsin kusen",
-      imageUrl: "https://s3.kngl.gg/knglrp-media/characters/594ce60e-63fb-4422-9629-2de3331c158d.png",
+      imageUrl:
+        "https://s3.kngl.gg/knglrp-media/characters/594ce60e-63fb-4422-9629-2de3331c158d.png",
       avatar: "💀",
       quote: "Payloco yüzünden CK yedi...",
       gag: true
@@ -100,22 +127,27 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       width: 100%;
       max-height: calc(33.333vh - 24px);
       overflow-y: auto;
-      overflow-x: hidden;
       padding: 16px;
       color: var(--cream);
       border: 1px solid #c6a8ff66;
       border-radius: 20px;
-      background:
-        linear-gradient(145deg, #493167e8, #160d25f2 65%),
-        var(--plum);
-      box-shadow:
-        0 0 18px #8a63d255,
-        0 0 45px #8a63d222,
-        inset 0 0 25px #c6a8ff12;
+      background: linear-gradient(145deg, #493167e8, #160d25f2 65%), var(--plum);
+      box-shadow: 0 0 18px #8a63d255, 0 0 45px #8a63d222, inset 0 0 25px #c6a8ff12;
       backdrop-filter: blur(12px);
       scrollbar-width: none;
+      scroll-behavior: smooth;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
+      touch-action: manipulation;
       animation: character-card-float 4s ease-in-out infinite;
-      transition: .35s ease;
+      transition:
+        width .55s cubic-bezier(.22, 1, .36, 1),
+        max-height .65s cubic-bezier(.22, 1, .36, 1),
+        padding .45s ease,
+        border-radius .45s ease,
+        box-shadow .55s ease,
+        transform .55s cubic-bezier(.22, 1, .36, 1);
     }
 
     .character-card::-webkit-scrollbar {
@@ -130,28 +162,12 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       animation-delay: -2.8s;
     }
 
-    .character-card::before {
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      content: "";
-      border-radius: inherit;
-      background: linear-gradient(
-        120deg,
-        transparent 20%,
-        #c6a8ff18 45%,
-        transparent 70%
-      );
-      background-size: 220% 100%;
-      animation: character-card-shine 5s linear infinite;
-      pointer-events: none;
-    }
-
     .character-card__header {
       display: flex;
       align-items: center;
       gap: 12px;
       margin-bottom: 14px;
+      transition: transform .45s ease, opacity .35s ease;
     }
 
     .character-card__avatar {
@@ -165,50 +181,49 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       border: 1px solid var(--gold);
       border-radius: 15px;
       color: var(--gold);
-      background:
-        radial-gradient(circle, #8a63d255, transparent 65%),
-        #090511aa;
-      box-shadow: 0 0 14px #e0b45c55;
-      font: inherit;
+      background: #090511aa;
       font-size: 25px;
-      cursor: none;
-      transition: .35s ease;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
+      touch-action: manipulation;
+      transition:
+        transform .45s cubic-bezier(.22, 1, .36, 1),
+        box-shadow .4s ease,
+        border-radius .4s ease;
     }
 
     .character-card__avatar:hover,
     .character-card__avatar:focus-visible {
-      border-color: var(--glow);
-      box-shadow:
-        0 0 14px var(--gold),
-        0 0 28px var(--witch);
-      transform: scale(1.04);
-      outline: none;
+      transform: scale(1.08) rotate(-2deg);
+      box-shadow: 0 0 18px var(--gold), 0 0 30px var(--witch);
     }
 
     .character-card__avatar img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
     }
 
     .character-card__name {
       color: var(--glow);
       font-family: "Eagle Lake", cursive;
       font-size: 21px;
-      line-height: 1.2;
-      text-shadow: 0 0 10px #8a63d288;
     }
 
-    .character-card__age {
-      margin-top: 5px;
+    .character-card__age,
+    .character-card__detail small {
       color: var(--mute);
       font-size: 12px;
     }
 
     .character-card__badge {
       display: inline-flex;
-      align-items: center;
-      gap: 6px;
       margin-bottom: 12px;
       padding: 5px 9px;
       border: 1px solid #8a63d266;
@@ -217,17 +232,7 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       background: #8a63d222;
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: .6px;
       text-transform: uppercase;
-    }
-
-    .character-card__badge::before {
-      width: 6px;
-      height: 6px;
-      content: "";
-      border-radius: 50%;
-      background: var(--gold);
-      box-shadow: 0 0 8px var(--gold);
     }
 
     .character-card__details {
@@ -247,17 +252,14 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
     .character-card__detail small {
       display: block;
       margin-bottom: 3px;
-      color: var(--mute);
       font-size: 10px;
     }
 
     .character-card__detail strong {
-      color: var(--cream);
       font-size: 12px;
     }
 
     .character-card__quote {
-      margin-bottom: 0;
       padding: 10px 12px;
       border-left: 2px solid var(--gold);
       color: var(--glow);
@@ -267,44 +269,25 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       line-height: 1.5;
     }
 
-    .character-card__fail {
-      margin-top: 12px;
-      padding: 10px;
-      border: 1px solid #ff5c8a99;
-      border-radius: 12px;
-      color: #ffd5e1;
-      background: linear-gradient(135deg, #ff3d7a30, #210d2044);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .5px;
-      line-height: 1.5;
-      text-align: center;
-      text-transform: uppercase;
-      box-shadow: 0 0 14px #ff3d7a33;
-    }
-
     .character-card__story {
       margin-top: 14px;
-      border-top: 1px solid #c6a8ff22;
       padding-top: 12px;
+      border-top: 1px solid #c6a8ff22;
+      scroll-margin-top: 20px;
+      animation: story-fade-in .5s ease both;
     }
 
     .character-card__story summary {
-      cursor: none;
+      cursor: pointer;
       color: var(--gold);
       font-size: 12px;
       font-weight: 700;
-      list-style: none;
-      user-select: none;
+      transition: color .25s ease, letter-spacing .25s ease;
     }
 
-    .character-card__story summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .character-card__story summary::before {
-      margin-right: 6px;
-      content: "✦";
+    .character-card__story summary:hover {
+      color: var(--glow);
+      letter-spacing: .4px;
     }
 
     .character-card__story p {
@@ -315,6 +298,49 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       white-space: pre-line;
     }
 
+    .character-card__memorial {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid #e0b45c55;
+      text-align: center;
+    }
+
+    .character-card__memorial img {
+      display: block;
+      width: 100%;
+      max-height: 180px;
+      object-fit: cover;
+      border: 1px solid #e0b45c88;
+      border-radius: 12px;
+      box-shadow: 0 0 18px #e0b45c44;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+
+    .character-card__memorial p {
+      margin-top: 10px;
+      color: var(--gold);
+      font-family: "Eagle Lake", cursive;
+      font-size: 13px;
+      line-height: 1.7;
+      white-space: pre-line;
+      text-shadow: 0 0 10px #e0b45c88;
+    }
+
+    .character-card__fail {
+      margin-top: 12px;
+      padding: 10px;
+      border: 1px solid #ff5c8a99;
+      border-radius: 12px;
+      color: #ffd5e1;
+      background: #ff3d7a30;
+      font-size: 11px;
+      font-weight: 800;
+      text-align: center;
+    }
+
     .character-card.is-collapsed {
       width: 74px;
       height: 74px;
@@ -323,6 +349,7 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       align-self: flex-end;
       padding: 6px;
       border-radius: 20px;
+      box-shadow: 0 0 12px #8a63d244, inset 0 0 15px #c6a8ff10;
     }
 
     .character-card.is-collapsed .character-card__header {
@@ -333,7 +360,6 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       width: 62px;
       height: 62px;
       flex-basis: 62px;
-      border-radius: 16px;
     }
 
     .character-card.is-collapsed .character-card__name,
@@ -348,51 +374,29 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
 
     .character-card.reha-card {
       border-color: #ff5c8a99;
-      background:
-        linear-gradient(145deg, #642645ee, #210d20f5 65%),
-        var(--plum);
-      box-shadow:
-        0 0 18px #ff3d7a66,
-        0 0 45px #ff3d7a22,
-        inset 0 0 25px #ff9dbb18;
+      background: linear-gradient(145deg, #642645ee, #210d20f5 65%), var(--plum);
     }
 
-    .character-card.reha-card .character-card__name,
-    .character-card.reha-card .character-card__badge {
-      color: #ff9dbb;
-    }
+    @keyframes story-fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
 
-    .character-card.reha-card .character-card__quote {
-      border-color: #ff5c8a;
-      color: #ffb6c9;
-      background: #ff3d7a18;
-    }
-
-    .character-card.reha-card.ck-effect {
-      animation:
-        reha-shake .12s linear 8,
-        reha-flash .7s ease;
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @keyframes character-card-float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
+      0%, 100% {
+        transform: translateY(0);
+      }
 
-    @keyframes character-card-shine {
-      from { background-position: 220% 0; }
-      to { background-position: -220% 0; }
-    }
-
-    @keyframes reha-shake {
-      0%, 100% { transform: translate(0); }
-      25% { transform: translate(-8px, 3px) rotate(-2deg); }
-      75% { transform: translate(8px, -3px) rotate(2deg); }
-    }
-
-    @keyframes reha-flash {
-      0%, 100% { filter: none; }
-      35% { filter: brightness(2.4) saturate(1.8); }
+      50% {
+        transform: translateY(-5px);
+      }
     }
 
     @media (max-width: 1150px) {
@@ -419,8 +423,10 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
 
     @media (prefers-reduced-motion: reduce) {
       .character-card,
-      .character-card::before {
+      .character-card__avatar,
+      .character-card__story {
         animation: none;
+        transition: none;
       }
     }
   `;
@@ -443,7 +449,7 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
     card.setAttribute("aria-label", `${character.name} karakter kartı`);
 
     const avatar = character.imageUrl
-      ? `<img src="${escapeHtml(character.imageUrl)}" alt="${escapeHtml(character.name)} karakter görseli">`
+      ? `<img draggable="false" src="${escapeHtml(character.imageUrl)}" alt="${escapeHtml(character.name)} karakter görseli">`
       : escapeHtml(character.avatar);
 
     const story = character.story
@@ -451,6 +457,19 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
         <details class="character-card__story">
           <summary>Hikâyeyi oku</summary>
           <p>${escapeHtml(character.story)}</p>
+          ${
+            character.memorialImage
+              ? `
+                <div class="character-card__memorial">
+                  <img
+                    draggable="false"
+                    src="${escapeHtml(character.memorialImage)}"
+                    alt="${escapeHtml(character.memorialText)}">
+                  <p>${escapeHtml(character.memorialText)}</p>
+                </div>
+              `
+              : ""
+          }
         </details>
       `
       : "";
@@ -480,7 +499,9 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
         </div>
       </div>
 
-      <div class="character-card__badge">${escapeHtml(character.occupation)}</div>
+      <div class="character-card__badge">
+        ${escapeHtml(character.occupation)}
+      </div>
 
       <div class="character-card__details">
         <div class="character-card__detail">
@@ -502,6 +523,17 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       ${story}
     `;
 
+    card.addEventListener("dragstart", event => {
+      event.preventDefault();
+    });
+
+    card.querySelectorAll("img").forEach(image => {
+      image.draggable = false;
+      image.addEventListener("dragstart", event => {
+        event.preventDefault();
+      });
+    });
+
     const avatarButton = card.querySelector(".character-card__avatar");
 
     avatarButton.addEventListener("click", () => {
@@ -515,23 +547,24 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       );
 
       avatarButton.title = collapsed ? "Kartı büyüt" : "Kartı küçült";
-
-      if (character.gag) {
-        playRehaEffect(card);
-      }
     });
 
+    const storyDetails = card.querySelector(".character-card__story");
+
+    if (storyDetails) {
+      storyDetails.addEventListener("toggle", () => {
+        if (!storyDetails.open) return;
+
+        requestAnimationFrame(() => {
+          card.scrollBy({
+            top: 80,
+            behavior: "smooth"
+          });
+        });
+      });
+    }
+
     return card;
-  }
-
-  function playRehaEffect(card) {
-    card.classList.remove("ck-effect");
-    void card.offsetWidth;
-    card.classList.add("ck-effect");
-
-    setTimeout(() => {
-      card.classList.remove("ck-effect");
-    }, 300);
   }
 
   characters.forEach(character => {
