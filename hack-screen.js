@@ -46,7 +46,6 @@
         linear-gradient(#ff246b18 1px, transparent 1px),
         linear-gradient(90deg, #ff246b18 1px, transparent 1px);
       background-size: 42px 42px;
-      mask-image: radial-gradient(circle, #000 15%, transparent 80%);
       animation: nieves-grid-move 8s linear infinite;
     }
 
@@ -61,35 +60,6 @@
       );
       mix-blend-mode: screen;
       animation: nieves-scan 5s linear infinite;
-    }
-
-    .nieves-glow {
-      position: absolute;
-      width: 45vw;
-      height: 45vw;
-      border: 1px solid #ff246b44;
-      border-radius: 50%;
-      box-shadow:
-        0 0 30px #ff246b55,
-        inset 0 0 35px #ff246b33;
-      opacity: .6;
-      animation: nieves-pulse 4s ease-in-out infinite;
-    }
-
-    .nieves-glow::before,
-    .nieves-glow::after {
-      position: absolute;
-      inset: 12%;
-      content: "";
-      border: 1px dashed #00eaff55;
-      border-radius: inherit;
-      transform: rotate(45deg);
-    }
-
-    .nieves-glow::after {
-      inset: 25%;
-      border-color: #ff246b66;
-      transform: rotate(-35deg);
     }
 
     .nieves-particle {
@@ -109,9 +79,7 @@
       padding: 34px 26px 26px;
       border: 1px solid #ff246baa;
       border-radius: 10px;
-      background:
-        linear-gradient(145deg, #160713, #050509),
-        #08030b;
+      background: linear-gradient(145deg, #160713, #050509);
       box-shadow:
         0 0 20px #ff246b99,
         0 0 90px #ff246b44,
@@ -230,8 +198,8 @@
     }
 
     .nieves-terminal div {
-      white-space: nowrap;
       overflow: hidden;
+      white-space: nowrap;
       text-overflow: ellipsis;
     }
 
@@ -306,11 +274,16 @@
     }
 
     @keyframes nieves-title-glitch {
-      0%, 88%, 100% { transform: none; clip-path: none; }
+      0%, 88%, 100% {
+        transform: none;
+        clip-path: none;
+      }
+
       90% {
         transform: translateX(-7px) skewX(-8deg);
         clip-path: inset(20% 0 55% 0);
       }
+
       93% {
         transform: translateX(7px);
         clip-path: inset(60% 0 10% 0);
@@ -329,10 +302,6 @@
 
     @keyframes nieves-grid-move {
       to { background-position: 42px 42px; }
-    }
-
-    @keyframes nieves-pulse {
-      50% { transform: scale(1.08) rotate(8deg); opacity: .35; }
     }
 
     @keyframes nieves-particle {
@@ -366,11 +335,6 @@
         letter-spacing: 4px;
       }
 
-      .nieves-glow {
-        width: 90vw;
-        height: 90vw;
-      }
-
       .nieves-corner {
         font-size: 8px;
       }
@@ -394,8 +358,6 @@
   overlay.setAttribute("aria-labelledby", "nievesHackTitle");
 
   overlay.innerHTML = `
-    <div class="nieves-glow" aria-hidden="true"></div>
-
     <span class="nieves-particle" style="left:12%;top:80%;animation-delay:-1s"></span>
     <span class="nieves-particle" style="left:24%;top:65%;animation-delay:-3s"></span>
     <span class="nieves-particle" style="left:76%;top:75%;animation-delay:-2s"></span>
