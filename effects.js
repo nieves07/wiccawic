@@ -173,12 +173,12 @@
       display: none;
     }
 
-    .potion-link:nth-child(1) .bottle::before { content: "🧪"; }
-    .potion-link:nth-child(2) .bottle::before { content: "🔮"; }
-    .potion-link:nth-child(3) .bottle::before { content: "🕯️"; }
-    .potion-link:nth-child(4) .bottle::before { content: "🐈‍⬛"; }
-    .potion-link:nth-child(5) .bottle::before { content: "🌙"; }
-    .potion-link:nth-child(6) .bottle::before { content: "🧿"; }
+        .potion-link:nth-child(1) .bottle::before { content: "🔥"; }
+    .potion-link:nth-child(2) .bottle::before { content: "🕯️"; }
+    .potion-link:nth-child(3) .bottle::before { content: "🌹"; }
+    .potion-link:nth-child(4) .bottle::before { content: "🎶"; }
+    .potion-link:nth-child(5) .bottle::before { content: "🦉"; }
+    .potion-link:nth-child(6) .bottle::before { content: "🪙"; }
 
     .potion-link:hover .bottle,
     .potion-link:focus-visible .bottle {
