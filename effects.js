@@ -5,7 +5,7 @@
   const finePointer = matchMedia("(pointer: fine) and (hover: hover)").matches;
   const style = document.createElement("style");
 
-  style.textContent = `
+  style.textContent = ` 
     *,
     *::before,
     *::after {
