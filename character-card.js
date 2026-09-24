@@ -104,7 +104,7 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
   const style = document.createElement("style");
 
   style.textContent = `
-    .character-cards {
+        .character-cards {
       position: fixed;
       top: 50%;
       right: 24px;
@@ -113,9 +113,10 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       flex-direction: column;
       align-items: flex-end;
       gap: 14px;
-      width: min(320px, calc(100vw - 48px));
+      width: min(340px, calc(100vw - 48px));
       max-height: calc(100vh - 48px);
       transform: translateY(-50%);
+      filter: drop-shadow(0 14px 28px #0008);
     }
 
     .character-card {
@@ -127,13 +128,20 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       max-width: calc(100vw - 32px);
       max-height: calc(33.333vh - 24px);
       overflow-y: auto;
-      padding: 16px;
+            padding: 18px;
       color: var(--cream);
-      border: 1px solid #c6a8ff66;
-      border-radius: 20px;
-      background: linear-gradient(145deg, #493167e8, #160d25f2 65%), var(--plum);
-      box-shadow: 0 0 18px #8a63d255, 0 0 45px #8a63d222, inset 0 0 25px #c6a8ff12;
-      backdrop-filter: blur(12px);
+      border: 1px solid #d9a74a88;
+      border-radius: 6px 22px 6px 22px;
+      background:
+        linear-gradient(135deg, #4a2865e8, #170b25f5 68%),
+        radial-gradient(circle at 90% 0%, #d9a74a22, transparent 35%),
+        var(--plum);
+      box-shadow:
+        0 0 0 1px #8a63d222,
+        0 0 20px #8a63d255,
+        0 18px 42px #0009,
+        inset 0 0 25px #d9a74a12;
+      backdrop-filter: blur(14px);
       scrollbar-width: none;
       scroll-behavior: smooth;
       user-select: none;
@@ -172,8 +180,8 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       margin: -16px 0 -30px -16px;
       cursor: nwse-resize;
       touch-action: none;
-      background: linear-gradient(135deg, #160d25ee, transparent);
-      border-radius: 0 0 10px 0;
+            background: linear-gradient(135deg, #d9a74a18, transparent);
+      border-radius: 0 0 12px 0;
     }
 
     .character-card__resize::before {
@@ -183,9 +191,9 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       width: 13px;
       height: 13px;
       content: "";
-      border-top: 2px solid var(--gold);
-      border-left: 2px solid var(--gold);
-      border-radius: 5px 0 0;
+            border-top: 2px solid #d9a74a;
+      border-left: 2px solid #d9a74a;
+      border-radius: 4px 0 0;
       opacity: .8;
       transition: opacity .2s ease, transform .2s ease;
     }
@@ -196,7 +204,7 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       transform: scale(1.2);
     }
 
-    .character-card__header {
+        .character-card__header {
       display: flex;
       align-items: center;
       gap: 12px;
@@ -211,10 +219,11 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       height: 62px;
       padding: 0;
       overflow: hidden;
-      border: 1px solid var(--gold);
-      border-radius: 15px;
-      color: var(--gold);
-      background: #090511aa;
+            border: 1px solid #d9a74acc;
+      border-radius: 8px 16px 8px 16px;
+      color: #f1d78f;
+      background: linear-gradient(145deg, #2a163d, #0d0715);
+      box-shadow: 0 0 14px #d9a74a33, inset 0 0 12px #8a63d222;
       font-size: calc(25px * var(--character-scale));
       cursor: pointer;
       touch-action: manipulation;
@@ -227,17 +236,20 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       box-shadow: 0 0 18px var(--gold), 0 0 30px var(--witch);
     }
 
-    .character-card__avatar img {
+        .character-card__avatar img {
+      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
       pointer-events: none;
     }
 
     .character-card__name {
-      color: var(--glow);
+            color: #f1d78f;
       font-family: "Eagle Lake", cursive;
       font-size: calc(21px * var(--character-scale));
+      text-shadow: 0 0 10px #d9a74a88;
     }
 
     .character-card__age,
@@ -250,10 +262,11 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       display: inline-flex;
       margin-bottom: 12px;
       padding: 5px 9px;
-      border: 1px solid #8a63d266;
-      border-radius: 20px;
-      color: var(--glow);
-      background: #8a63d222;
+            border: 1px solid #d9a74a66;
+      border-radius: 4px 12px 4px 12px;
+      color: #e8c878;
+      background: linear-gradient(90deg, #d9a74a1c, #8a63d21c);
+      letter-spacing: .5px;
       font-size: calc(10px * var(--character-scale));
       font-weight: 700;
       text-transform: uppercase;
@@ -268,9 +281,10 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
 
     .character-card__detail {
       padding: 9px;
-      border: 1px solid #c6a8ff22;
-      border-radius: 10px;
-      background: #09051144;
+            border: 1px solid #d9a74a2e;
+      border-radius: 4px 10px 4px 10px;
+      background: #09051166;
+      box-shadow: inset 0 0 12px #d9a74a08;
     }
 
     .character-card__detail small {
@@ -285,9 +299,11 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
 
     .character-card__quote {
       padding: 10px 12px;
-      border-left: 2px solid var(--gold);
-      color: var(--glow);
-      background: #e0b45c12;
+            border-left: 2px solid #d9a74a;
+      border-radius: 0 10px 10px 0;
+      color: #d9c18d;
+      background: linear-gradient(90deg, #d9a74a18, transparent);
+      box-shadow: inset 0 0 14px #d9a74a08;
       font-size: calc(11px * var(--character-scale));
       font-style: italic;
       line-height: 1.5;
@@ -296,16 +312,17 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
     .character-card__story {
       margin-top: 14px;
       padding-top: 12px;
-      border-top: 1px solid #c6a8ff22;
+            border-top: 1px solid #d9a74a44;
       scroll-margin-top: 20px;
       animation: story-fade-in .5s ease both;
     }
 
     .character-card__story summary {
       cursor: pointer;
-      color: var(--gold);
+            color: #e8c878;
       font-size: calc(12px * var(--character-scale));
       font-weight: 700;
+      text-shadow: 0 0 8px #d9a74a66;
     }
 
     .character-card__story p {
@@ -356,25 +373,47 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
       text-align: center;
     }
 
-    .character-card.is-collapsed {
+        .character-card.is-collapsed {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 74px;
       height: 74px;
       max-width: 74px;
       max-height: 74px;
       overflow: hidden;
-      padding: 6px;
-      border-radius: 20px;
-      box-shadow: 0 0 12px #8a63d244, inset 0 0 15px #c6a8ff10;
+      padding: 5px;
+      border-radius: 8px 20px 8px 20px;
+      border-color: #d9a74a99;
+      background: linear-gradient(145deg, #38204fe8, #12091df5);
+      box-shadow: 0 0 14px #8a63d266, 0 0 28px #d9a74a22, inset 0 0 15px #d9a74a12;
     }
 
-    .character-card.is-collapsed .character-card__header {
+            .character-card.is-collapsed .character-card__header {
+      position: absolute;
+      inset: 5px;
+      display: grid;
+      place-items: center;
+      width: auto;
+      height: auto;
       margin: 0;
     }
 
     .character-card.is-collapsed .character-card__avatar {
+      display: grid;
+      place-items: center;
       width: 62px;
       height: 62px;
-      flex-basis: 62px;
+      flex: 0 0 62px;
+      margin: 0;
+    }
+
+    .character-card.is-collapsed .character-card__avatar img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 50%;
     }
 
     .character-card.is-collapsed .character-card__name,
@@ -479,7 +518,7 @@ gerçek dünyası sessizlik, gözlem, kontrol ve insan davranışlarını çözm
     const failNotice = character.gag
       ? `
         <div class="character-card__fail">
-          💀 CK YEDİ 💀<br>
+          💀 CK *****İ 💀<br>
           PALYOCO ÖLDÜRDÜ
         </div>
       `
