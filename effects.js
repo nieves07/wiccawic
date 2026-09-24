@@ -494,4 +494,4 @@
   }
 
   initMagicPotionIcons();
-})();
+})(); 
