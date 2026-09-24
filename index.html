@@ -1025,6 +1025,171 @@
       .theme-switcher { gap: 8px; padding: 8px 12px; }
     }
 
+        /* Gece ritüeli teması */
+    body {
+      background:
+        radial-gradient(ellipse at 50% -12%, #6f3fa633 0%, transparent 42%),
+        radial-gradient(circle at 8% 78%, #30145155 0%, transparent 28%),
+        radial-gradient(circle at 92% 42%, #b27a241c 0%, transparent 22%),
+        #07030d;
+    }
+
+    body::after {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      content: "";
+      opacity: .15;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 18%, transparent 0 13%, #d9a74a22 13.1% 13.25%, transparent 13.4%),
+        radial-gradient(circle at 50% 18%, transparent 0 21%, #d9a74a15 21.1% 21.2%, transparent 21.4%);
+      mask-image: linear-gradient(to bottom, #000 0 55%, transparent 92%);
+    }
+
+    main {
+      width: min(calc(100% - 32px), 590px);
+      padding-top: 40px;
+    }
+
+    .moon {
+      background: radial-gradient(circle at 35% 30%, #fff9dc, #d8a34e 68%, #8f572d);
+      box-shadow: 0 0 26px 8px #d8a34e99, 0 0 90px 28px #a96b3944;
+    }
+
+    .daily-quote {
+      position: relative;
+      border-color: #d9a74a66;
+      background: linear-gradient(135deg, #d9a74a14, #241335cc 45%, #6f3fa622);
+      box-shadow: inset 0 0 18px #d9a74a0d, 0 0 24px #4b237122;
+    }
+
+    .daily-quote::before,
+    .daily-quote::after {
+      color: var(--gold);
+      font-size: 18px;
+      text-shadow: 0 0 10px var(--gold);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 42px;
+      letter-spacing: 3px;
+    }
+
+    .section-title::before,
+    .section-title::after {
+      flex: 1;
+      height: 1px;
+      content: "";
+      background: linear-gradient(90deg, transparent, var(--gold));
+      box-shadow: 0 0 8px var(--gold);
+    }
+
+    .section-title::after {
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    .cauldron-wrap::before {
+      width: 250px;
+      height: 180px;
+      background: #7a43bb;
+      filter: blur(76px);
+      opacity: .18;
+    }
+
+    .cauldron-frame {
+      border-color: #d9a74acc;
+      background: radial-gradient(circle at 35% 24%, #8f5ac733, transparent 38%), linear-gradient(145deg, #392052, #100817 72%);
+      box-shadow:
+        0 0 0 7px #8a63d218,
+        0 0 0 11px #d9a74a12,
+        0 0 22px 4px #8a63d266,
+        inset 0 0 22px #d9a74a22;
+    }
+
+    .cauldron-frame::before {
+      border-color: #d9a74acc;
+    }
+
+    .magic-ring {
+      border-color: #e5c17b99;
+      box-shadow: 0 0 20px #8a63d288;
+    }
+
+    .brand {
+      color: #f7e6c4;
+      font-size: clamp(38px, 9vw, 54px);
+      letter-spacing: 1px;
+      text-shadow: 0 0 8px #fff0c488, 0 0 24px #8a63d2cc, 0 0 52px #6f3fa288;
+    }
+
+    .tagline {
+      color: #d2bda0;
+      letter-spacing: .5px;
+    }
+
+    .feature-button,
+    .potion-link {
+      border-color: #b98bdf55;
+      background: linear-gradient(135deg, #3a2055f2, #160b22f2 72%);
+      box-shadow: inset 0 0 16px #b98bdf0d;
+    }
+
+    .feature-button:hover,
+    .feature-button:focus-visible,
+    .potion-link:hover,
+    .potion-link:focus-visible {
+      border-color: var(--gold);
+      box-shadow: 0 0 24px #8a63d266, inset 0 0 18px #d9a74a18;
+    }
+
+    .potion-result {
+      border-color: #d9a74a55;
+      background: linear-gradient(135deg, #d9a74a12, #8a63d218);
+      box-shadow: inset 0 0 16px #d9a74a0c;
+    }
+
+    .stream-card {
+      border-color: #9a6bc466;
+      background: linear-gradient(135deg, #492667e8, #12091df5 68%);
+      box-shadow: inset 0 0 24px #d9a74a0b, 0 12px 30px #0008;
+    }
+
+    .stream-card::before {
+      position: absolute;
+      top: 0;
+      left: 12%;
+      width: 76%;
+      height: 1px;
+      content: "";
+      background: var(--gold);
+      box-shadow: 0 0 12px var(--gold);
+    }
+
+    .theme-switcher {
+      border-color: #d9a74a44;
+      background: #11091ccc;
+      box-shadow: 0 0 22px #0006;
+    }
+
+    .cat-aura {
+      border-color: #d9a74a88;
+      background: radial-gradient(circle, #d9a74a28, #8a63d20d 46%, transparent 70%);
+      box-shadow: 0 0 32px #8a63d288, inset 0 0 18px #d9a74a33;
+    }
+
+    .site-footer {
+      border-top-color: #d9a74a44;
+    }
+
+    @media (max-width: 600px) {
+      main { padding-top: 30px; }
+      .section-title { letter-spacing: 2px; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *,
       *::before,
@@ -1033,6 +1198,126 @@
         animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
       }
+    }
+
+    /* Yeni cadı kitabı görsel dili */
+    body {
+      background:
+        radial-gradient(circle at 50% 0%, #47205e 0, transparent 34%),
+        radial-gradient(circle at 0% 55%, #24103d 0, transparent 30%),
+        radial-gradient(circle at 100% 75%, #6b3c1d 0, transparent 22%),
+        #08050d;
+    }
+
+    body::before {
+      opacity: .1;
+      background-image:
+        linear-gradient(30deg, #d9a74a22 12%, transparent 12.5%, transparent 87%, #d9a74a22 87.5%),
+        linear-gradient(150deg, #d9a74a22 12%, transparent 12.5%, transparent 87%, #d9a74a22 87.5%);
+      background-size: 34px 60px;
+      mask-image: linear-gradient(to bottom, #000, transparent 78%);
+    }
+
+    main { width: min(calc(100% - 32px), 650px); }
+
+    .daily-quote,
+    .feature-button,
+    .potion-result,
+    .stream-card,
+    .potion-link,
+    .theme-switcher,
+    .spellbook {
+      border-color: #d9a74a66;
+      background: linear-gradient(135deg, #38204fF2, #120a1cf5 70%);
+      box-shadow: 0 12px 28px #0008, inset 0 0 24px #d9a74a0d;
+    }
+
+    .daily-quote {
+      border-radius: 4px 22px 6px 20px;
+      outline: 1px solid #8a63d244;
+      outline-offset: 4px;
+    }
+
+    .section-title {
+      color: #e8c878;
+      font-family: "Eagle Lake", cursive;
+      font-size: 15px;
+      letter-spacing: 1px;
+      text-transform: none;
+      text-shadow: 0 0 14px #d9a74a;
+    }
+
+    .section-title::before,
+    .section-title::after {
+      background: linear-gradient(90deg, transparent, #d9a74a, #8a63d2);
+      box-shadow: 0 0 10px #d9a74a;
+    }
+
+    .feature-grid { gap: 14px; }
+
+    .feature-button,
+    .potion-link {
+      border-radius: 5px 18px 5px 18px;
+      position: relative;
+    }
+
+    .feature-button::after,
+    .potion-link::after,
+    .stream-card::after {
+      position: absolute;
+      inset: 5px;
+      content: "";
+      border: 1px solid #d9a74a1f;
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    .feature-button:hover,
+    .feature-button:focus-visible,
+    .potion-link:hover,
+    .potion-link:focus-visible {
+      border-color: #f1d78f;
+      box-shadow: 0 0 26px #8a63d288, inset 0 0 22px #d9a74a22;
+    }
+
+    .potion-result { border-radius: 18px 5px 18px 5px; }
+
+    .stream-card {
+      border-radius: 22px 5px 22px 5px;
+      position: relative;
+    }
+
+    .stream-header strong,
+    .last-stream strong { color: #efd28b; }
+
+    .potion-link {
+      min-height: 68px;
+      padding: 15px 22px;
+    }
+
+    .bottle { filter: drop-shadow(0 0 8px var(--link-glow)); }
+
+    .theme-switcher {
+      border-radius: 5px 22px 5px 22px;
+    }
+
+    .site-footer {
+      margin-top: 52px;
+      border-top: 0;
+    }
+
+    .site-footer::before,
+    .site-footer::after {
+      width: 38%;
+      height: 2px;
+    }
+
+    .footer-rune { font-size: 24px; }
+
+    @media (max-width: 600px) {
+      .feature-button,
+      .potion-link { border-radius: 4px 14px 4px 14px; }
+      .section-title { font-size: 13px; }
     }
   </style>
 </head>
@@ -1192,7 +1477,7 @@
       const channelApi = `https://kick.com/api/v2/channels/${KICK_USERNAME.toLowerCase()}`;
       const videosApi = `${channelApi}/videos`;
 
-      const quotes = [
+            const quotes = [
         "Yıldızlar sana yol göstersin, büyücü.",
         "Kazan seni asla yalnız bırakmaz.",
         "Her iksirin bir bedeli, her bedelin bir büyüsü vardır.",
@@ -1202,7 +1487,22 @@
         "Kediler bilir, sen de kulak ver.",
         "Büyü, inandığın kadar gerçektir.",
         "Küçük bir kıvılcım, büyük bir alev doğurur.",
-        "Kazandaki her köpük, yeni bir hikayedir."
+        "Kazandaki her köpük, yeni bir hikayedir.",
+        "Ay taşı avucunda ısındığında, kalbinin unuttuğu yolu hatırlarsın.",
+        "Gölgen bugün senden önce davranacak; onu takip et.",
+        "Kadim rünler fısıldıyor: Aradığın cevap çoktan içinde uyandı.",
+        "Mor alev yükselirse, dileğini sessizce kazanına bırak.",
+        "Karanlık bir kapı gördüğünde korkma; bazı yollar gece açılır.",
+        "Bugünün koruyucu büyüsü: cesaret, sezgi ve bir tutam kaos.",
+        "Kaderin ipliği elinde; düğümü çözmek için yalnızca niyet et.",
+        "Kazan kaynıyor, yıldızlar hizalanıyor; evren senin tarafında.",
+        "Eski ormanların bilgeliği bugün kulağına güzel bir sır bırakacak.",
+        "Bir dilek, doğru zamanda söylendiğinde küçük bir kehanete dönüşür.",
+        "Gümüş ay ışığı yolunu aydınlatsın, altın kıvılcımlar şansını uyandırsın.",
+        "Rünlerini seç, nefesini tut ve büyünün kendi yolunu bulmasına izin ver.",
+        "Bugün kapını çalan tesadüf, uzun zamandır beklediğin büyüdür.",
+        "Kazanındaki son damla bile yeni bir başlangıcın habercisi olabilir.",
+        "Sezgilerin pusulan, merakın asan olsun; gece seni doğru yere götürecek."
       ];
 
       const quoteText = $("#quoteText");
@@ -1601,6 +1901,5 @@ if (cauldronImage.complete) {
   <script src="effects.js"></script>
   <script src="character-card.js"></script>
   <script src="stream-end-date.js"></script>
-  <script src="hack-screen.js"></script>
 </body>
 </html>
