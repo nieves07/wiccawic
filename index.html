@@ -1,0 +1,2018 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090511">
+  <title>Wiccawic — Cadı Kazanı</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="preload"
+      as="image"
+      href="profil.webp">
+
+  <style>
+    :root {
+      --void: #090511;
+      --plum: #1c1226; 
+      --plum-2: #302044;
+      --witch: #8a63d2;
+      --glow: #c6a8ff;
+      --gold: #e0b45c;
+      --cream: #f3ead9;
+      --mute: #b7a8c9;
+      --pink: #ff9ddd;
+      --bg-glow-1: #8a63d23d;
+      --bg-glow-2: #e0b45c18;
+      --grid-color: #fff1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--cream);
+      font-family: Quicksand, sans-serif;
+      background:
+        radial-gradient(circle at 15% 15%, var(--bg-glow-1), transparent 32%),
+        radial-gradient(circle at 50% 100%, var(--bg-glow-2), transparent 36%),
+        var(--void);
+    }
+
+    body.theme-midnight {
+      --void: #050a14;
+      --plum: #0f1724;
+      --plum-2: #1a2638;
+      --witch: #5b8bd2;
+      --glow: #9ec6ff;
+      --gold: #d4a35c;
+      --cream: #f3ead9;
+      --mute: #a8b8c9;
+      --pink: #9dcfff;
+      --bg-glow-1: #5b8bd23d;
+      --bg-glow-2: #d4a35c18;
+    }
+
+    body.theme-samhain {
+      --void: #1a0d05;
+      --plum: #2a180a;
+      --plum-2: #3d2413;
+      --witch: #d28a3e;
+      --glow: #ffcc8a;
+      --gold: #e88b4a;
+      --cream: #fff4e6;
+      --mute: #d4bfa3;
+      --pink: #ff9d9d;
+      --bg-glow-1: #d28a3e3d;
+      --bg-glow-2: #e88b4a18;
+    }
+
+    body.theme-forest {
+      --void: #08140b;
+      --plum: #122019;
+      --plum-2: #1d3326;
+      --witch: #5da67a;
+      --glow: #a8ffc6;
+      --gold: #c9d45c;
+      --cream: #f1f8e9;
+      --mute: #b4c9a9;
+      --pink: #b4ff9d;
+      --bg-glow-1: #5da67a3d;
+      --bg-glow-2: #c9d45c18;
+    }
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      content: "";
+      opacity: .16;
+      pointer-events: none;
+      background:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, #000, transparent);
+    }
+
+    #stars,
+    #particles,
+    #magicSymbols {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .star,
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .star {
+      background: var(--cream);
+      box-shadow: 0 0 8px var(--cream);
+      animation: twinkle 4s ease-in-out infinite;
+    }
+
+    .particle {
+      width: 4px;
+      height: 4px;
+      background: var(--glow);
+      box-shadow: 0 0 12px 3px var(--witch);
+      animation: float-up linear infinite;
+    }
+
+    .moon {
+      position: fixed;
+      top: 8vh;
+      right: 8vw;
+      z-index: 0;
+      width: 74px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff8e6, var(--gold) 70%);
+      box-shadow: 0 0 30px 8px #e0b45c88, 0 0 85px 22px #e0b45c33;
+      animation: moon-glow 4s ease-in-out infinite;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      width: min(calc(100% - 32px), 560px);
+      min-height: 100vh;
+      margin: auto;
+      padding: 48px 0 34px;
+      text-align: center;
+    }
+
+    @keyframes twinkle {
+      50% { opacity: .9; transform: scale(1.4); }
+    }
+
+    @keyframes float-up {
+      from { opacity: 0; transform: translateY(30px); }
+      20%, 80% { opacity: .8; }
+      to { opacity: 0; transform: translateY(-110vh) rotate(180deg); }
+    }
+
+    @keyframes moon-glow {
+      50% { box-shadow: 0 0 42px 12px #e0b45c99, 0 0 100px 28px #e0b45c44; }
+    }
+
+    .daily-quote {
+      margin: 16px auto 0;
+      padding: 12px 18px;
+      max-width: 420px;
+      border: 1px solid #c6a8ff44;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #8a63d21a, transparent);
+      color: var(--glow);
+      font-size: 13px;
+      font-weight: 600;
+      font-style: italic;
+      line-height: 1.5;
+      text-shadow: 0 0 10px var(--witch);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: .3s ease;
+    }
+
+    .quote-stars {
+      color: var(--gold);
+      font-style: normal;
+      font-size: 12px;
+    }
+
+    .cauldron-wrap {
+      --cauldron-size: 230px;
+      --cauldron-top: 24px;
+      position: relative;
+      width: 300px;
+      height: 270px;
+      margin: auto;
+      isolation: isolate;
+    }
+
+    .cauldron-wrap::before {
+      position: absolute;
+      top: 48%;
+      left: 50%;
+      z-index: -1;
+      width: 220px;
+      height: 155px;
+      content: "";
+      border-radius: 50%;
+      background: var(--witch);
+      filter: blur(70px);
+      opacity: .1;
+      transform: translate(-50%, -50%);
+      animation: aura 3s ease-in-out infinite;
+    }
+
+    .cauldron-frame,
+    .magic-ring,
+    .cauldron-image {
+      position: absolute;
+      top: var(--cauldron-top);
+      left: 50%;
+      width: var(--cauldron-size);
+      height: var(--cauldron-size);
+      border-radius: 50%;
+      transform: translateX(-50%);
+      animation: float 3.5s ease-in-out infinite;
+    }
+
+    .cauldron-frame {
+      z-index: 1;
+      border: 2px solid #c6a8ff99;
+      background: linear-gradient(135deg, #c6a8ff22, transparent 35%, #8a63d233), #160d25aa;
+      box-shadow:
+        0 0 0 7px #8a63d210,
+        0 0 0 10px #c6a8ff0c,
+        0 0 12px 2px #8a63d244,
+        inset 0 0 15px #c6a8ff22;
+    }
+
+    .cauldron-frame::before {
+      position: absolute;
+      inset: 8px;
+      content: "";
+      border: 1px dashed #e0b45c99;
+      border-radius: inherit;
+      box-shadow: inset 0 0 18px #e0b45c33;
+      animation: spin 18s linear infinite;
+    }
+
+    .cauldron-frame::after {
+      position: absolute;
+      top: -17px;
+      left: 50%;
+      content: "✦";
+      color: var(--gold);
+      font-size: 22px;
+      text-shadow: 0 0 12px var(--gold);
+      transform: translateX(-50%);
+    }
+
+    .magic-ring {
+      z-index: 3;
+      border: 1px solid #c6a8ff80;
+      pointer-events: none;
+    }
+
+    .magic-ring::before {
+      position: absolute;
+      inset: -1px;
+      content: "";
+      border: 1px dashed #c6a8ff99;
+      border-radius: inherit;
+      box-shadow: 0 0 14px #8a63d288, inset 0 0 14px #8a63d244;
+      animation: spin 16s linear infinite reverse;
+    }
+
+/* Profil fotoğrafı (eski cadı kazanı görseli yerine) */
+.cauldron-image {
+  z-index: 2;
+  object-fit: cover;
+  object-position: 50% 22%;
+  clip-path: circle(50%);
+  cursor: pointer;
+
+  /* Görsel yüklenirken boş görünmez */
+  opacity: .65;
+
+  filter:
+    blur(10px)
+    drop-shadow(0 0 4px var(--glow))
+    drop-shadow(0 0 10px var(--witch))
+    drop-shadow(0 12px 17px #000b);
+
+  transition:
+    opacity .7s ease,
+    filter .7s ease,
+    transform .3s ease;
+}
+
+.cauldron-image.loaded {
+  opacity: 1;
+  filter:
+    blur(0)
+    drop-shadow(0 0 4px var(--glow))
+    drop-shadow(0 0 10px var(--witch))
+    drop-shadow(0 12px 17px #000b);
+}
+
+/* Görsel çerçeveden taşmasın: hover'da transform kullanma,
+   efekti çerçeveye (parlaklık) uygula. */
+.cauldron-wrap:hover .cauldron-frame {
+  filter: brightness(1.35);
+}
+
+.cauldron-wrap:hover .magic-ring::after {
+  animation-duration: 5s;
+  filter: brightness(1.5);
+}
+
+    .witch-hat {
+      position: absolute;
+      top: -22px;
+      left: 55%;
+      z-index: 5;
+      width: 110px;
+      height: 75px;
+      pointer-events: none;
+      transform: translateX(-50%) rotate(-9deg);
+      filter: drop-shadow(0 0 7px var(--witch)) drop-shadow(0 8px 8px #000b);
+      animation: hat-float 3.5s ease-in-out infinite;
+    }
+
+    .witch-hat::before {
+      position: absolute;
+      left: 29px;
+      bottom: 15px;
+      width: 53px;
+      height: 58px;
+      content: "";
+      background: linear-gradient(110deg, #120b1e, #44226d 55%, #170d27);
+      border-top: 2px solid #c6a8ff99;
+      border-radius: 45% 45% 5% 5%;
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    }
+
+    .witch-hat::after {
+      position: absolute;
+      left: 3px;
+      bottom: 8px;
+      width: 104px;
+      height: 22px;
+      content: "";
+      border: 2px solid #c6a8ff99;
+      border-radius: 50%;
+      background: linear-gradient(#35184f, #120b1e);
+      box-shadow: 0 0 8px #8a63d2aa, inset 0 3px 5px #c6a8ff33;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes float {
+      50% { transform: translateX(-50%) translateY(-8px) rotate(1deg); }
+    }
+    @keyframes hat-float {
+      50% { transform: translateX(-50%) translateY(-8px) rotate(-4deg); }
+    }
+    @keyframes aura {
+      50% { opacity: .75; transform: translate(-50%, -50%) scale(1.2); }
+    }
+
+    .spark,
+    .smoke {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .spark {
+      z-index: 4;
+      color: var(--glow);
+      font-size: 18px;
+      text-shadow: 0 0 12px var(--witch);
+      animation: spark 2.5s ease-in-out infinite;
+    }
+
+    .spark-one { top: 38px; left: 26px; }
+    .spark-two { top: 90px; right: 20px; color: var(--gold); animation-delay: .8s; }
+    .spark-three { bottom: 32px; left: 48px; animation-delay: 1.4s; }
+
+    @keyframes spark {
+      50% { opacity: .35; transform: translateY(-12px) scale(1.5) rotate(90deg); }
+    }
+
+    .smoke {
+      top: 26px;
+      left: 50%;
+      z-index: 3;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--glow), transparent 70%);
+      animation: smoke 3s ease-in infinite;
+    }
+
+    .smoke:nth-of-type(2) { left: 42%; animation-delay: .8s; }
+    .smoke:nth-of-type(3) { left: 58%; animation-delay: 1.6s; }
+
+    @keyframes smoke {
+      from { opacity: 0; transform: translate(-50%, 0) scale(.6); }
+      20% { opacity: .8; }
+      to { opacity: 0; transform: translate(-50%, -110px) scale(1.8); }
+    }
+
+    .brand {
+      margin-top: 12px;
+      font-family: "Eagle Lake", cursive;
+      font-size: clamp(36px, 8vw, 48px);
+      text-shadow: 0 0 10px #c6a8ffaa, 0 0 28px #8a63d2aa;
+      animation: brand-float 4s ease-in-out infinite;
+    }
+
+    @keyframes brand-float {
+      50% { transform: translateY(-4px); }
+    }
+
+    .tagline {
+      margin-top: 6px;
+      color: var(--mute);
+      font-size: 14px;
+    }
+
+    .kick-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 16px;
+      padding: 7px 15px;
+      border: 1px solid #c6a8ff66;
+      border-radius: 20px;
+      color: var(--glow);
+      background: #8a63d21a;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--witch);
+      box-shadow: 0 0 8px 2px var(--witch);
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      50% { opacity: .35; transform: scale(.75); }
+    }
+
+    .section-title {
+      margin: 38px 0 15px;
+      color: var(--glow);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-shadow: 0 0 12px var(--glow);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .feature-button {
+      padding: 15px 10px;
+      border: 1px solid #b899f255;
+      border-radius: 15px;
+      color: var(--cream);
+      background: linear-gradient(135deg, #302044e8, #1c1226e8);
+      font-size: 13px;
+      font-weight: 700;
+      transition: .25s ease;
+    }
+
+    .feature-button:hover,
+    .feature-button:focus-visible {
+      border-color: var(--glow);
+      box-shadow: 0 0 22px #8a63d255;
+      transform: translateY(-3px);
+    }
+
+    .potion-result {
+      min-height: 54px;
+      margin-bottom: 14px;
+      padding: 12px;
+      border: 1px solid #c6a8ff55;
+      border-radius: 14px;
+      color: var(--glow);
+      background: #8a63d212;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .stream-card,
+    .potion-link,
+    .spellbook {
+      border-radius: 16px;
+    }
+
+    .stream-card {
+      margin-bottom: 14px;
+      padding: 15px;
+      border: 1px solid #8a63d255;
+      background: linear-gradient(135deg, #8a63d224, #1c1226ee 55%);
+      text-align: left;
+    }
+
+    .stream-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .stream-status {
+      padding: 5px 9px;
+      border-radius: 20px;
+      color: var(--glow);
+      background: #8a63d222;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .stream-status.offline {
+      color: var(--mute);
+      background: #b7a8c91a;
+    }
+
+    .stream-status.loading {
+      color: var(--gold);
+      background: #e0b45c22;
+    }
+
+    .stream-frame {
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      border-radius: 11px;
+      background: #000;
+    }
+
+    .stream-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .offline-box {
+      display: none;
+      padding: 24px 15px;
+      border: 1px solid #b7a8c933;
+      border-radius: 11px;
+      background: #09051199;
+      text-align: center;
+    }
+
+    .offline-box.visible,
+    .last-stream.visible {
+      display: block;
+    }
+
+    .offline-icon {
+      margin-bottom: 8px;
+      font-size: 32px;
+    }
+
+    .offline-box h3 {
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .offline-box p,
+    .embed-note,
+    .last-stream {
+      color: var(--mute);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .last-stream {
+      display: none;
+      margin-top: 14px;
+      padding: 12px;
+      border: 1px solid #8a63d255;
+      border-radius: 11px;
+      background: #8a63d212;
+    }
+
+    .last-stream strong {
+      color: var(--glow);
+    }
+
+    .last-stream-title {
+      color: var(--cream);
+      font-weight: 700;
+    }
+
+    .embed-note {
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .potion-link {
+      --link-glow: var(--witch);
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      padding: 15px 20px;
+      overflow: hidden;
+      border: 1px solid #b899f238;
+      color: var(--cream);
+      background: linear-gradient(115deg, #302044e8, #1c1226e8);
+      font-size: 15px;
+      font-weight: 600;
+      text-align: left;
+      text-decoration: none;
+      transition: .25s ease;
+    }
+
+    .potion-link::before {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 5px;
+      content: "";
+      background: var(--link-glow);
+      box-shadow: 0 0 14px var(--link-glow);
+    }
+
+    .potion-link:hover,
+    .potion-link:focus-visible {
+      border-color: var(--link-glow);
+      box-shadow: 0 10px 30px -6px var(--link-glow);
+      transform: translateY(-4px);
+    }
+
+    .lk-kick { --link-glow: #8a63d2; }
+    .lk-discord { --link-glow: #9c8bf0; }
+    .lk-instagram { --link-glow: #e28fd0; }
+    .lk-tiktok { --link-glow: #e6e6e6; }
+    .lk-x { --link-glow: #c9c9d9; }
+    .lk-support { --link-glow: var(--gold); }
+
+    .bottle {
+      position: relative;
+      flex: 0 0 30px;
+      width: 30px;
+      height: 36px;
+    }
+
+    .bottle::before {
+      position: absolute;
+      top: 10px;
+      left: 2px;
+      width: 26px;
+      height: 26px;
+      content: "";
+      border-radius: 8px 8px 12px 12px;
+      background: var(--link-glow);
+      box-shadow: 0 0 14px var(--link-glow);
+    }
+
+    .bottle::after {
+      position: absolute;
+      top: 0;
+      left: 11px;
+      width: 8px;
+      height: 7px;
+      content: "";
+      border-radius: 2px;
+      background: #8a6a3a;
+    }
+
+    .label-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .sub {
+      color: var(--mute);
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .arrow {
+      margin-left: auto;
+      color: var(--mute);
+      font-size: 18px;
+    }
+
+    .cat-scene {
+      position: relative;
+      width: 190px;
+      height: 145px;
+      margin: 30px auto 0;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .cat-aura {
+      position: absolute;
+      top: 27px;
+      left: 50%;
+      width: 95px;
+      height: 95px;
+      border: 1px solid #c6a8ff88;
+      border-radius: 50%;
+      background: radial-gradient(circle, #c6a8ff2e, transparent 68%);
+      box-shadow: 0 0 28px #8a63d266;
+      transform: translateX(-50%);
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      50% { opacity: .7; transform: translateX(-50%) scale(1.12); }
+    }
+
+    .cat {
+      position: absolute;
+      top: 43px;
+      left: 50%;
+      z-index: 2;
+      font-size: 54px;
+      filter: drop-shadow(0 0 12px #c6a8ffcc);
+      transform: translateX(-50%);
+      animation: cat-float 3s ease-in-out infinite;
+    }
+
+    @keyframes cat-float {
+      50% { transform: translate(-50%, -8px) rotate(4deg); }
+    }
+
+    .paw-trail {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      color: #c6a8ff99;
+      font-size: 17px;
+      letter-spacing: 9px;
+      transform: translateX(-50%) rotate(-8deg);
+    }
+
+    .cat-message {
+      position: absolute;
+      top: -12px;
+      right: -5px;
+      z-index: 4;
+      min-width: 130px;
+      padding: 8px 12px;
+      border: 1px solid #ff9ddd88;
+      border-radius: 14px 14px 4px 14px;
+      color: #fff0fb;
+      background: #4b235ddf;
+      box-shadow: 0 0 18px #ff9ddd66;
+      font-size: 11px;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .cat-message.show {
+      animation: message-pop 2.4s ease forwards;
+    }
+
+    @keyframes message-pop {
+      15%, 80% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: translateY(-8px) scale(.9); }
+    }
+
+    .hearts {
+      position: absolute;
+      top: 24px;
+      left: 50%;
+      z-index: 3;
+      color: var(--pink);
+      font-size: 18px;
+      opacity: 0;
+      transform: translateX(-50%);
+    }
+
+    .cat-scene.active .hearts {
+      animation: hearts 1.5s ease-out forwards;
+    }
+
+    @keyframes hearts {
+      from { opacity: 0; transform: translate(-50%, 15px) scale(.5); }
+      25% { opacity: 1; }
+      to { opacity: 0; transform: translate(-50%, -65px) scale(1.4); }
+    }
+
+   .site-footer {
+  position: relative;
+  margin-top: 42px;
+  padding: 28px 16px 18px;
+  border-top: 1px solid #c6a8ff33;
+  text-align: center;
+}
+
+.site-footer::before,
+.site-footer::after {
+  position: absolute;
+  top: -1px;
+  width: 32%;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  box-shadow: 0 0 10px var(--gold);
+}
+
+.site-footer::before {
+  left: 0;
+}
+
+.site-footer::after {
+  right: 0;
+}
+
+.footer-rune {
+  margin-bottom: 13px;
+  color: var(--gold);
+  font-size: 18px;
+  letter-spacing: 8px;
+  text-shadow: 0 0 12px var(--gold);
+  animation: footer-rune-glow 3s ease-in-out infinite;
+}
+
+.footer-signature {
+  color: var(--cream);
+  font-family: "Eagle Lake", cursive;
+  font-size: clamp(13px, 3.5vw, 17px);
+  text-decoration: none;
+  text-shadow:
+    0 0 5px var(--cream),
+    0 0 14px var(--glow);
+  transition: color .3s ease, text-shadow .3s ease;
+}
+
+.footer-signature:hover,
+.footer-signature:focus-visible {
+  color: var(--glow);
+  text-shadow:
+    0 0 8px var(--glow),
+    0 0 20px var(--witch);
+}
+
+@keyframes footer-rune-glow {
+  50% {
+    opacity: .65;
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-rune {
+    animation: none;
+  }
+}
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: #090511cc;
+      backdrop-filter: blur(8px);
+    }
+
+    .modal[hidden] {
+      display: none;
+    }
+
+    .spellbook {
+      position: relative;
+      width: min(100%, 430px);
+      max-height: 85vh;
+      overflow: auto;
+      padding: 30px 24px;
+      border: 1px solid #c6a8ff88;
+      background: linear-gradient(135deg, #493167f2, #1c1226f5);
+      box-shadow: 0 0 45px #8a63d288;
+    }
+
+    .spellbook h2 {
+      margin-bottom: 15px;
+      color: var(--glow);
+      font-family: "Eagle Lake", cursive;
+      text-align: center;
+    }
+
+    .spellbook p {
+      margin: 12px 0;
+      color: var(--mute);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .spellbook strong {
+      color: var(--cream);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      border: 0;
+      color: var(--cream);
+      background: transparent;
+      font-size: 24px;
+    }
+
+    .magic-symbol {
+      position: absolute;
+      bottom: -60px;
+      color: var(--glow);
+      font-family: serif;
+      font-size: clamp(22px, 4vw, 38px);
+      opacity: 0;
+      text-shadow: 0 0 8px #8a63d288, 0 0 20px #8a63d244;
+      animation: symbol-rise linear infinite;
+    }
+
+    .magic-symbol.gold {
+      color: var(--glow);
+      text-shadow: 0 0 8px #8a63d288, 0 0 20px #8a63d244;
+    }
+
+    @keyframes symbol-rise {
+      0% { opacity: 0; transform: translateY(30px) rotate(-12deg) scale(.8); }
+      15% { opacity: .18; }
+      70% { opacity: .12; }
+      100% { opacity: 0; transform: translateY(-115vh) rotate(18deg) scale(1.15); }
+    }
+
+    @media (max-width: 600px) {
+      main { padding-top: 35px; }
+      .moon { top: 4vh; right: 5vw; width: 55px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .cat-message { right: -18px; }
+      .daily-quote { flex-direction: column; gap: 6px; font-size: 12px; }
+    }
+
+        /* Gece ritüeli teması */
+    body {
+      background:
+        radial-gradient(ellipse at 50% -12%, #6f3fa633 0%, transparent 42%),
+        radial-gradient(circle at 8% 78%, #30145155 0%, transparent 28%),
+        radial-gradient(circle at 92% 42%, #6f3fa61c 0%, transparent 22%),
+        #07030d;
+    }
+
+    body::after {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      content: "";
+      opacity: .15;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 18%, transparent 0 13%, #8a63d222 13.1% 13.25%, transparent 13.4%),
+        radial-gradient(circle at 50% 18%, transparent 0 21%, #8a63d215 21.1% 21.2%, transparent 21.4%);
+      mask-image: linear-gradient(to bottom, #000 0 55%, transparent 92%);
+    }
+
+    main {
+      width: min(calc(100% - 32px), 590px);
+      padding-top: 40px;
+    }
+
+    .moon {
+      background: radial-gradient(circle at 35% 30%, #fff9dc, #d8a34e 68%, #8f572d);
+      box-shadow: 0 0 26px 8px #d8a34e99, 0 0 90px 28px #a96b3944;
+    }
+
+    .daily-quote {
+      position: relative;
+      border-color: #d9a74a66;
+      background: linear-gradient(135deg, #d9a74a14, #241335cc 45%, #6f3fa622);
+      box-shadow: inset 0 0 18px #d9a74a0d, 0 0 24px #4b237122;
+    }
+
+    .daily-quote::before,
+    .daily-quote::after {
+      color: var(--gold);
+      font-size: 18px;
+      text-shadow: 0 0 10px var(--gold);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 42px;
+      letter-spacing: 3px;
+    }
+
+    .section-title::before,
+    .section-title::after {
+      flex: 1;
+      height: 1px;
+      content: "";
+      background: linear-gradient(90deg, transparent, var(--gold));
+      box-shadow: 0 0 8px var(--gold);
+    }
+
+    .section-title::after {
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    .cauldron-wrap::before {
+      width: 250px;
+      height: 180px;
+      background: #7a43bb;
+      filter: blur(76px);
+      opacity: .18;
+    }
+
+    .cauldron-frame {
+      border-color: #d9a74acc;
+      background: radial-gradient(circle at 35% 24%, #8f5ac733, transparent 38%), linear-gradient(145deg, #392052, #100817 72%);
+      box-shadow:
+        0 0 0 7px #8a63d218,
+        0 0 0 11px #d9a74a12,
+        0 0 22px 4px #8a63d266,
+        inset 0 0 22px #d9a74a22;
+    }
+
+    .cauldron-frame::before {
+      border-color: #d9a74acc;
+    }
+
+    .magic-ring {
+      border-color: #e5c17b99;
+      box-shadow: 0 0 20px #8a63d288;
+    }
+
+    .brand {
+      color: #f7e6c4;
+      font-size: clamp(38px, 9vw, 54px);
+      letter-spacing: 1px;
+      text-shadow: 0 0 8px #fff0c488, 0 0 24px #8a63d2cc, 0 0 52px #6f3fa288;
+    }
+
+    .tagline {
+      color: #d2bda0;
+      letter-spacing: .5px;
+    }
+
+    .feature-button,
+    .potion-link {
+      border-color: #b98bdf55;
+      background: linear-gradient(135deg, #3a2055f2, #160b22f2 72%);
+      box-shadow: inset 0 0 16px #b98bdf0d;
+    }
+
+    .feature-button:hover,
+    .feature-button:focus-visible,
+    .potion-link:hover,
+    .potion-link:focus-visible {
+      border-color: var(--gold);
+      box-shadow: 0 0 24px #8a63d266, inset 0 0 18px #d9a74a18;
+    }
+
+    .potion-result {
+      border-color: #d9a74a55;
+      background: linear-gradient(135deg, #d9a74a12, #8a63d218);
+      box-shadow: inset 0 0 16px #d9a74a0c;
+    }
+
+    .stream-card {
+      border-color: #9a6bc466;
+      background: linear-gradient(135deg, #492667e8, #12091df5 68%);
+      box-shadow: inset 0 0 24px #d9a74a0b, 0 12px 30px #0008;
+    }
+
+    .stream-card::before {
+      position: absolute;
+      top: 0;
+      left: 12%;
+      width: 76%;
+      height: 1px;
+      content: "";
+      background: var(--gold);
+      box-shadow: 0 0 12px var(--gold);
+    }
+
+    .cat-aura {
+      border-color: #d9a74a88;
+      background: radial-gradient(circle, #d9a74a28, #8a63d20d 46%, transparent 70%);
+      box-shadow: 0 0 32px #8a63d288, inset 0 0 18px #d9a74a33;
+    }
+
+    .site-footer {
+      border-top-color: #d9a74a44;
+    }
+
+    @media (max-width: 600px) {
+      main { padding-top: 30px; }
+      .section-title { letter-spacing: 2px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Yeni cadı kitabı görsel dili */
+    body {
+      background:
+        radial-gradient(circle at 50% 0%, #47205e 0, transparent 34%),
+        radial-gradient(circle at 0% 55%, #24103d 0, transparent 30%),
+        radial-gradient(circle at 100% 75%, #3d1f6b 0, transparent 22%),
+        #08050d;
+    }
+
+    /* Arka plandaki sarı noktalı elmas deseni kaldırıldı */
+    body::before {
+      display: none;
+    }
+
+    main { width: min(calc(100% - 32px), 650px); }
+
+    .daily-quote,
+    .feature-button,
+    .potion-result,
+    .stream-card,
+    .potion-link,
+    .spellbook {
+      border-color: #d9a74a66;
+      background: linear-gradient(135deg, #38204fF2, #120a1cf5 70%);
+      box-shadow: 0 12px 28px #0008, inset 0 0 24px #d9a74a0d;
+    }
+
+    .daily-quote {
+      border-radius: 4px 22px 6px 20px;
+      outline: 1px solid #8a63d244;
+      outline-offset: 4px;
+    }
+
+    .section-title {
+      color: #e8c878;
+      font-family: "Eagle Lake", cursive;
+      font-size: 15px;
+      letter-spacing: 1px;
+      text-transform: none;
+      text-shadow: 0 0 14px #d9a74a;
+    }
+
+    .section-title::before,
+    .section-title::after {
+      background: linear-gradient(90deg, transparent, #d9a74a, #8a63d2);
+      box-shadow: 0 0 10px #d9a74a;
+    }
+
+    .feature-grid { gap: 14px; }
+
+    .feature-button,
+    .potion-link {
+      border-radius: 5px 18px 5px 18px;
+      position: relative;
+    }
+
+    .feature-button::after,
+    .potion-link::after,
+    .stream-card::after {
+      position: absolute;
+      inset: 5px;
+      content: "";
+      border: 1px solid #d9a74a1f;
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    .feature-button:hover,
+    .feature-button:focus-visible,
+    .potion-link:hover,
+    .potion-link:focus-visible {
+      border-color: #f1d78f;
+      box-shadow: 0 0 26px #8a63d288, inset 0 0 22px #d9a74a22;
+    }
+
+    .potion-result { border-radius: 18px 5px 18px 5px; }
+
+    .stream-card {
+      border-radius: 22px 5px 22px 5px;
+      position: relative;
+    }
+
+    .stream-header strong,
+    .last-stream strong { color: #efd28b; }
+
+    .potion-link {
+      min-height: 68px;
+      padding: 15px 22px;
+    }
+
+    .bottle { filter: drop-shadow(0 0 8px var(--link-glow)); }
+
+    .site-footer {
+      margin-top: 52px;
+      border-top: 0;
+    }
+
+    .site-footer::before,
+    .site-footer::after {
+      width: 38%;
+      height: 2px;
+    }
+
+    .footer-rune { font-size: 24px; }
+
+    @media (max-width: 600px) {
+      .feature-button,
+      .potion-link { border-radius: 4px 14px 4px 14px; }
+      .section-title { font-size: 13px; }
+    }
+
+    /* --- Profil çerçevesi: hale, dönen büyülü halka, nabız --- */
+
+    /* 1) Arka ışık halesi */
+    .cauldron-wrap::before {
+      width: 330px;
+      height: 300px;
+      background: radial-gradient(circle, #c6a8ff55 0%, #8a63d233 42%, transparent 70%);
+      filter: blur(38px);
+      opacity: .85;
+      animation: aura 4.5s ease-in-out infinite;
+    }
+
+    /* 2) Dönen büyülü halka */
+    .magic-ring::after {
+      position: absolute;
+      inset: -13px;
+      content: "";
+      border-radius: 50%;
+      pointer-events: none;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0 18%,
+        #c6a8ff99 26%,
+        transparent 34% 60%,
+        #8a63d2aa 70%,
+        transparent 78% 100%
+      );
+      -webkit-mask: radial-gradient(circle closest-side, transparent 84%, #000 85% 99%, transparent 100%);
+      mask: radial-gradient(circle closest-side, transparent 84%, #000 85% 99%, transparent 100%);
+      animation: spin 11s linear infinite;
+    }
+
+    /* 3) Nabız / parlama animasyonu */
+    .cauldron-frame {
+      animation:
+        float 3.5s ease-in-out infinite,
+        frame-pulse 3.2s ease-in-out infinite;
+    }
+
+    @keyframes frame-pulse {
+      0%, 100% {
+        box-shadow:
+          0 0 0 7px #8a63d210,
+          0 0 0 10px #c6a8ff0c,
+          0 0 12px 2px #8a63d244,
+          inset 0 0 15px #c6a8ff22;
+      }
+      50% {
+        box-shadow:
+          0 0 0 9px #8a63d222,
+          0 0 0 15px #c6a8ff18,
+          0 0 34px 10px #8a63d288,
+          inset 0 0 28px #c6a8ff44;
+      }
+    }
+
+    /* --- Canlı yayın bölümü --- */
+    .stream-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stream-header strong {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14.5px;
+    }
+
+    .stream-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .stream-status.live {
+      color: #fff;
+      background: linear-gradient(135deg, #e23a5e, #a81e3c);
+      box-shadow: 0 0 16px #e23a5e99;
+    }
+
+    .stream-status.live::before,
+    .stream-status.loading::before {
+      width: 7px;
+      height: 7px;
+      content: "";
+      border-radius: 50%;
+      background: currentColor;
+      animation: live-pulse 1.4s ease-in-out infinite;
+    }
+
+    .stream-status.live::before {
+      background: #fff;
+      box-shadow: 0 0 6px #fff;
+    }
+
+    @keyframes live-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .35; transform: scale(.65); }
+    }
+
+    .offline-icon {
+      animation: moon-sway 4s ease-in-out infinite;
+    }
+
+    @keyframes moon-sway {
+      50% { transform: translateY(-6px) rotate(-8deg); }
+    }
+
+    .stream-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 14px;
+      padding: 9px 18px;
+      border: 1px solid #e0b45c99;
+      border-radius: 20px;
+      color: var(--gold);
+      background: #e0b45c14;
+      font-size: 12.5px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: .25s ease;
+    }
+
+    .stream-cta:hover,
+    .stream-cta:focus-visible {
+      color: #1a1020;
+      background: var(--gold);
+      box-shadow: 0 0 20px #e0b45c88;
+    }
+
+    .embed-note {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border: 1px dashed #c6a8ff33;
+      border-radius: 10px;
+      background: #8a63d20d;
+    }
+
+    /* --- Mobil: kazan dairesi, ay ve başlık düzeni --- */
+    .cauldron-wrap {
+      width: min(300px, 100%);
+    }
+
+    @media (max-width: 420px) {
+      .cauldron-wrap {
+        --cauldron-size: 196px;
+        --cauldron-top: 20px;
+        height: 232px;
+      }
+
+      .witch-hat {
+        top: -14px;
+        left: 54%;
+      }
+
+      .moon {
+        top: 1vh;
+        right: 2vw;
+        width: 34px;
+      }
+
+      .brand { font-size: 30px; }
+
+      .tagline {
+        font-size: 12.5px;
+        max-width: 240px;
+        margin-inline: auto;
+      }
+
+      main { padding-top: 24px; }
+
+      .daily-quote { margin-top: 20px; }
+
+      .section-title { margin-top: 22px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="stars" aria-hidden="true"></div>
+  <div id="magicSymbols" aria-hidden="true"></div>
+  <div id="particles" aria-hidden="true"></div>
+  <div class="moon" aria-hidden="true"></div>
+
+  <main>
+    <div class="cauldron-wrap" id="cauldron" role="button" tabindex="0" aria-label="Rastgele iksir seç">
+      <div class="cauldron-frame"></div>
+      <div class="witch-hat" aria-hidden="true"></div>
+      <div class="magic-ring" aria-hidden="true"></div>
+      <span class="spark spark-one">✦</span>
+      <span class="spark spark-two">✧</span>
+      <span class="spark spark-three">✦</span>
+      <span class="smoke"></span>
+      <span class="smoke"></span>
+      <span class="smoke"></span>
+      <img class="cauldron-image"
+        src="profil.webp"
+        alt="Wiccawic profil fotoğrafı"
+        title="Kazanın içine tıkla">
+    </div>
+
+    <h1 class="brand">Wiccawic</h1>
+    <p class="tagline">🌙 Cadı kazanında oyun, sohbet ve eğlence</p>
+
+
+    <div class="daily-quote" id="dailyQuote" aria-live="polite">
+      <span class="quote-stars">✦</span>
+      <p class="quote-text" id="quoteText">Büyü yükleniyor...</p>
+      <span class="quote-stars">✦</span>
+    </div>
+
+    <p class="section-title">Büyülü Araçlar</p>
+
+    <div class="feature-grid">
+      <button class="feature-button" id="potionButton" type="button">🧪 İksir Seç</button>
+      <button class="feature-button" id="spellbookButton" type="button">📖 Büyü Kitabı</button>
+    </div>
+
+    <div class="potion-result" id="potionResult" aria-live="polite">
+      Kendin için rastgele bir iksir seçebilirsin ✨
+    </div>
+
+    <p class="section-title">Canlı Yayın Kazanı</p>
+
+    <section class="stream-card" aria-labelledby="streamHeading">
+      <div class="stream-header">
+        <strong id="streamHeading">🔮 Yayın durumu kontrol ediliyor...</strong>
+        <span class="stream-status loading" id="streamStatus">KONTROL</span>
+      </div>
+
+      <div class="stream-frame" id="streamFrame" hidden>
+        <iframe id="streamEmbed"
+          title="Wiccawic Kick canlı yayını"
+          loading="lazy"
+          allow="autoplay; fullscreen"
+          allowfullscreen></iframe>
+      </div>
+
+      <div class="offline-box" id="offlineBox">
+        <div class="offline-icon">🌙</div>
+        <h3>Yayın şu anda kapalı</h3>
+        <p>Kazan dinleniyor. Yeni yayın başladığında canlı yayın burada görünecek.</p>
+        <a class="stream-cta" href="https://kick.com/Wiccawic" target="_blank" rel="noopener">
+          🔔 Kick kanalını takip et
+        </a>
+      </div>
+
+      <div class="last-stream" id="lastStream"></div>
+      <p class="embed-note" id="streamNote">Kick yayın durumu yükleniyor...</p>
+    </section>
+
+       <a class="kick-badge" href="https://kick.com/Wiccawic" target="_blank" rel="noopener">
+        <span class="dot"></span>
+        <span>KICK KANALINI ZİYARET ET</span>
+    </a>
+
+    <p class="section-title">İksir Rafı</p>
+
+    <nav class="links" aria-label="Sosyal medya bağlantıları">
+      <a class="potion-link lk-kick" href="https://kick.com/Wiccawic" target="_blank" rel="noopener">
+        <span class="bottle"></span>
+        <span class="label-group"><span>Kick Kanalım</span><span class="sub">canlı yayını izle</span></span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a class="potion-link lk-discord" href="https://discord.com/invite/ScbQXUsnNk" target="_blank" rel="noopener">
+        <span class="bottle"></span>
+        <span class="label-group"><span>Discord</span><span class="sub">kazana katıl</span></span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a class="potion-link lk-instagram" href="https://www.instagram.com/wicca.wic" target="_blank" rel="noopener">
+        <span class="bottle"></span>
+        <span class="label-group"><span>Instagram</span><span class="sub">günlük büyüler</span></span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a class="potion-link lk-tiktok" href="https://www.tiktok.com/@wiccawicc" target="_blank" rel="noopener">
+        <span class="bottle"></span>
+        <span class="label-group"><span>TikTok</span><span class="sub">kısa iksirler</span></span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a class="potion-link lk-x" href="https://x.com/diloswic" target="_blank" rel="noopener">
+        <span class="bottle"></span>
+        <span class="label-group"><span>X</span><span class="sub">duyurular</span></span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a class="potion-link lk-support" href="https://donate.bynogame.com/wiccawicc" target="_blank" rel="noopener">
+        <span class="bottle"></span>
+        <span class="label-group"><span>Bağış Yap</span><span class="sub">kazanı besle</span></span>
+        <span class="arrow">›</span>
+      </a>
+    </nav>
+
+    <div class="cat-scene" id="cat" role="button" tabindex="0" title="Büyülü kediye tıkla">
+      <div class="cat-aura"></div>
+      <div class="cat-message" id="catMessage" aria-live="polite"></div>
+      <div class="hearts">💜 ✨ 💜</div>
+      <div class="cat">🐈‍⬛</div>
+      <div class="paw-trail">🐾　🐾　🐾</div>
+    </div>
+
+    <footer class="site-footer">
+  <div class="footer-rune" aria-hidden="true">☽ ✦ ☾</div>
+  <a
+    class="footer-signature"
+    href="https://www.instagram.com/cesurdrnn"
+    target="_blank"
+    rel="noopener noreferrer">
+    ✨ This site was magically prepared for Wiccawic
+  </a>
+
+</footer>
+  </main>
+
+  <div class="modal" id="spellbookModal" hidden>
+    <article class="spellbook" role="dialog" aria-modal="true" aria-labelledby="spellbookTitle">
+      <button class="close-modal" id="closeModal" type="button" aria-label="Büyü kitabını kapat">×</button>
+      <h2 id="spellbookTitle">Büyü Kitabı</h2>
+      <p><strong>✨ Wiccawic kimdir?</strong><br>Cadı kazanında oyun, sohbet ve eğlence iksirleri kaynatan gizemli yayıncı.</p>
+      <p><strong>🔮 Kazanın sırrı</strong><br>Her yayın yeni bir büyü, her izleyici de kazanın gücünü artıran bir büyücüdür.</p>
+      <p><strong>🌙 Yayın büyüsü</strong><br>Kick kanalını takip et, Discord topluluğuna katıl ve yeni yayınlardan haberdar ol.</p>
+      <p><strong>🐈‍⬛ Aşina kedi</strong><br>Büyülü kediye her tıkladığında farklı bir tepki verir.</p>
+    </article>
+  </div>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const $ = selector => document.querySelector(selector);
+      const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      const KICK_USERNAME = "Wiccawic";
+      const channelApi = `https://kick.com/api/v2/channels/${KICK_USERNAME.toLowerCase()}`;
+      const videosApi = `${channelApi}/videos`;
+
+            const quotes = [
+        "Yıldızlar sana yol göstersin, büyücü.",
+        "Kazan seni asla yalnız bırakmaz.",
+        "Her iksirin bir bedeli, her bedelin bir büyüsü vardır.",
+        "Güç içindedir, sadece doğru zamanda karıştırmayı bil.",
+        "Bugün seni bekleyen tek şey mucizedir.",
+        "Ay’ın ışığında gizlenenler, senin için ortaya çıkacak.",
+        "Kediler bilir, sen de kulak ver.",
+        "Büyü, inandığın kadar gerçektir.",
+        "Küçük bir kıvılcım, büyük bir alev doğurur.",
+        "Kazandaki her köpük, yeni bir hikayedir.",
+        "Ay taşı avucunda ısındığında, kalbinin unuttuğu yolu hatırlarsın.",
+        "Gölgen bugün senden önce davranacak; onu takip et.",
+        "Kadim rünler fısıldıyor: Aradığın cevap çoktan içinde uyandı.",
+        "Mor alev yükselirse, dileğini sessizce kazanına bırak.",
+        "Karanlık bir kapı gördüğünde korkma; bazı yollar gece açılır.",
+        "Bugünün koruyucu büyüsü: cesaret, sezgi ve bir tutam kaos.",
+        "Kaderin ipliği elinde; düğümü çözmek için yalnızca niyet et.",
+        "Kazan kaynıyor, yıldızlar hizalanıyor; evren senin tarafında.",
+        "Eski ormanların bilgeliği bugün kulağına güzel bir sır bırakacak.",
+        "Bir dilek, doğru zamanda söylendiğinde küçük bir kehanete dönüşür.",
+        "Gümüş ay ışığı yolunu aydınlatsın, altın kıvılcımlar şansını uyandırsın.",
+        "Rünlerini seç, nefesini tut ve büyünün kendi yolunu bulmasına izin ver.",
+        "Bugün kapını çalan tesadüf, uzun zamandır beklediğin büyüdür.",
+        "Kazanındaki son damla bile yeni bir başlangıcın habercisi olabilir.",
+        "Sezgilerin pusulan, merakın asan olsun; gece seni doğru yere götürecek."
+      ];
+
+      const quoteText = $("#quoteText");
+      const today = new Date().getDate();
+      quoteText.textContent = quotes[today % quotes.length];
+
+      function initTheme() {
+        // Tema seçicisi kaldırıldı; kalıntı bir tema sınıfı varsa temizle.
+        document.body.classList.remove(
+          "theme-midnight",
+          "theme-samhain",
+          "theme-forest"
+        );
+        localStorage.removeItem("wiccawic-theme");
+      }
+
+      initTheme();
+
+      function createBackground() {
+        const stars = $("#stars");
+        const particles = $("#particles");
+        const symbols = $("#magicSymbols");
+        const mobile = innerWidth < 600;
+
+        const fragment = document.createDocumentFragment();
+
+        for (let i = 0; i < (mobile ? 35 : 70); i++) {
+          const star = document.createElement("span");
+          const size = Math.random() * 2 + 1;
+
+          star.className = "star";
+          star.style.cssText = `
+            width:${size}px;
+            height:${size}px;
+            top:${Math.random() * 100}%;
+            left:${Math.random() * 100}%;
+            opacity:${Math.random()};
+            animation-delay:${Math.random() * 4}s;
+          `;
+          fragment.appendChild(star);
+        }
+
+        stars.appendChild(fragment);
+
+        const particleFragment = document.createDocumentFragment();
+
+        for (let i = 0; i < (mobile ? 8 : 16); i++) {
+          const particle = document.createElement("span");
+
+          particle.className = "particle";
+          particle.style.cssText = `
+            left:${Math.random() * 100}%;
+            top:${Math.random() * 100 + 20}%;
+            animation-duration:${8 + Math.random() * 12}s;
+            animation-delay:${Math.random() * -15}s;
+          `;
+          particleFragment.appendChild(particle);
+        }
+
+        particles.appendChild(particleFragment);
+
+        const symbolList = [
+          ["☽", "gold"], ["𑄝੭", ""], ["𖤐", ""], ["🕮", ""],
+          ["𓃵", "gold"], ["⏾", ""], ["♡", ""], ["☽ ☾", "gold"]
+        ];
+
+        const symbolFragment = document.createDocumentFragment();
+
+        for (let i = 0; i < (reduceMotion ? 6 : 14); i++) {
+          const [character, type] = symbolList[Math.floor(Math.random() * symbolList.length)];
+          const symbol = document.createElement("span");
+
+          symbol.className = `magic-symbol ${type}`;
+          symbol.textContent = character;
+          symbol.style.cssText = `
+            left:${Math.random() * 100}%;
+            animation-duration:${14 + Math.random() * 14}s;
+            animation-delay:${Math.random() * -24}s;
+            font-size:${22 + Math.random() * 18}px;
+          `;
+          symbolFragment.appendChild(symbol);
+        }
+
+        symbols.appendChild(symbolFragment);
+      }
+
+      createBackground();
+
+      const potionResult = $("#potionResult");
+      const cauldron = $("#cauldron");
+      const cauldronImage = document.querySelector(".cauldron-image");
+
+function revealCauldronImage() {
+  cauldronImage.classList.add("loaded");
+}
+
+if (cauldronImage.complete) {
+  revealCauldronImage();
+} else {
+  cauldronImage.addEventListener("load", revealCauldronImage, { once: true });
+}
+
+      const potions = [
+        "🧪 Şans İksiri: Bugün bütün güzel tesadüfler seni bulacak!",
+        "💜 Mor Büyü: Yaratıcılığın ve enerjin iki katına çıktı!",
+        "🔥 Ejderha Nefesi: Bugünkü yayın enerjin alev alev yanıyor!",
+        "🌙 Ay Işığı İksiri: Gizli dileğin gece gerçekleşebilir.",
+        "✨ Kaos İksiri: Beklenmedik ama çok eğlenceli bir macera seni bekliyor!"
+      ];
+
+      function choosePotion() {
+        potionResult.textContent = potions[Math.floor(Math.random() * potions.length)];
+
+        if (!reduceMotion) {
+          cauldron.classList.remove("active");
+          void cauldron.offsetWidth;
+          cauldron.classList.add("active");
+
+          potionResult.animate(
+            [
+              { opacity: .3, transform: "scale(.96)" },
+              { opacity: 1, transform: "scale(1)" }
+            ],
+            { duration: 400, easing: "ease-out" }
+          );
+
+          setTimeout(() => cauldron.classList.remove("active"), 900);
+        }
+      }
+
+      $("#potionButton").addEventListener("click", choosePotion);
+      cauldron.addEventListener("click", choosePotion);
+      cauldron.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          choosePotion();
+        }
+      });
+
+      const streamHeading = $("#streamHeading");
+      const streamStatus = $("#streamStatus");
+      const streamFrame = $("#streamFrame");
+      const streamEmbed = $("#streamEmbed");
+      const offlineBox = $("#offlineBox");
+      const lastStream = $("#lastStream");
+      const streamNote = $("#streamNote");
+      
+
+      function formatDate(value) {
+        const date = new Date(value);
+        return value && !Number.isNaN(date.getTime())
+          ? new Intl.DateTimeFormat("tr-TR", { dateStyle: "medium", timeStyle: "short" }).format(date)
+          : "Tarih bilgisi bulunamadı";
+      }
+
+      function escapeHtml(value) {
+        const div = document.createElement("div");
+        div.textContent = String(value ?? "");
+        return div.innerHTML;
+      }
+
+      function getLastStream(response) {
+  const videos = Array.isArray(response)
+    ? response
+    : Array.isArray(response?.data)
+      ? response.data
+      : [];
+
+  const video = videos[0];
+
+  if (!video) return null;
+
+  function getCategory(video) {
+    const category = video.category;
+
+    if (typeof category === "string" && category.trim()) {
+      return category;
+    }
+
+    if (category && typeof category === "object") {
+      return (
+        category.name ||
+        category.title ||
+        category.slug ||
+        category.category_name
+      );
+    }
+
+    if (typeof video.game === "string" && video.game.trim()) {
+      return video.game;
+    }
+
+    if (video.game && typeof video.game === "object") {
+      return video.game.name || video.game.title || video.game.slug;
+    }
+
+    return (
+      video.category_name ||
+      video.game_name ||
+      video.categories?.[0]?.name ||
+      "Kategori bilgisi alınamadı"
+    );
+  }
+
+  return {
+    title:
+      video.session_title ||
+      video.title ||
+      video.name ||
+      "Son yayın",
+
+    category: getCategory(video),
+
+    date:
+      video.ended_at ||
+      video.created_at ||
+      video.published_at ||
+      video.start_time ||
+      video.started_at
+  };
+}
+      function showLiveStream(livestream) {
+        streamHeading.textContent = "🔴 Wiccawic şu anda yayında!";
+        streamStatus.textContent = "CANLI";
+        streamStatus.className = "stream-status live";
+        streamFrame.hidden = false;
+        offlineBox.classList.remove("visible");
+        lastStream.classList.remove("visible");
+
+        const source = `https://player.kick.com/${KICK_USERNAME.toLowerCase()}?autoplay=true&muted=true`;
+
+        if (streamEmbed.src !== source) {
+          streamEmbed.src = source;
+        }
+
+        streamNote.textContent =
+          `${livestream.session_title || "Canlı yayın"} • ${livestream.viewer_count || 0} izleyici`;
+      }
+
+      function showOfflineStream(videos) {
+        const previousStream = getLastStream(videos);
+
+        streamHeading.textContent = "🌙 Wiccawic şu anda yayında değil";
+        streamStatus.textContent = "ÇEVRİMDIŞI";
+        streamStatus.className = "stream-status offline";
+        streamEmbed.removeAttribute("src");
+        streamFrame.hidden = true;
+        offlineBox.classList.add("visible");
+        streamNote.textContent = "Yeni yayın başladığında canlı yayın burada görünecek.";
+
+        if (!previousStream) {
+          lastStream.classList.remove("visible");
+          return;
+        }
+
+        lastStream.innerHTML = `
+          <strong>📜 Son yayın</strong><br>
+          <span class="last-stream-title">${escapeHtml(previousStream.title)}</span><br>
+          🎮 ${escapeHtml(previousStream.category)}<br>
+          🕒 ${formatDate(previousStream.date)}
+        `;
+        lastStream.classList.add("visible");
+      }
+
+      function showStreamError() {
+        streamHeading.textContent = "🔮 Yayın durumu alınamadı";
+        streamStatus.textContent = "KICK";
+        streamStatus.className = "stream-status offline";
+        streamEmbed.removeAttribute("src");
+        streamFrame.hidden = true;
+        offlineBox.classList.add("visible");
+        streamNote.innerHTML = `
+          Durumu kontrol etmek için
+          <a href="https://kick.com/${KICK_USERNAME}" target="_blank" rel="noopener">Kick kanalını aç</a>.
+        `;
+      }
+
+     async function fetchJson(url, timeout = 8000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeout);
+
+  try {
+    const response = await fetch(url, {
+      signal: controller.signal,
+      cache: "no-store",
+      headers: {
+        Accept: "application/json"
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    if (error.name === "AbortError") {
+      throw new Error("Kick API zaman aşımına uğradı");
+    }
+
+    throw error;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+      async function updateStreamStatus() {
+        try {
+          const [channelData, videosData] = await Promise.all([
+            fetchJson(channelApi),
+            fetchJson(videosApi).catch(() => [])
+          ]);
+
+          channelData.livestream
+            ? showLiveStream(channelData.livestream)
+            : showOfflineStream(videosData);
+        } catch (error) {
+          console.warn("Kick yayın durumu alınamadı:", error);
+          showStreamError();
+        }
+      }
+
+      updateStreamStatus();
+      setInterval(updateStreamStatus, 60000);
+
+      const modal = $("#spellbookModal");
+      const spellbookButton = $("#spellbookButton");
+      const closeModal = $("#closeModal");
+
+      function openSpellbook() {
+        modal.hidden = false;
+        closeModal.focus();
+      }
+
+      function closeSpellbook() {
+        modal.hidden = true;
+        spellbookButton.focus();
+      }
+
+      spellbookButton.addEventListener("click", openSpellbook);
+      closeModal.addEventListener("click", closeSpellbook);
+
+      modal.addEventListener("click", event => {
+        if (event.target === modal) closeSpellbook();
+      });
+
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && !modal.hidden) closeSpellbook();
+      });
+
+      const cat = $("#cat");
+      const catMessage = $("#catMessage");
+
+      const reactions = [
+        "Miyav! Büyü başladı ✨",
+        "Bugün şansın çok açık! 💜",
+        "Kedi kehaneti: Güzel haberler geliyor 🔮",
+        "Mırıldanıyorum, çünkü enerjin harika! 🐾",
+        "Sana gizli bir yıldız gönderdim 🌟",
+        "Kazan seni sevdi, büyücü! 🧪",
+        "Pati büyüsü başarıyla uygulandı ✨"
+      ];
+
+      function catReaction() {
+        catMessage.classList.remove("show");
+        void cat.offsetWidth;
+
+        const reaction = reactions[Math.floor(Math.random() * reactions.length)];
+        catMessage.textContent = reaction;
+        catMessage.classList.add("show");
+        cat.classList.remove("active");
+        void cat.offsetWidth;
+        cat.classList.add("active");
+        potionResult.textContent = `🐈‍⬛ ${reaction}`;
+      }
+
+      cat.addEventListener("click", catReaction);
+      cat.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          catReaction();
+        }
+      });
+    })();
+  </script> 
+  <script src="effects.js"></script>
+  <script src="character-card.js"></script>
+  <script src="stream-end-date.js"></script>
+</body>
+</html>
